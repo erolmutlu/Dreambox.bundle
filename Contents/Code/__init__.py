@@ -2,6 +2,7 @@ ART = 'art-default.jpg'
 ICON = 'icon-default.png'
 REGEX = '%s = new Array\((.+?)\);'
 ZAP_TO_URL = 'http://%s:%s/cgi-bin/zapTo?path=%s&curBouquet=%d&curChannel=%d'
+STREAM_URL = 'http://%s:%s'
 
 ####################################################################################################
 def Start():
@@ -106,8 +107,8 @@ def PlayVideo(channel_ref, bouquet_index, channel_index):
 
 	# Change the channel
 	zap_to = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], channel_ref, bouquet_index, channel_index)
-	Log(' --> %s' % zap_to)
+	zap = HTTP.Request(zap_to, sleep=2.0).content
 
-	# Todo: Tune in to the stream
-
-	return None
+	# Tune in to the stream
+	stream = STREAM_URL % (Prefs['host'], Prefs['port_video'])
+	return Redirect(stream)
