@@ -104,7 +104,10 @@ def CreateVideoClipObject(channel_ref, bouquet_index, channel_index, title, thum
 ####################################################################################################
 def PlayVideo(channel_ref, bouquet_index, channel_index):
 
+	# Change the channel
 	zap_to = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], channel_ref, bouquet_index, channel_index)
 	Log(' --> %s' % zap_to)
+
+	# Todo: Tune in to the stream
 
 	return None
