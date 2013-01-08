@@ -1,0 +1,20 @@
+[
+	{
+		"id": "host",
+		"type": "text",
+		"label": "Host",
+		"default": ""
+	},
+	{
+		"id": "port_web",
+		"type": "text",
+		"label": "Web Interface Port",
+		"default": ""
+	},
+	{
+		"id": "port_video",
+		"type": "text",
+		"label": "Streaming Video Port",
+		"default": ""
+	}
+]
