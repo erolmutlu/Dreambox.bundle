@@ -107,7 +107,7 @@ def PlayVideo(channel_ref, bouquet_index, channel_index):
 
 	# Change the channel
 	zap_to = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], channel_ref, bouquet_index, channel_index)
-	zap = HTTP.Request(zap_to, sleep=2.0).content
+	zap = HTTP.Request(zap_to, cacheTime=0, sleep=2.0).content
 
 	# Tune in to the stream
 	stream = STREAM_URL % (Prefs['host'], Prefs['port_video'])
