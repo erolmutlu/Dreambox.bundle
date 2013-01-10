@@ -83,12 +83,12 @@ def CreateVideoClipObject(channel_ref, bouquet_index, channel_index, title, thum
 		items = [
 			MediaObject(
 				container = 'mpegts',
-				video_codec = 'mpeg2',
-				audio_codec = AudioCodec.MP3,
+				video_codec = VideoCodec.H264,
+				audio_codec = AudioCodec.AAC,
 				audio_channels = 2,
 				parts = [
 					PartObject(
-						key = Callback(PlayVideo, channel_ref=channel_ref, bouquet_index=bouquet_index, channel_index=channel_index)
+						key = HTTPLiveStreamURL(Callback(PlayVideo, channel_ref=channel_ref, bouquet_index=bouquet_index, channel_index=channel_index))
 					)
 				]
 			)
