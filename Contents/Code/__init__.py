@@ -21,19 +21,19 @@ def MainMenu():
 	if Prefs['host'] and Prefs['port_web'] and Prefs['port_video']:
 		categories = GetDataList(name='bouquets')
 
-		if not categories:
-			return ObjectContainer(header="Error", message="Couldn't connect to host")
+		if categories:
+			for bouquet_index, title in enumerate(categories):
+				channels = GetDataList(name='channels\[%d\]' % bouquet_index)
 
-		for bouquet_index, title in enumerate(categories):
-			channels = GetDataList(name='channels\[%d\]' % bouquet_index)
+				if channels[0].lower() == 'none':
+					continue
 
-			if channels[0].lower() == 'none':
-				continue
-
-			oc.add(DirectoryObject(
-				key = Callback(Bouquet, title=title, bouquet_index=bouquet_index),
-				title = title
-			))
+				oc.add(DirectoryObject(
+					key = Callback(Bouquet, title=title, bouquet_index=bouquet_index),
+					title = title
+				))
+		else:
+			Log("Couldn't connect to host.")
 
 	oc.add(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
 
