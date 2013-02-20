@@ -3,18 +3,36 @@
 		"id": "host",
 		"type": "text",
 		"label": "Host",
-		"default": ""
+		"default": "dm800"
 	},
 	{
 		"id": "port_web",
 		"type": "text",
 		"label": "Web Interface Port",
-		"default": ""
+		"default": "80"
 	},
 	{
 		"id": "port_video",
 		"type": "text",
 		"label": "Streaming Video Port",
-		"default": ""
+		"default": "8001"
+	},
+	{
+		"id": "zap",
+		"type": "bool",
+		"label": "Zap to channel before stream",
+		"default": "true"
+	},
+	{
+		"id": "epg",
+		"type": "bool",
+		"label": "Show EPG info",
+		"default": "true"
+	},
+	{
+		"id": "picon",
+		"type": "bool",
+		"label": "Show Picons if available",
+		"default": "true"
 	}
 ]
