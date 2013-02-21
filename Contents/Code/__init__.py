@@ -54,8 +54,10 @@ def BouquetsMenu(sender, index, name):
 	for event in events:
 		tempChannelReference = ''
 		tempChannelName = ''
-		tempChannelReference = event.xpath("./e2eventservicereference/text()")[0]
-		tempChannelName = event.xpath("./e2eventservicename/text()")[0]
+		if len(event.xpath("./e2eventservicereference/text()"))>0:
+			tempChannelReference = event.xpath("./e2eventservicereference/text()")[0]
+		if len(event.xpath("./e2eventservicename/text()"))>0:
+			tempChannelName = event.xpath("./e2eventservicename/text()")[0]
 		if Prefs['epg']:
 			temptitle = ''
 			tempdescription = ''
@@ -63,14 +65,18 @@ def BouquetsMenu(sender, index, name):
 			tempcurrenttime = ''
 			tempstart = ''
 			tempduration = ''
-			temptitle = event.xpath("./e2eventtitle/text()")[0]
+			if len(event.xpath("./e2eventtitle/text()"))>0:
+				temptitle = event.xpath("./e2eventtitle/text()")[0]
 			if len(event.xpath("./e2eventdescription/text()"))>0:
 				tempdescription = event.xpath("./e2eventdescription/text()")[0]
 			if len(event.xpath("./e2eventdescriptionextended/text()"))>0:
 				tempdescriptionext = event.xpath("./e2eventdescriptionextended/text()")[0]
-			tempcurrenttime = event.xpath("./e2eventcurrenttime/text()")[0]
-			tempstart = event.xpath("./e2eventstart/text()")[0]
-			tempduration = event.xpath("./e2eventduration/text()")[0]
+			if len(event.xpath("./e2eventcurrenttime/text()"))>0:
+				tempcurrenttime = event.xpath("./e2eventcurrenttime/text()")[0]
+			if len(event.xpath("./e2eventstart/text()"))>0:
+				tempstart = event.xpath("./e2eventstart/text()")[0]
+			if len(event.xpath("./e2eventduration/text()"))>0:
+				tempduration = event.xpath("./e2eventduration/text()")[0]
 			if temptitle == 'None':
 				temptitle = ''
 			if tempstart == 'None':
