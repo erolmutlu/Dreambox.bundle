@@ -126,6 +126,10 @@ def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), i
 		if piconfile:
 			Log('Piconfile: '+sender+ ' - ' + piconfile)
 			thumb=R(piconfile)
+
+	container = 'mpegts'
+	video_codec = 'h264'
+	audio_codec = 'aac'
 	
      	video = VideoClipObject(
 		key = Callback(TvStationMenu, sender=sender, channel=channel, epgdescription=epgdescription, epgduration=epgduration, thumb=thumb, include_oc=True),
@@ -136,7 +140,11 @@ def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), i
 		thumb = thumb,
 		items = [
 			MediaObject(
-				parts = [PartObject(key=HTTPLiveStreamURL(Callback(PlayVideo, channel=channel)))]
+				container = container,
+				video_codec = video_codec,
+				audio_codec = audio_codec,
+				audio_channels = 2,
+				parts = [PartObject(key=Callback(PlayVideo, channel=channel))]
 			)
 		]
 	)
@@ -152,6 +160,8 @@ def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), i
 ####################################################################################################
 @route("video/dreambox/PlayVideo/{channel}")
 def PlayVideo(channel):
+	channel = channel.strip('.m3u8')
+	Log('channel variable='+channel)
 	if Prefs['zap']:
 		#Zap to channel
 		url = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], String.Quote(channel))
@@ -159,7 +169,7 @@ def PlayVideo(channel):
 			urlHtml = HTTP.Request(url, cacheTime=0, sleep=2.0).content
 		except:
 			Log("Couldn't zap to channel.")
-        # Tune in to the stream
+	 # Tune in to the stream
 	stream = STREAM_URL % (Prefs['host'], Prefs['port_video'], channel)
 	Log(stream)
 	return Redirect(stream)
