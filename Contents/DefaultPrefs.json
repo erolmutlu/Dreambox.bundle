@@ -33,6 +33,6 @@
 		"id": "picon",
 		"type": "bool",
 		"label": "Show Picons if available",
-		"default": "true"
+		"default": "false"
 	}
 ]
