@@ -19,38 +19,37 @@ def MainMenu():
         oc = ObjectContainer(view_group='List', no_cache=True)
 
         if Prefs['host'] and Prefs['port_web'] and Prefs['port_video']:
-                url = 'http://%s:%s/web/getservices' % (Prefs['host'], Prefs['port_web'])
-                
+                url = 'http://{}:{}/web/getservices'.format(Prefs['host'], Prefs['port_web'] )
                 try:
                         urlHtml = HTML.ElementFromURL(url)
-                
                 except:
                         Log("Couldn't connect to Dreambox.") 
-                        return None
-                
+                        return None     
                 ServiceReference = urlHtml.xpath("//e2servicereference/text()")
                 ServiceName = urlHtml.xpath("//e2servicename/text()")
-
-                for item in range(len(ServiceReference)):
-                        oc.add(DirectoryObject(key = Callback(BouquetsMenu, sender = ServiceName[item], index=ServiceReference[item], name=ServiceName[item]),title = ServiceName[item]))
+                for item in xrange(len(ServiceReference)):
+					oc.add(DirectoryObject(key = Callback(BouquetsMenu, sender = ServiceName[item], index=ServiceReference[item], name=ServiceName[item]),title = ServiceName[item]))
         oc.add(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))      
         return oc
+
 
 @route("/video/dreambox/BouquetsMenu/{name}")
 def BouquetsMenu(sender, index, name):
 	
 	#Getting Channels and EPG
 	url = EPG_URL % (Prefs['host'], Prefs['port_web'], String.Quote(index))
+	Log(url)
 	try:
 		urlHtml = HTML.ElementFromURL(url)
 	except:
 		Log("Couldn't get channels and EPG.") 
 	events = urlHtml.xpath("//e2event")
-	Log('Events='+str(len(events)))
 	ChannelReference = list()
 	ChannelName = list()
 	epgdescription = list()
 	epgduration = list()
+	# Should be able to get now and next here
+	# I'll refactor this out
 	for event in events:
 		tempChannelReference = ''
 		tempChannelName = ''
@@ -110,7 +109,7 @@ def BouquetsMenu(sender, index, name):
 		
 	oc = ObjectContainer(title2=name, view_group='List', no_cache=True)
 
-	for item in range(len(ChannelReference)):
+	for item in xrange(len(ChannelReference)):
 		oc.add(TvStationMenu(sender=ChannelName[item], channel=ChannelReference[item], epgdescription=epgdescription[item], epgduration=epgduration[item]))
 
 	return oc
@@ -118,20 +117,25 @@ def BouquetsMenu(sender, index, name):
 ##11111##################################################################################################
 @route("/video/dreambox/TvStationMenu")
 def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), include_oc=False):
-
-	if Prefs['picon']:
+    browsers = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
+    video_codec = 'x264'
+    audio_codec = 'aac'
+    container = 'mp4'
+    if Prefs['picon']:
 		piconfile = channel.replace(':', '_')
 		piconfile = piconfile.rstrip('_')
 		piconfile = piconfile + '.png'
 		if piconfile:
 			Log('Piconfile: '+sender+ ' - ' + piconfile)
 			thumb=R(piconfile)
+    # Set default container for MP4 to work on Samsung.. and others???
+	# Still no go on IOS
+	# Just filters against browser name (Better way to do this ? Check the caps of the connected device?)
+    if (Client.Platform  in browsers ):
+        container = 'mpegts'
 
-	container = 'mpegts'
-	video_codec = 'h264'
-	audio_codec = 'aac'
-	
-     	video = VideoClipObject(
+
+    video = VideoClipObject(
 		key = Callback(TvStationMenu, sender=sender, channel=channel, epgdescription=epgdescription, epgduration=epgduration, thumb=thumb, include_oc=True),
 		rating_key = channel,
 		title = sender,
@@ -148,18 +152,19 @@ def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), i
 			)
 		]
 	)
-
-	if include_oc:
-		oc = ObjectContainer()
-		oc.add(video)
-		return oc
-	else:
-		return video
+    if include_oc:
+        oc = ObjectContainer()
+        oc.add(video)
+        return oc
+    return video
 
 
 ####################################################################################################
 @route("video/dreambox/PlayVideo/{channel}")
 def PlayVideo(channel):
+	Log('**** Client Prortert **** ' + str(Client.Protocols))
+
+        
 	channel = channel.strip('.m3u8')
 	Log('channel variable='+channel)
 	if Prefs['zap']:
@@ -167,9 +172,11 @@ def PlayVideo(channel):
 		url = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], String.Quote(channel))
 		try:
 			urlHtml = HTTP.Request(url, cacheTime=0, sleep=2.0).content
+			Log('url HTML = {}'.format(urlHtml))
 		except:
 			Log("Couldn't zap to channel.")
 	 # Tune in to the stream
+	 # MLG Can we point the URL to the EBKIT thing etc that it mentions in the docs
 	stream = STREAM_URL % (Prefs['host'], Prefs['port_video'], channel)
-	Log(stream)
+	Log('stream is {}'.format(stream))
 	return Redirect(stream)

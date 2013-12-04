@@ -3,13 +3,13 @@
 		"id": "host",
 		"type": "text",
 		"label": "Host",
-		"default": "dm800"
+		"default": "192.168.1.252"
 	},
 	{
 		"id": "port_web",
 		"type": "text",
-		"label": "Web Interface Port",
-		"default": "80"
+		"label": "port_web",
+		"default": "8001"
 	},
 	{
 		"id": "port_video",
