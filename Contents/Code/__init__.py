@@ -117,9 +117,9 @@ def BouquetsMenu(sender, index, name):
 ##11111##################################################################################################
 @route("/video/dreambox/TvStationMenu")
 def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), include_oc=False):
-    browsers = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
-    video_codec = 'x264'
-    audio_codec = 'aac'
+    browsers = ('Chrome', 'Internet Explorer', 'Opera', 'Safari', 'iOS')
+    video_codec = 'h264'
+    audio_codec = 'mp3'
     container = 'mp4'
     if Prefs['picon']:
 		piconfile = channel.replace(':', '_')
@@ -129,12 +129,9 @@ def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), i
 			Log('Piconfile: '+sender+ ' - ' + piconfile)
 			thumb=R(piconfile)
     # Set default container for MP4 to work on Samsung.. and others???
-	# Still no go on IOS
 	# Just filters against browser name (Better way to do this ? Check the caps of the connected device?)
     if (Client.Platform  in browsers ):
         container = 'mpegts'
-
-
     video = VideoClipObject(
 		key = Callback(TvStationMenu, sender=sender, channel=channel, epgdescription=epgdescription, epgduration=epgduration, thumb=thumb, include_oc=True),
 		rating_key = channel,
@@ -162,7 +159,7 @@ def TvStationMenu(sender, channel, epgdescription, epgduration, thumb=R(ICON), i
 ####################################################################################################
 @route("video/dreambox/PlayVideo/{channel}")
 def PlayVideo(channel):
-	Log('**** Client Prortert **** ' + str(Client.Protocols))
+
 
         
 	channel = channel.strip('.m3u8')
@@ -175,8 +172,6 @@ def PlayVideo(channel):
 			Log('url HTML = {}'.format(urlHtml))
 		except:
 			Log("Couldn't zap to channel.")
-	 # Tune in to the stream
-	 # MLG Can we point the URL to the EBKIT thing etc that it mentions in the docs
 	stream = STREAM_URL % (Prefs['host'], Prefs['port_video'], channel)
 	Log('stream is {}'.format(stream))
 	return Redirect(stream)
