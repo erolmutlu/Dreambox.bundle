@@ -4,9 +4,12 @@
 <dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.plexapp.plugins.dreambox</string>
+
 	<key>PlexClientPlatforms</key>
 	<string>*</string>
+
 	<key>PlexFrameworkVersion</key>
 	<string>2</string>
+
 </dict>
 </plist>
