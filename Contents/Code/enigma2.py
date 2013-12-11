@@ -105,3 +105,6 @@ def get_data(*args):
         except Exception as e:
             results.append(('Error', e.message))
     return results
+
+
+print get_nownext('192.168.1.252', 80, '1:0:1:1933:7FF:2:11A0000:0:0:0')

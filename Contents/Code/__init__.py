@@ -115,13 +115,14 @@ def ChannelContent(sRef):
             # TODO We need to figure out JUST PASS AN EXTRA PARAM INTO THE THING HTTP192.....?NOW=TRUE, NEXT=FALSE ETC.
             # todo wE CAN THEN FIGURE OUT WHAT CALL TO DO IN THE URL TO GET DATA AGAIN
             if int(start) < time.time():
-                oc.add(EpisodeObject(url='http://192.168.1.252/web/epgservicenow?sRef=1:0:1:1933:7FF:2:11A0000:0:0:0:',
+                oc.add(VideoClipObject(url='http://192.168.1.252/web/epgservicenow?sRef=1:0:1:1933:7FF:2:11A0000:0:0:0:',
                                    title='{}  - {}'.format(name, title),
                                    summary=description
                                    )
                   )
             else:
                 # Go off and set a timer
+                #TODO This can have invalid xml in so needs to be converted. That swhy you get blank lines
                 oc.add(DirectoryObject(key=Callback(TimerPopup, name=name), title=title,
                 summary="Click here to search for stuff")
 
@@ -133,9 +134,6 @@ def ChannelContent(sRef):
 
 @route("/video/dreambox/TimerPopup")
 def TimerPopup(name):
-
-
-
     return MessageContainer(
           "Timer",
           "Timer created for {}".format(name)
