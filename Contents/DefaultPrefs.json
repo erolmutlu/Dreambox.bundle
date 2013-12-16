@@ -8,7 +8,7 @@
 	{
 		"id": "port_web",
 		"type": "text",
-		"label": "port_web",
+		"label": "Web Interface Port",
 		"default": "8001"
 	},
 	{
@@ -21,7 +21,7 @@
 		"id": "zap",
 		"type": "bool",
 		"label": "Zap to channel before stream",
-		"default": "true"
+		"default": "false"
 	},
 	{
 		"id": "epg",
@@ -33,6 +33,12 @@
 		"id": "picon",
 		"type": "bool",
 		"label": "Show Picons if available",
+		"default": "false"
+	},
+	{
+		"id": "fullepg",
+		"type": "bool",
+		"label": "Show full events list instead of just now/next",
 		"default": "false"
 	}
 ]
