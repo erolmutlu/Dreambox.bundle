@@ -38,7 +38,7 @@
 	{
 		"id": "fullepg",
 		"type": "bool",
-		"label": "Show full events list instead of just now/next",
+		"label": "Show full event list instead of now/next",
 		"default": "false"
 	}
 ]

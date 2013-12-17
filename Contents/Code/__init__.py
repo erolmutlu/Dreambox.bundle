@@ -23,12 +23,13 @@ def MainMenu():
                                title='Live TV',
                                tagline='Watch live TV direct from your Enigma 2 based satellite receiver')
     )
-    oc.add(DirectoryObject(key='http://www.google.co.uk',
+    oc.add(DirectoryObject(key=Callback(Display_Movies),
                                title='Recorded TV',
                                tagline='Watch recorded content on your Enigma 2 based satellite receiver')
     )
     oc.add(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
     return oc
+
 
 @route("/video/dreambox/Display_Bouquets")
 def Display_Bouquets():
@@ -45,6 +46,21 @@ def Display_Bouquets():
         oc.add(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))      
         return oc
 
+
+@route("/video/dreambox/Display_Movies")
+def Display_Movies():
+    from enigma2 import get_movies
+
+    oc = ObjectContainer(view_group='List', no_cache=True, title1='Recorded TV')
+    if Prefs['host'] and Prefs['port_web'] and Prefs['port_video']:
+
+        movies = get_movies(Prefs['host'],Prefs['port_web'])
+        Log(movies)
+        for sref, title, description, channel, e2time, length, filename in movies:
+            oc.add(DirectoryObject(key = Callback(Display_Bouquet_Channels, sender = str(channel), index=str(filename)),
+                                    title ='{} ({})'.format(title, e2time),
+                                    summary=description))
+        return oc
 
 @route("/video/dreambox/Display_Bouquet_Channels/{name}")
 def Display_Bouquet_Channels(sender, index):
