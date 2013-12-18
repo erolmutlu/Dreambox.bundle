@@ -3,7 +3,10 @@ ICON = 'icon-default.png'
 ZAP_TO_URL = 'http://%s:%s/web/zap?sRef=%s'
 STREAM_URL = 'http://%s:%s/%s'
 EPG_URL = 'http://%s:%s/web/epgnow?bRef=%s'
+
 CLIENT = ['Plex Home Theater']
+BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
+
 
 ####################################################################################################
 def Start():
@@ -17,16 +20,26 @@ def Start():
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
+    from enigma2 import get_timers
 
     oc = ObjectContainer(view_group='List', no_cache=True)
     oc.add(DirectoryObject(key=Callback(Display_Bouquets),
                                title='Live TV',
                                tagline='Watch live TV direct from your Enigma 2 based satellite receiver')
-    )
+           )
     oc.add(DirectoryObject(key=Callback(Display_Movies),
                                title='Recorded TV',
                                tagline='Watch recorded content on your Enigma 2 based satellite receiver')
-    )
+           )
+    if Prefs['host'] and Prefs['port_web'] and Prefs['port_video']:
+        timers = get_timers(Prefs['host'], Prefs['port_web'], active=True)
+        if timers[0]:
+            oc.add(DirectoryObject(key=Callback(TimerPopup,
+                                   title='Timer',
+                                   message='Active timer view Not working yet '),
+                                   title='Active timers',
+                                   summary='Click here to search for stuff')
+                   )
     oc.add(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
     return oc
 
@@ -57,32 +70,28 @@ def Display_Movies():
         movies = get_movies(Prefs['host'],Prefs['port_web'])
         Log(movies)
         for sref, title, description, channel, e2time, length, filename in movies:
-            oc.add(DirectoryObject(key = Callback(Display_Bouquet_Channels, sender = str(channel), index=str(filename)),
-                                    title ='{} ({})'.format(title, e2time),
-                                    summary=description))
+            oc.add(Display_Movie_Event(sender=title, filename=filename[1:], description=description, duration=int(1000)))
         return oc
 
 @route("/video/dreambox/Display_Bouquet_Channels/{name}")
 def Display_Bouquet_Channels(sender, index):
-
     from enigma2 import get_channels
 
     channels = get_channels(Prefs['host'], Prefs['port_web'], index)
     name = sender
-
     oc = ObjectContainer(title2=name, view_group='List', no_cache=True)
     for id, start, duration, current_time, title, description, sRef, name in channels:
         remaining = ((current_time + int(duration)) - current_time) * 1000
         oc.add(DirectoryObject(key = Callback(Display_Channel_Events, sender=str(name), index=str(sRef)),
                                     title = '{}  - {}'.format(name, title),
                                     duration = remaining))
-
     return oc
 
 @route("/video/dreambox/Display_Channel_Events/{sender}")
 def Display_Channel_Events(sender, index):
     from enigma2 import get_nownext, get_fullepg
     import time
+
     if Prefs['fullepg']:
         events = get_fullepg(Prefs['host'], Prefs['port_web'], index)
     else:
@@ -109,9 +118,43 @@ def Display_Channel_Events(sender, index):
                                    duration = duration * 1000,
                                    summary='Click here to search for stuff'),
 
-            )
+                   )
     return oc
 
+
+
+@route("/video/dreambox/Display_Movie_Event/hdd/movie")
+def Display_Movie_Event(sender, filename, description, duration, thumb=R(ICON), include_oc=False):
+
+    video_codec = 'h264'
+    audio_codec = 'mp3'
+    container = 'mp4'
+
+    if (Client.Platform in BROWSERS ):
+        container = 'mpegts'
+    video = VideoClipObject(
+        key = Callback(Display_Movie_Event, sender=sender, filename=filename, description=description, duration=duration, thumb=thumb, include_oc=True),
+        rating_key = filename + description,
+        title = sender,
+        summary = description,
+        duration = int(duration)*1000,
+        thumb = thumb,
+        items = [
+            MediaObject(
+                container = container,
+                video_codec = video_codec,
+                audio_codec = audio_codec,
+                audio_channels = 2,
+                parts = [PartObject(key=Callback(PlayVideo, channel=sender, filename=filename, recorded=True),
+                                    optimized_for_streaming = True)]
+            )
+        ]
+    )
+    if include_oc:
+        oc = ObjectContainer()
+        oc.add(video)
+        return oc
+    return video
 
 ##11111##################################################################################################
 @route("/video/dreambox/Display_Event")
@@ -119,7 +162,7 @@ def Display_Event(sender, channel, description, duration, thumb=R(ICON), include
     # x264 soesnt work with samsung, probably iOs.
     Log('**** TVStation  sender {}, channel {}, description {}, duration {}'.format(sender, channel, description, duration))
     browsers = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
-    video_codec = 'h264'
+    video_codec = None
     audio_codec = 'mp3'
     container = 'mp4'
     if Prefs['picon']:
@@ -156,10 +199,10 @@ def Display_Event(sender, channel, description, duration, thumb=R(ICON), include
 
 ####################################################################################################
 @route("video/dreambox/PlayVideo/{channel}")
-def PlayVideo(channel):
+def PlayVideo(channel, filename=None,  recorded=False):
 
     channel = channel.strip('.m3u8')
-    if Prefs['zap']:
+    if Prefs['zap'] and not recorded:
         #Zap to channel
         zap()
         url = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], String.Quote(channel))
@@ -168,13 +211,33 @@ def PlayVideo(channel):
             Log('url HTML = {}'.format(urlHtml))
         except:
             Log("Couldn't zap to channel.")
-
-    stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
+    if not recorded:
+        stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
+    else:
+        stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
     return Redirect(stream)
+
+
 
 @route("/video/dreambox/TimerPopup")
 def TimerPopup(title, message):
-    return MessageContainer(
+    return     MessageContainer(
           title,
           message
+      )
+
+
+@route("/video/dreambox/TimerEvent")
+def TimerEvent(title, message):
+
+    oc = ObjectContainer()
+    oc.add(InputDirectoryObject(key='www.google.co.uk',
+                                   title='Timer',
+                                   prompt='Click here to search for stuff',
+                                   summary='Click here to search for stuff'
+                                    )
+    )
+    return MessageContainer(
+          'title',
+          str(oc)
       )

@@ -1,4 +1,7 @@
-
+"""
+Theres a bit of duplication hrere so it will get refactored when I get the time
+Just wanted to get things working by copy/paste :)
+"""
 import urllib2
 from BeautifulSoup import BeautifulSoup
 
@@ -16,7 +19,6 @@ def get_bouquets(host, web):
     except Exception as e:
         return 'Error', 'Messsage and vals : {} host: {} port: {}'.format(e.message, host, web)
     return bouquets
-
 
 
 def get_channels(host, web, bRef):
@@ -51,6 +53,7 @@ def get_channels(host, web, bRef):
         return 'Error', 'Messsage and vals : {} host: {} port: {} bref: {} url: {}'.format(e.message, host, web, bRef, url)
     return channels
 
+
 def get_fullepg(host, web, sRef):
     import urllib
     channels = []
@@ -82,13 +85,13 @@ def get_fullepg(host, web, sRef):
         return 'Error', 'Messsage and vals : {} host: {} port: {} bref: {} url: {}'.format(e.message, host, web, sRef, url)
     return channels
 
+
 def get_nownext(host, web, sRef):
     import urllib
     channels = []
     url = 'http://{}:{}/web/epgservicenow'.format(host, web)
     url2 = 'http://{}:{}/web/epgservicenext'.format(host, web)
     data = urllib.urlencode({'sRef': sRef})
-
     try:
         soup = get_data((url, data), (url2, data))
         for elem in soup:
@@ -114,16 +117,13 @@ def get_nownext(host, web, sRef):
         return 'Error', 'Messsage and vals : {} host: {} port: {} bref: {} url: {}'.format(e.message, host, web, sRef, url)
     return channels
 
-
 def get_movies(host, web):
     import urllib
     movies = []
     url = 'http://{}:{}/web/movielist'.format(host, web)
     try:
         soup = get_data((url, None))
-        soup = soup[0].findAll('e2movie')
-        print soup
-        for elem in soup:
+        for elem in soup[0].findAll('e2movie'):
             sref, title, description, channel, e2time, length, filename = elem.findAll(['e2servicereference',
                                                                             'e2title',
                                                                             'e2description',
@@ -142,30 +142,66 @@ def get_movies(host, web):
                            format_string(channel, strip=True),
                            dt,
                            format_string(length),
-                           format_string(filename)))
+                           format_string(filename, url_encode=True)))
 
     except Exception as e:
         return 'Error', 'Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
     return movies
 
 
+def get_timers(host, web, active=False):
+    import time
+    timers = []
+    url = 'http://{}:{}/web/timerlist'.format(host, web)
+    try:
+        soup = get_data((url, None))
+        soup = soup[0].findAll('e2timer')
+        print soup
+        for elem in soup:
+            sref, service_name, name, description, disabled, begin, end, duration = elem.findAll(['e2servicereference',
+                                                                            'e2servicename',
+                                                                            'e2name',
+                                                                            'e2description',
+                                                                            'e2disabled',
+                                                                            'e2timebegin',
+                                                                            'e2timeend',
+                                                                            'e2duration'
+                                                                       ])
 
+            if long(format_string(begin)) > time.time():
+                timers.append((format_string(sref),
+                           format_string(service_name, strip=True),
+                           format_string(name, strip=True),
+                           format_string(description, strip=True),
+                           bool(format_string(disabled)),
+                           int(format_string(begin)),
+                           int(format_string(end)),
+                           int(format_string(duration)))
+            )
+            print len(timers)
+
+    except Exception as e:
+        return 'Error', 'Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
+    return timers, active
 
 
 #################################
 # Helpers                       #
 #################################
 
+######################################################
+# Formats the string returned from the satellite box #
+######################################################
+def format_string(data, strip=False, url_encode=False):
 
-
-
-
-def format_string(data, strip=False):
-    if data.string:
-        if len(data.string) > 0:
+    data = data.string
+    if data:
+        if len(data) > 0:
             if strip:
-                return unicode_replace(data.string)
-            return data.string
+                data = unicode_replace(data)
+            if url_encode:
+                data = url_replace(data)
+            return data
     return ''
 
 ###############################################################
@@ -179,6 +215,18 @@ def unicode_replace(data):
         data = data.replace(k, v)
     return data
 
+###############################################################
+# Remove HTML escape chars that are not replaced              #
+###############################################################
+def url_replace(data):
+    escape_chars = {'+': '%2B'}
+    for k, v in escape_chars.iteritems():
+        data = data.replace(k, v)
+    return data
+
+###############################################################
+# Gets the stuff we need from the box and returns soup        #
+###############################################################
 def get_data(*args):
     import urllib2
     results = []
@@ -207,4 +255,6 @@ def get_data(*args):
 
 #print get_fullepg('192.168.1.252', 80, '1:0:1:1933:7FF:2:11A0000:0:0:0:')
 
-print get_movies('192.168.1.252', 80)
+#print get_movies('192.168.1.252', 80)
+
+print get_timers('192.168.1.252', 80, True)
