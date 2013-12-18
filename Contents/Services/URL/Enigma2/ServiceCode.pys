@@ -1,0 +1,92 @@
+
+
+
+
+
+def MetadataObjectForURL(url):
+
+    from BeautifulSoup import BeautifulSoup
+    from urllib import urlencode
+    from urllib2 import urlopen
+
+
+
+    param = get_sRef(url)
+    try:
+        data = urlencode({'sRef': param})
+        response = urlopen('http://192.168.1.252/web/epgservicenow', data)
+        res = response.read()
+        soup = BeautifulSoup(res)
+        elem = soup.find('e2event')
+        id, start, duration, current_time, title, description, sRef, name = elem.findAll(['e2eventid',
+                                                                            'e2eventstart',
+                                                                            'e2eventduration',
+                                                                            'e2eventcurrenttime',
+                                                                            'e2eventtitle',
+                                                                            'e2eventdescription',
+                                                                            'e2eventservicereference',
+
+                                                                         'e2eventservicename'])
+
+    except Exception as e:
+        return e
+
+    return VideoClipObject(
+        title=title.string,
+        summary=description.string,
+        thumb='thumb')
+
+
+def MediaObjectsForURL(url):
+    #TODO Get a few packets and get the stream info etc. Media values go in here
+    return [
+        MediaObject(
+            video_codec = 'h264',
+            audio_codec = 'mp3',
+            container = 'mpegts',
+            width=1920,
+            height=1080,
+            parts = [PartObject(key=Callback(PlayVideoIndirect, url = url))]
+        )
+    ]
+
+
+
+# Called when the user presses the play button.
+# Callback function called from the part object
+@indirect
+def PlayVideoIndirect(url):
+    oc = ObjectContainer(objects=[
+            VideoClipObject(items=[
+                            MediaObject(
+                                video_codec = 'h264',
+                                audio_codec = 'mp3',
+                                container = 'mpegts',
+                                width=1920,
+                                height=1080,
+                                 parts=[PartObject(key=url)])
+                            ])
+    ])
+    return oc
+
+
+def PlayVideoRedirect(url):
+    #url = 'http://{}:{}/{}'.format('192.168.1.252', 8001, url)
+    return Redirect('http://192.168.1.252:8001/1%3A0%3A19%3A1B1C%3A802%3A2%3A11A0000%3A0%3A0%3A0%3A')
+
+
+#######################################
+# Helpers                             #
+#######################################
+
+
+
+
+def get_sRef(url):
+    from urlparse import urlparse
+
+    query = urlparse(url)
+    data = query.path.split('/')
+    return data[1]
+
+print MetadataObjectForURL('http://192.168.1.252:8001/1:0:1:1933:7FF:2:11A0000:0:0:0:')
