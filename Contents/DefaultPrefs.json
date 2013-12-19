@@ -40,5 +40,23 @@
 		"type": "bool",
 		"label": "Show full event list instead of now/next",
 		"default": "false"
-	}
+	},
+        {
+                "id": "container",
+                "type": "text",
+                "label": "Use container",
+                "default": "mpegts"
+        },
+        {
+                "id": "video_codec",
+                "type": "text",
+                "label": "Use video codec",
+                "default": "h264"
+        },
+        {
+                "id": "audio_codec",
+                "type": "text",
+                "label": "Use audio codec",
+                "default": "aac"
+        }
 ]
