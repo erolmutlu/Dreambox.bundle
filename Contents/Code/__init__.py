@@ -162,7 +162,7 @@ def Display_Event(sender, channel, description, duration, thumb=R(ICON), include
     # x264 soesnt work with samsung, probably iOs.
     Log('**** TVStation  sender {}, channel {}, description {}, duration {}'.format(sender, channel, description, duration))
     browsers = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
-    video_codec = None
+    video_codec = 'h264'
     audio_codec = 'mp3'
     container = 'mp4'
     if Prefs['picon']:
