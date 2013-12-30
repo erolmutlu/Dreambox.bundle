@@ -1,4 +1,29 @@
 [
+
+	{
+		"id": "zap",
+		"type": "bool",
+		"label": "Zap to channel before stream",
+		"default": "false"
+	},
+	{
+		"id": "picon",
+		"type": "bool",
+		"label": "Show Picons if available",
+		"default": "false"
+	},
+	{
+		"id": "fullepg",
+		"type": "bool",
+		"label": "Show full event list instead of now/next",
+		"default": "false"
+	},
+    {
+		"id": "duration",
+		"type": "text",
+		"label": "Duration of live stream (minutes)",
+		"default": "180"
+	},
 	{
 		"id": "host",
 		"type": "text",
@@ -18,28 +43,10 @@
 		"default": "8001"
 	},
 	{
-		"id": "zap",
-		"type": "bool",
-		"label": "Zap to channel before stream",
-		"default": "false"
-	},
-	{
-		"id": "epg",
-		"type": "bool",
-		"label": "Show EPG info",
-		"default": "true"
-	},
-	{
-		"id": "picon",
-		"type": "bool",
-		"label": "Show Picons if available",
-		"default": "false"
-	},
-	{
-		"id": "fullepg",
-		"type": "bool",
-		"label": "Show full event list instead of now/next",
-		"default": "false"
+		"id": "piconpath",
+		"type": "text",
+		"label": "Path to load picons",
+		"default": "hdd/picon"
 	},
         {
                 "id": "container",

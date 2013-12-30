@@ -9,12 +9,12 @@ def MetadataObjectForURL(url):
     from urllib import urlencode
     from urllib2 import urlopen
 
-
-
-    param = get_sRef(url)
+    param = get_url_part(url, 'sRef')
+    web_port = get_url_part(url, 'web_port')
+    url = get_url_part(url)
     try:
         data = urlencode({'sRef': param})
-        response = urlopen('http://192.168.1.252/web/epgservicenow', data)
+        response = urlopen('http://{}:{}/web/epgservicenow'.format(url, web_port), data)
         res = response.read()
         soup = BeautifulSoup(res)
         elem = soup.find('e2event')
@@ -25,9 +25,7 @@ def MetadataObjectForURL(url):
                                                                             'e2eventtitle',
                                                                             'e2eventdescription',
                                                                             'e2eventservicereference',
-
-                                                                         'e2eventservicename'])
-
+                                                                            'e2eventservicename'])
     except Exception as e:
         return e
 
@@ -44,8 +42,6 @@ def MediaObjectsForURL(url):
             video_codec = 'h264',
             audio_codec = 'mp3',
             container = 'mpegts',
-            width=1920,
-            height=1080,
             parts = [PartObject(key=Callback(PlayVideoIndirect, url = url))]
         )
     ]
@@ -56,23 +52,21 @@ def MediaObjectsForURL(url):
 # Callback function called from the part object
 @indirect
 def PlayVideoIndirect(url):
+
+    param = get_url_part(url, 'sRef')
+    video_port = get_url_part(url, 'video_port')
+    url = get_url_part(url)
+
     oc = ObjectContainer(objects=[
             VideoClipObject(items=[
                             MediaObject(
                                 video_codec = 'h264',
                                 audio_codec = 'mp3',
                                 container = 'mpegts',
-                                width=1920,
-                                height=1080,
-                                 parts=[PartObject(key=url)])
+                                 parts=[PartObject(key='http://{}:{}/{}'.format(url, video_port, param))])
                             ])
     ])
     return oc
-
-
-def PlayVideoRedirect(url):
-    #url = 'http://{}:{}/{}'.format('192.168.1.252', 8001, url)
-    return Redirect('http://192.168.1.252:8001/1%3A0%3A19%3A1B1C%3A802%3A2%3A11A0000%3A0%3A0%3A0%3A')
 
 
 #######################################
@@ -82,11 +76,21 @@ def PlayVideoRedirect(url):
 
 
 
-def get_sRef(url):
+def get_url_part(url, type='url'):
     from urlparse import urlparse
 
     query = urlparse(url)
     data = query.path.split('/')
-    return data[1]
+    if type== 'sRef':
+        return data[3]
+    elif type == 'web_port':
+        return data[1]
+    elif type== 'video_port':
+        return data[2]
+    else:
+        return query.netloc
 
-print MetadataObjectForURL('http://192.168.1.252:8001/1:0:1:1933:7FF:2:11A0000:0:0:0:')
+
+
+
+

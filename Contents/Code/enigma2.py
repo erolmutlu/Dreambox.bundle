@@ -1,124 +1,70 @@
-"""
-Theres a bit of duplication hrere so it will get refactored when I get the time
-Just wanted to get things working by copy/paste :)
-"""
-import urllib2
+
+import urllib
 from BeautifulSoup import BeautifulSoup
 
 
 def get_bouquets(host, web):
-    bouquets = []
+
     url = 'http://{}:{}/web/getservices'.format(host, web)
-    try:
-        req = urllib2.Request(url)
-        response = urllib2.urlopen(req)
-        soup = BeautifulSoup(response.read())
-        for elems in soup.findAll('e2service'):
-            bref, name = elems.findAll(['e2servicereference', 'e2servicename'])
-            bouquets.append((name.string, bref.string))
-    except Exception as e:
-        return 'Error', 'Messsage and vals : {} host: {} port: {}'.format(e.message, host, web)
-    return bouquets
+    soup = get_data((url, None))
+    results = get_service_name(soup)
+    return results
 
 
-def get_channels(host, web, bRef):
-    import urllib
-    channels = []
+def get_current_service(host, web):
+
+    url = 'http://{}:{}/web/getcurrent'.format(host, web)
+    soup = get_data((url, None))
+    results = get_current_service_info(soup)
+    return results
+
+def get_channels_from_service(host, web, sRef, show_epg=False):
+
+    url = 'http://{}:{}/web/getservices'.format(host, web)
+    data = urllib.urlencode({'sRef': sRef})
+    soup = get_data((url, data))
+    results = get_service_name(soup, host, web, show_epg)
+    return results
+
+
+def get_channels_from_epg(host, web, bRef):
+
     url = 'http://{}:{}/web/epgbouquet'.format(host, web)
     data = urllib.urlencode({'bRef': bRef})
-    try:
-        req = urllib2.Request(url, data)
-        response = urllib2.urlopen(req)
-        soup = BeautifulSoup(response.read())
-        for elems in soup.findAll('e2event'):
-            id, start, duration, current_time, title, description, sRef, name = elems.findAll(['e2eventid',
-                                                                            'e2eventstart',
-                                                                            'e2eventduration',
-                                                                            'e2eventcurrenttime',
-                                                                            'e2eventtitle',
-                                                                            'e2eventdescription',
-                                                                            'e2eventservicereference',
-                                                                            'e2eventservicename'])
-
-            channels.append((int(format_string(id)),
-                             int(format_string(start)),
-                             int(format_string(duration)),
-                             int(format_string(current_time)),
-                             format_string(title, strip=True),
-                             format_string(description, strip=True),
-                             format_string(sRef),
-                             format_string(name)))
-
-    except Exception as e:
-        return 'Error', 'Messsage and vals : {} host: {} port: {} bref: {} url: {}'.format(e.message, host, web, bRef, url)
-    return channels
+    soup = get_data((url, data))
+    results = get_events(soup)
+    return results
 
 
 def get_fullepg(host, web, sRef):
-    import urllib
-    channels = []
+
     url = 'http://{}:{}/web/epgservice'.format(host, web)
     data = urllib.urlencode({'sRef': sRef})
-    try:
-        soup = get_data((url, data))
-        soup = soup[0].findAll('e2event')
-        for elem in soup:
-            id, start, duration, current_time, title, description, sRef, name = elem.findAll(['e2eventid',
-                                                                            'e2eventstart',
-                                                                            'e2eventduration',
-                                                                            'e2eventcurrenttime',
-                                                                            'e2eventtitle',
-                                                                            'e2eventdescription',
-                                                                            'e2eventservicereference',
-                                                                            'e2eventservicename'])
+    soup = get_data((url, data))
+    results = get_events(soup)
+    return results
 
-            channels.append((int(format_string(id)),
-                             int(format_string(start)),
-                             int(format_string(duration)),
-                             int(format_string(current_time)),
-                             format_string(title, strip=True),
-                             format_string(description, strip=True),
-                             format_string(sRef),
-                             format_string(name)))
+def get_now(host, web, sRef):
 
-    except Exception as e:
-        return 'Error', 'Messsage and vals : {} host: {} port: {} bref: {} url: {}'.format(e.message, host, web, sRef, url)
-    return channels
+    url = 'http://{}:{}/web/epgservicenow'.format(host, web)
+    data = urllib.urlencode({'sRef': sRef})
+    soup = get_data((url, data))
+    results = get_events(soup)
+    return results
 
 
 def get_nownext(host, web, sRef):
-    import urllib
-    channels = []
+
     url = 'http://{}:{}/web/epgservicenow'.format(host, web)
     url2 = 'http://{}:{}/web/epgservicenext'.format(host, web)
     data = urllib.urlencode({'sRef': sRef})
-    try:
-        soup = get_data((url, data), (url2, data))
-        for elem in soup:
-            id, start, duration, current_time, title, description, sRef, name = elem.findAll(['e2eventid',
-                                                                            'e2eventstart',
-                                                                            'e2eventduration',
-                                                                            'e2eventcurrenttime',
-                                                                            'e2eventtitle',
-                                                                            'e2eventdescription',
-                                                                            'e2eventservicereference',
-                                                                            'e2eventservicename'])
+    soup = get_data((url, data), (url2, data))
+    results = get_events(soup)
+    return results
 
-            channels.append((int(format_string(id)),
-                             int(format_string(start)),
-                             int(format_string(duration)),
-                             int(format_string(current_time)),
-                             format_string(title, strip=True),
-                             format_string(description, strip=True),
-                             format_string(sRef),
-                             format_string(name)))
-
-    except Exception as e:
-        return 'Error', 'Messsage and vals : {} host: {} port: {} bref: {} url: {}'.format(e.message, host, web, sRef, url)
-    return channels
 
 def get_movies(host, web):
-    import urllib
+
     movies = []
     url = 'http://{}:{}/web/movielist'.format(host, web)
     try:
@@ -135,7 +81,6 @@ def get_movies(host, web):
                                                                             ])
             import datetime
             dt = datetime.datetime.fromtimestamp(int(format_string(e2time))).strftime('%d %B %Y %H:%M')
-            print dt
             movies.append((format_string(sref),
                            format_string(title, strip=True),
                            format_string(description, strip=True),
@@ -145,7 +90,7 @@ def get_movies(host, web):
                            format_string(filename, url_encode=True)))
 
     except Exception as e:
-        return 'Error', 'Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
+        return 'Error', 'getmovies Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
     return movies
 
 
@@ -189,20 +134,125 @@ def get_timers(host, web, active=False):
 # Helpers                       #
 #################################
 
-######################################################
-# Formats the string returned from the satellite box #
-######################################################
-def format_string(data, strip=False, url_encode=False):
+###############################################################
+# Extracts the service name from the soup                     #
+###############################################################
+def get_service_name(soup_list, host=None, web=None, show_epg=None):
+    try:
+        results = []
+        for soup in soup_list:
+            for elems in soup.findAll('e2service'):
+                sRef, name = elems.findAll(['e2servicereference', 'e2servicename'])
+                if show_epg:
+                    re =  get_now(host, web, format_string(sRef))
+                    if re[0] != 'Error':
+                        results.append((re[0][0],
+                                     re[0][1],
+                                     re[0][2],
+                                     re[0][3],
+                                     format_string(re[0][4], strip=True),
+                                     format_string(re[0][5], strip=True),
+                                     format_string(re[0][6]),
+                                     format_string(re[0][7], strip=True)))
+                    else:
+                        results.append((0, 0,  0,  0,
+                                     '',
+                                     '',
+                                     format_string(sRef),
+                                     format_string(name, strip=True)))
+                else:
+                    results.append((0,  0,  0,  0,
+                                     '',
+                                     '',
+                                     format_string(sRef),
+                                     format_string(name, strip=True)))
+    except Exception as e:
+        return 'Error', 'getservicename Messsage  : {} '.format(e.message)
+    return results
 
-    data = data.string
+
+###############################################################
+# Extracts the events from the soup                           #
+###############################################################
+def get_events(soup_list):
+
+    results = []
+    try:
+        for soup in soup_list:
+            for elems in soup.findAll('e2event'):
+                id, start, duration, current_time, title, description, sRef, name = elems.findAll(['e2eventid',
+                                                                                    'e2eventstart',
+                                                                                    'e2eventduration',
+                                                                                    'e2eventcurrenttime',
+                                                                                    'e2eventtitle',
+                                                                                    'e2eventdescription',
+                                                                                    'e2eventservicereference',
+                                                                                    'e2eventservicename'])
+
+                results.append((format_string(id, integer=True),
+                                     format_string(start, integer=True),
+                                     format_string(duration, integer=True),
+                                     format_string(current_time, integer=True),
+                                     format_string(title, strip=True),
+                                     format_string(description, strip=True),
+                                     format_string(sRef),
+                                     format_string(name, strip=True)))
+
+    except Exception as e:
+        return 'Error', 'Messsage  : {} '.format(e.message)
+    return results
+
+###############################################################
+# Extracts the current service info from the soup             #
+###############################################################
+def get_current_service_info(soup_list):
+
+    results = []
+    try:
+        for soup in soup_list:
+            for elems in soup.findAll('e2event'):
+                sRef, channel, provider,title, description, remaining = elems.findAll(['e2eventservicereference',
+                                                      'e2eventservicename',
+                                                      'e2eventprovidername',
+                                                      'e2eventtitle',
+                                                      'e2eventdescription',
+                                                      'e2eventremaining'])
+
+                results.append((format_string(sRef),
+                                format_string(channel, strip=True),
+                                format_string(provider, strip=True),
+                                format_string(title, strip=True),
+                                format_string(description, strip=True),
+                                format_string(remaining, integer=True)))
+
+    except Exception as e:
+        return 'Error', 'Messsage  : {} '.format(e.message)
+    return results
+
+
+###############################################################
+# Formats the string returned from the satellite box          #
+###############################################################
+def format_string(data, strip=False, url_encode=False, integer=False):
     if data:
-        if len(data) > 0:
-            if strip:
-                data = unicode_replace(data)
-            if url_encode:
-                data = url_replace(data)
-            return data
+        if isinstance(data, unicode):
+            data = data.encode('ascii', 'ignore')
+        else:
+
+            data = data.string
+        if data not in (None, 'None'):
+            if len(data) > 0:
+                if strip:
+                    data = unicode_replace(data)
+                if url_encode:
+                    data = url_replace(data)
+                if integer:
+                    return int(data)
+                return data
+    if integer:
+        return 0
     return ''
+
 
 ###############################################################
 # Remove Unicode Chars sent via the mpeg stream               #
@@ -210,10 +260,12 @@ def format_string(data, strip=False, url_encode=False):
 def unicode_replace(data):
     invalid_chars = {u'\x86': '',
                      u'\x87': '',
-                     '&amp;': '&'}
+                     '&amp;': '&',
+                    '&gt;': '>'}
     for k, v in invalid_chars.iteritems():
         data = data.replace(k, v)
     return data
+
 
 ###############################################################
 # Remove HTML escape chars that are not replaced              #
@@ -224,6 +276,7 @@ def url_replace(data):
         data = data.replace(k, v)
     return data
 
+
 ###############################################################
 # Gets the stuff we need from the box and returns soup        #
 ###############################################################
@@ -232,7 +285,6 @@ def get_data(*args):
     results = []
     for item in args:
         u = item[0]
-        #TODO Need to do a check here to make sure it exists
         data = item[1]
         try:
             if data:
@@ -240,21 +292,9 @@ def get_data(*args):
             else:
                 req = urllib2.Request(u)
             response = urllib2.urlopen(req)
-            soup = BeautifulSoup(response.read())
+            r = response.read()
+            soup = BeautifulSoup(r)
             results.append(soup)
         except Exception as e:
             results.append(('Error', e.message))
     return results
-
-
-#res =  get_channels('192.168.1.252', 80, '1:7:1:0:0:0:0:0:0:0:FROM%20BOUQUET%20"userbouquet.entertainment.tv"')
-
-
-#for r in res:
-#    print repr(r[4])
-
-#print get_fullepg('192.168.1.252', 80, '1:0:1:1933:7FF:2:11A0000:0:0:0:')
-
-#print get_movies('192.168.1.252', 80)
-
-print get_timers('192.168.1.252', 80, True)
