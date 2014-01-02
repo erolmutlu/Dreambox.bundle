@@ -1,6 +1,5 @@
 ART = 'art-default.jpg'
 ICON = 'icon-default.png'
-ZAP_TO_URL = 'http://%s:%s/web/zap?sRef=%s'
 STREAM_URL = 'http://%s:%s/%s'
 EPG_URL = 'http://%s:%s/web/epgnow?bRef=%s'
 LIVE = 'livetv.png'
@@ -11,18 +10,21 @@ BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
 
 
 def Start():
-
+    from enigma2 import get_current_service
     Plugin.AddViewGroup('List', viewMode='List', mediaType='items')
     ObjectContainer.art = R(ART)
     ObjectContainer.title1 = 'Dreambox'
     DirectoryObject.thumb = R(ICON)
     Resource.AddMimeType('image/png','png')
+    #Save the inital channel to reset the box
+    sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
+    Data.Save('sRef', sRef)
 
 
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
-    from enigma2 import get_timers, get_current_service
+    from enigma2 import  get_number_of_tuners
     items = []
     items.append(on_now())
     items.append(DirectoryObject(key=Callback(Display_Bouquets),
@@ -33,6 +35,7 @@ def MainMenu():
                                title='Recorded TV',
                                thumb= R(RECORDED),
                                tagline='Watch recorded content on your Enigma 2 based satellite receiver'))
+    items = zap_menuitem(items)
     items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
     oc = ObjectContainer(objects=items, view_group='List', no_cache=False)
     timers(oc)
@@ -80,10 +83,10 @@ def Display_Bouquet_Channels(sender, index):
             name = '{}  - {}'.format(str(name), str(title))
         else:
             name = '{}'.format(str(name))
-            #gets rid of na
+        #gets rid of na
         if name != '&lt;n/a>':
-            Log('remaining {}'.format(remaining))
-            oc.add(DirectoryObject(key = Callback(Display_Channel_Events, sender=str(name), sRef=str(sRef), title=title),
+            Log('remaining {}'.format(name))
+            oc.add(DirectoryObject(key = Callback(Display_Channel_Events, sender=name, sRef=str(sRef), title=title),
                                     title = name,
                                     duration = remaining,
                                     thumb = picon(sRef)))
@@ -97,8 +100,8 @@ def get_packets(sRef):
     import time, urllib2
 
     tuner = True
-    Log('Getting packets {}'.format(sRef))
-    stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], sRef)
+    Log('Entered Get Packets {}'.format(sRef))
+    stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], str(sRef))
     Log(stream)
     streamurl = urllib2.urlopen(stream)
     bytes_to_read = 188
@@ -109,8 +112,7 @@ def get_packets(sRef):
         else:
             tuner = True
             break
-    time.sleep(2)
-    #TODO maybe retry to get the epg now
+    Log('Exiting Get Packets {}'.format(tuner))
     if tuner:
         return True
     return False
@@ -123,18 +125,20 @@ def get_packets(sRef):
 def Display_Channel_Events(sender, sRef, title=None):
     import time
 
-    Log('**** sender{} sref{} title{}'.format(sender, sRef, title))
+    Log('Entered display channel events: sender {} sref {} title {}'.format(sender, sRef, title))
     items = []
     for id, start, duration, current_time, title, description, sRef, name in get_events(title, sRef):
         remaining = calculate_remaining(start, int(duration), current_time)
         #Add current event
-        Log('****Time is {}'.format(start))
+
         if int(start) < time.time():
             result = add_current_event(sRef, name, title, description, remaining, picon(sRef))
+            if title == 'N/A':
+                title = 'Unknown'
             if result:
                 items.append(result)
         #Add a future \ next event
-        else:
+        elif start > 0:
             items.append(DirectoryObject(key=Callback(TimerPopup,
                                    title='Timer',
                                    message='Timer created for \n\n{} {} *** Not working yet ***'.format(name, title)),
@@ -149,8 +153,9 @@ def Display_Channel_Events(sender, sRef, title=None):
 
 
 @route("/video/dreambox/Display_Movie_Event/hdd/movie")
-def Display_Movie_Event(sender, filename, description, duration, thumb=R(ICON), include_oc=False, rating_key=None):
-    Log('Snder in movie event {}'.format(sender))
+def Display_Movie_Event(sender=None, filename=None, description=None, duration=None, thumb=R(ICON), include_oc=False, rating_key=None):
+    Log('Entered movie event {} {} {} {} {} {} {}'.format(sender, filename, description, duration, thumb, include_oc, rating_key))
+    from enigma2 import format_string
     container, video_codec, audio_codec = get_codecs()
     rating_key = generate_rating_key(rating_key)
     video = EpisodeObject(
@@ -165,14 +170,12 @@ def Display_Movie_Event(sender, filename, description, duration, thumb=R(ICON), 
                 video_codec = video_codec,
                 audio_codec = audio_codec,
                 audio_channels = 2,
-                parts = [PartObject(key=Callback(PlayVideo, channel='sender', filename=filename, recorded=True)
-                                    )]
+                parts = [PartObject(key=Callback(PlayVideo, channel='sender', filename=filename, recorded=True))]
             )
         ]
     )
     if include_oc:
         oc = ObjectContainer()
-
         oc.add(video)
         return oc
     import re
@@ -197,8 +200,8 @@ def Display_Event(sender, channel, description, duration, thumb=None, include_oc
             MediaObject(
                 container = container,
                 video_codec = video_codec,
-                audio_codec = audio_codec,
                 audio_channels = 2,
+                audio_codec = audio_codec,
                 parts = [PartObject(key=Callback(PlayVideo, channel=channel))]
             )
         ]
@@ -219,21 +222,25 @@ def Display_Event(sender, channel, description, duration, thumb=None, include_oc
 @route("video/dreambox/PlayVideo/{channel}")
 def PlayVideo(channel, filename=None,  recorded=False):
     import urllib2, time
+    from enigma2 import format_string, zap
 
     channel = channel.strip('.m3u8')
     if Prefs['zap'] and not recorded:
         #Zap to channel
-        url = ZAP_TO_URL % (Prefs['host'], Prefs['port_web'], String.Quote(channel))
-        try:
-            urlHtml = HTTP.Request(url, cacheTime=0, sleep=3.0).content
-            Log('url HTML = {}'.format(urlHtml))
-        except:
-            Log("Couldn't zap to channel.")
+        zap = zap(Prefs['host'], Prefs['port_web'], String.Quote(channel))
+        if zap:
+            Log('Zapped to channel when playing video')
+        else:
+            Log("Couldn't zap to channel when playing video")
     if not recorded:
         stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
+        Log('Stream to play {}'.format(stream))
     else:
+
+        filename = format_string(filename, clean_file=True)
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
-    Log('Stream to play {}'.format(stream))
+        Log('Recorded file  to play {}'.format(stream))
+
     return Redirect(stream)
 
 
@@ -288,6 +295,7 @@ def get_events(title=None, sRef=None):
 ##################################################################
 def add_current_event(sRef=None, name=None, title=None, description=None, remaining=None, piconfile=None):
     # now check if we need to use the service
+    Log ('Entered Add Current Event {} {} {} {} {} {}'.format(sRef, name, title, description, remaining, piconfile))
     if Client.Platform in CLIENT:
         return VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'], sRef),
                                title='{}  - {}'.format(name, title),
@@ -307,16 +315,26 @@ def add_current_event(sRef=None, name=None, title=None, description=None, remain
 # Adds a menu iem for the current service                        #
 ##################################################################
 def on_now():
-    from enigma2 import get_current_service
-
     if Prefs['host'] and Prefs['port_web'] and Prefs['port_video']:
         # Add a item for the current serviceon now
-        sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
-        if Client.Platform in CLIENT:
-            result = VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'], sRef),
-                                       title='On Now - {}   {}'.format(channel, description))
-        else:
-            result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
+        result = None
+        try:
+            result = on_now_menuitem()
+        except:
+            #if we get here then there's no free tuners, so issue a zap.
+            #What do we zap to if there's no tuners when we start?
+            ResetReceiver()
+            result = on_now_menuitem()
+    return result
+
+def on_now_menuitem():
+    from enigma2 import get_current_service
+    sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
+    if Client.Platform in CLIENT:
+        result = VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'], sRef),
+                                           title='On Now - {}   {}'.format(channel, description))
+    else:
+        result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
     return result
 
 
@@ -380,7 +398,7 @@ def calculate_remaining(start=None, duration=None, current_time=None):
 
 
 ########################################################################
-# Returns a picon for the giveb channel                                #
+# Returns a picon for the given channel                                #
 ########################################################################
 def picon(sRef=None):
     if Prefs['picon'] :
@@ -393,3 +411,29 @@ def picon(sRef=None):
         return '{}{}'.format(piconpath, piconfile)
     else:
         return None
+
+
+########################################################################
+# Adds a menu item if the receiver just has one tuner                  #
+########################################################################
+def zap_menuitem(items=None):
+    from enigma2 import get_number_of_tuners
+
+    if get_number_of_tuners(Prefs['host'], Prefs['port_web']) == 1:
+        items.append(DirectoryObject(key=Callback(ResetReceiver),
+                               title='Reset receiver to original channel',
+                               thumb = None))
+    return items
+
+@route("video/dreambox/ResetReceiver")
+def ResetReceiver():
+    from enigma2 import zap
+    zap, error = zap(Prefs['host'], Prefs['port_web'], Data.Load('sRef'))
+    Log(error)
+    if zap:
+        message = 'Zapped to channel to reset receiver'
+        Log(message)
+    else:
+        message = "Couldn't zap to channel resetting receiver"
+        Log(message)
+    return ObjectContainer(title2='Reset Receiver', no_cache=False, header='Reset receiver', message=message)

@@ -40,9 +40,28 @@ def MediaObjectsForURL(url):
     return [
         MediaObject(
             video_codec = 'h264',
-            audio_codec = 'mp3',
             container = 'mpegts',
-            parts = [PartObject(key=Callback(PlayVideoIndirect, url = url))]
+            parts = [PartObject(key=Callback(PlayVideoIndirect, url = url),
+                                    streams=[
+                                        VideoStreamObject(id=0,
+                                                          frame_rate=25,
+                                                          selected=1),
+                                        AudioStreamObject(language_code=Locale.Language.English,
+
+                                                          id=1,
+                                                          index='1',
+                                                          sampling_rate=48000,
+                                                          channels = 2),
+                                        AudioStreamObject(language_code=Locale.Language.English,
+                                                          id=12,
+                                                          index='2',
+                                                          sampling_rate=48000,
+                                                          channels = 6,
+                                                          selected=True)
+                                    ]
+
+
+            )]
         )
     ]
 

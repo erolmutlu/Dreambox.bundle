@@ -87,7 +87,7 @@ def get_movies(host, web):
                            format_string(channel, strip=True),
                            dt,
                            format_string(length),
-                           format_string(filename, url_encode=True)))
+                           format_string(filename, strip=True)))
 
     except Exception as e:
         return 'Error', 'getmovies Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
@@ -129,6 +129,33 @@ def get_timers(host, web, active=False):
         return 'Error', 'Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
     return timers, active
 
+
+def get_number_of_tuners(host, web):
+    url = 'http://{}:{}/web/about'.format(host, web)
+    try:
+        soup = get_data((url, None))
+        number_of_tuners = len(soup[0].findAll('e2nim'))
+
+
+    except Exception as e:
+        return 'Error', 'Error getting number of tuners : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
+    return number_of_tuners
+
+
+def zap(host, web, sRef):
+
+    result = False
+    error = ''
+    try:
+        url = 'http://{}:{}/web/zap'.format(host, web)
+        data = urllib.urlencode({'sRef': sRef})
+        soup = get_data((url, data))
+        state = soup[0].e2state.string
+        if state == 'True':
+            result = True
+    except Exception as e:
+        error = e.message
+    return result, error
 
 #################################
 # Helpers                       #
@@ -233,19 +260,21 @@ def get_current_service_info(soup_list):
 ###############################################################
 # Formats the string returned from the satellite box          #
 ###############################################################
-def format_string(data, strip=False, url_encode=False, integer=False):
+def format_string(data, strip=False, clean_file=False, integer=False):
     if data:
         if isinstance(data, unicode):
             data = data.encode('ascii', 'ignore')
         else:
-
-            data = data.string
+            try:
+                data = data.string
+            except:
+                data = str(data)
         if data not in (None, 'None'):
             if len(data) > 0:
                 if strip:
                     data = unicode_replace(data)
-                if url_encode:
-                    data = url_replace(data)
+                if clean_file:
+                    data = clean_filename(data)
                 if integer:
                     return int(data)
                 return data
@@ -270,8 +299,17 @@ def unicode_replace(data):
 ###############################################################
 # Remove HTML escape chars that are not replaced              #
 ###############################################################
-def url_replace(data):
-    escape_chars = {'+': '%2B'}
+def clean_filename(data):
+    escape_chars = {'++': ' %2B',
+                    '+': '%20',
+                    '&': '%26',
+                    ' ': '%20',
+                    '<': '%3C',
+                    '>': '%3E',
+                    '#': '%23',
+                    '%': '%25',
+                    '\\': '%5C',
+                    '^': '%5E'}
     for k, v in escape_chars.iteritems():
         data = data.replace(k, v)
     return data
