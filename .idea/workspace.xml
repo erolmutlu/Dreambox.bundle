@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" afterPath="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/__init__.py" afterPath="$PROJECT_DIR$/Contents/Code/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/enigma2.py" afterPath="$PROJECT_DIR$/Contents/Code/enigma2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/DefaultPrefs.json" afterPath="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -46,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="414" column="0" selection-start="16232" selection-end="16232" vertical-scroll-proportion="0.3990878" vertical-offset="6688" max-vertical-offset="7565">
+            <state line="414" column="0" selection-start="16232" selection-end="16232" vertical-scroll-proportion="0.0" vertical-offset="6688" max-vertical-offset="7565">
               <folding />
             </state>
           </provider>
@@ -67,7 +66,16 @@
       <file leaf-file-name="DefaultPrefs.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="26" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="1275">
+            <state line="36" column="22" selection-start="623" selection-end="623" vertical-scroll-proportion="-7.1538463" vertical-offset="426" max-vertical-offset="1377">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.55636364" vertical-offset="0" max-vertical-offset="884">
               <folding />
             </state>
           </provider>
@@ -79,7 +87,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1927" column="0" selection-start="239925" selection-end="239925" vertical-scroll-proportion="0.0" vertical-offset="32759" max-vertical-offset="32861">
+            <state line="5738" column="0" selection-start="760170" selection-end="760170" vertical-scroll-proportion="0.0" vertical-offset="97546" max-vertical-offset="97648">
               <folding />
             </state>
           </provider>
@@ -91,7 +99,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="0" selection-start="6174" selection-end="6174" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1088">
+            <state line="146" column="0" selection-start="29163" selection-end="29163" vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="2584">
               <folding />
             </state>
           </provider>
@@ -120,22 +128,20 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/Contents/Services/ServiceInfo.plist" />
-        <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" />
         <option value="C:/Program Files (x86)/Plex/Plex Media Server/Resources/Profiles/Android.xml" />
         <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
         <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
         <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
         <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -151,7 +157,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -162,7 +168,12 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -426,7 +437,11 @@
       <created>1388409107260</created>
       <updated>1388409107260</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added a menu item to reset the receiver tuner if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility">
+      <created>1388693678181</created>
+      <updated>1388693678181</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -450,15 +465,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="0" width="960" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.6714761" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53415155" sideWeight="0.6736959" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53340757" sideWeight="0.6736959" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38870057" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33370912" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -468,7 +484,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -506,7 +521,8 @@
     <MESSAGE value="Added support to display recorded TV" />
     <MESSAGE value="1. Live TV Tested working on the following formats&#10;&#10;IOS, Android 4+, Web Client, Plex Home Theatre, Samsung 2012 Smart TV's, Roku 3&#10;&#10;2. Recorded TV worked on as above with the exception of PHT. This will be sorted when I have another go at getting the URL service to play the streams &#10;&#10;3. Added support for now / next on a channel. Added a preference to include a full EPG list for the channel.&#10;&#10;4. Clicking on a future program will eventually add a timer. &#10;&#10;5. Future timers will eventually display in a timer directory. at the moment just the menu item for it is included when a future timer is present. The code is crap for this by the way&#10;&#10;6. Hopefully PICONS still work. I'd like to pull these from the dreambox but this will mean you will  have to set up a share for the hdd/picon folder . What does everyone think?&#10;&#10;7. Dont think the duration works of events works very well anymore. I'll sort this out at some point.&#10;&#10;8. Hopefully the issue where a channel wont play with no EPG is fixed. I'm getting the info straight from the EPG in the stream now." />
     <MESSAGE value="Various updates and additions. Please see the README for more details" />
-    <option name="LAST_COMMIT_MESSAGE" value="Various updates and additions. Please see the README for more details" />
+    <MESSAGE value="Added a menu item to reset the receiver tuner if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a menu item to reset the receiver tuner if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -603,28 +619,9 @@
         <state line="0" column="0" selection-start="0" selection-end="376" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="2699" selection-end="2699" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1258" />
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Plex/Plex Media Server/Resources/Profiles/Android.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="46" selection-start="348" selection-end="348" vertical-scroll-proportion="0.165692" vertical-offset="17" max-vertical-offset="1071" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="26" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="1275">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="524" max-vertical-offset="2057">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
@@ -632,7 +629,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1927" column="0" selection-start="239925" selection-end="239925" vertical-scroll-proportion="0.0" vertical-offset="32759" max-vertical-offset="32861">
+        <state line="5738" column="0" selection-start="760170" selection-end="760170" vertical-scroll-proportion="0.0" vertical-offset="97546" max-vertical-offset="97648">
           <folding />
         </state>
       </provider>
@@ -642,7 +639,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="6174" selection-end="6174" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1088">
+        <state line="146" column="0" selection-start="29163" selection-end="29163" vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="2584">
           <folding />
         </state>
       </provider>
@@ -656,7 +653,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="414" column="0" selection-start="16232" selection-end="16232" vertical-scroll-proportion="0.3990878" vertical-offset="6688" max-vertical-offset="7565">
+        <state line="414" column="0" selection-start="16232" selection-end="16232" vertical-scroll-proportion="0.0" vertical-offset="6688" max-vertical-offset="7565">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="524" max-vertical-offset="2057">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="22" selection-start="623" selection-end="623" vertical-scroll-proportion="-7.1538463" vertical-offset="426" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.55636364" vertical-offset="0" max-vertical-offset="884">
           <folding />
         </state>
       </provider>

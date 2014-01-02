@@ -34,7 +34,7 @@
 		"id": "port_web",
 		"type": "text",
 		"label": "Web Interface Port",
-		"default": "8001"
+		"default": "80"
 	},
 	{
 		"id": "port_video",
@@ -65,5 +65,11 @@
                 "type": "text",
                 "label": "Use audio codec",
                 "default": "aac"
+        },
+        {
+                "id": "version",
+                "type": "text",
+                "label": "Version",
+                "default": "02012014"
         }
 ]
