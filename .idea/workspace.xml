@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/DefaultPrefs.json" afterPath="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/__init__.py" afterPath="$PROJECT_DIR$/Contents/Code/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -45,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="__init__.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="414" column="0" selection-start="16232" selection-end="16232" vertical-scroll-proportion="0.0" vertical-offset="6688" max-vertical-offset="7565">
+            <state line="91" column="57" selection-start="3826" selection-end="3826" vertical-scroll-proportion="1.8751515" vertical-offset="0" max-vertical-offset="7548">
               <folding />
             </state>
           </provider>
@@ -72,10 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.55636364" vertical-offset="0" max-vertical-offset="884">
+            <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
               <folding />
             </state>
           </provider>
@@ -133,9 +132,9 @@
         <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
         <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
         <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
-        <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
         <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
       </list>
     </option>
   </component>
@@ -441,7 +440,11 @@
       <created>1388693678181</created>
       <updated>1388693678181</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added a menu item to reset the receiver  if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility&#10;&#10;Added software version so we can keep track of where we are (JUst uses the date pushed to Github)">
+      <created>1388695252145</created>
+      <updated>1388695252145</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -522,7 +525,8 @@
     <MESSAGE value="1. Live TV Tested working on the following formats&#10;&#10;IOS, Android 4+, Web Client, Plex Home Theatre, Samsung 2012 Smart TV's, Roku 3&#10;&#10;2. Recorded TV worked on as above with the exception of PHT. This will be sorted when I have another go at getting the URL service to play the streams &#10;&#10;3. Added support for now / next on a channel. Added a preference to include a full EPG list for the channel.&#10;&#10;4. Clicking on a future program will eventually add a timer. &#10;&#10;5. Future timers will eventually display in a timer directory. at the moment just the menu item for it is included when a future timer is present. The code is crap for this by the way&#10;&#10;6. Hopefully PICONS still work. I'd like to pull these from the dreambox but this will mean you will  have to set up a share for the hdd/picon folder . What does everyone think?&#10;&#10;7. Dont think the duration works of events works very well anymore. I'll sort this out at some point.&#10;&#10;8. Hopefully the issue where a channel wont play with no EPG is fixed. I'm getting the info straight from the EPG in the stream now." />
     <MESSAGE value="Various updates and additions. Please see the README for more details" />
     <MESSAGE value="Added a menu item to reset the receiver tuner if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a menu item to reset the receiver tuner if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility" />
+    <MESSAGE value="Added a menu item to reset the receiver  if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility&#10;&#10;Added software version so we can keep track of where we are (JUst uses the date pushed to Github)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a menu item to reset the receiver  if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility&#10;&#10;Added software version so we can keep track of where we are (JUst uses the date pushed to Github)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -651,13 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="414" column="0" selection-start="16232" selection-end="16232" vertical-scroll-proportion="0.0" vertical-offset="6688" max-vertical-offset="7565">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="524" max-vertical-offset="2057">
@@ -674,7 +671,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.55636364" vertical-offset="0" max-vertical-offset="884">
+        <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="57" selection-start="3826" selection-end="3826" vertical-scroll-proportion="1.8751515" vertical-offset="0" max-vertical-offset="7548">
           <folding />
         </state>
       </provider>

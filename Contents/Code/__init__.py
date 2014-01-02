@@ -90,7 +90,6 @@ def Display_Bouquet_Channels(sender, index):
                                     title = name,
                                     duration = remaining,
                                     thumb = picon(sRef)))
-
     return oc
 
 
