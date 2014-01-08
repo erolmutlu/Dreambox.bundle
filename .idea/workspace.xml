@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/__init__.py" afterPath="$PROJECT_DIR$/Contents/Code/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/DefaultPrefs.json" afterPath="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -44,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="285" selection-end="315" vertical-scroll-proportion="0.21371429" vertical-offset="0" max-vertical-offset="10166">
+            <state line="11" column="4" selection-start="285" selection-end="315" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10166">
               <folding />
             </state>
           </provider>
@@ -62,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultPrefs.json" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DefaultPrefs.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="6" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1479">
+            <state line="78" column="30" selection-start="1591" selection-end="1591" vertical-scroll-proportion="1.5618374" vertical-offset="0" max-vertical-offset="1479">
               <folding />
             </state>
           </provider>
@@ -123,9 +123,9 @@
         <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
         <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
         <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
-        <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
       </list>
     </option>
   </component>
@@ -436,7 +436,11 @@
       <created>1389210154424</created>
       <updated>1389210154424</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Widened the except">
+      <created>1389214837731</created>
+      <updated>1389214837731</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -519,7 +523,8 @@
     <MESSAGE value="Added a menu item to reset the receiver tuner if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility" />
     <MESSAGE value="Added a menu item to reset the receiver  if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility&#10;&#10;Added software version so we can keep track of where we are (JUst uses the date pushed to Github)" />
     <MESSAGE value="Fixed error of no preferences box if the receiver was unreachable.&#10;&#10;Added the ability to add and remove timers&#10;&#10;Added audio support :)&#10;&#10;Various menu changes to get round android client errors when a message or empty menu is presented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed error of no preferences box if the receiver was unreachable.&#10;&#10;Added the ability to add and remove timers&#10;&#10;Added audio support :)&#10;&#10;Various menu changes to get round android client errors when a message or empty menu is presented" />
+    <MESSAGE value="Widened the except" />
+    <option name="LAST_COMMIT_MESSAGE" value="Widened the except" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -665,16 +670,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
+    <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="6" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1479">
+        <state line="11" column="4" selection-start="285" selection-end="315" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10166">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
+    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="285" selection-end="315" vertical-scroll-proportion="0.21371429" vertical-offset="0" max-vertical-offset="10166">
+        <state line="78" column="30" selection-start="1591" selection-end="1591" vertical-scroll-proportion="1.5618374" vertical-offset="0" max-vertical-offset="1479">
           <folding />
         </state>
       </provider>
