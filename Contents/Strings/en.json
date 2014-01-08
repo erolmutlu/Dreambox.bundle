@@ -1,0 +1,8 @@
+{
+    'Title': 'Dreambox',
+    'Live': 'Live TV',
+    'LiveTag': 'Watch live TV direct from your Enigma 2 based satellite receiver',
+    'Recorded': 'Recorded TV',
+    'Bouquets': 'Bouquets',
+    'ConnectError': 'Unable to connect to receiver.',
+}
