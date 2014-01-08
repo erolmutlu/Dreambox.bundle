@@ -6,7 +6,6 @@ LIVE = 'livetv.png'
 RECORDED = 'recordedtv.png'
 CLIENT = ['Plex Home Theater']
 BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
-from time import  clock
 
 
 def Start():
@@ -17,13 +16,12 @@ def Start():
     ObjectContainer.title1 = Locale.LocalString('Title')
     DirectoryObject.thumb = R(ICON)
     #Save the inital channel to reset the box
-    a = clock()
     try:
         sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
         Data.Save('sRef', sRef)
-    except Exception as e:
+    except:
         Log('Error in Start. Unable to get current service - {}'.format(e.reason))
-    Log(clock() - a)
+
 
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
