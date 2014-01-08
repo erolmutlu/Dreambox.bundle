@@ -7,6 +7,12 @@
 		"default": "false"
 	},
 	{
+		"id": "audio",
+		"type": "bool",
+		"label": "Select audio (Needs Zap to channel)",
+		"default": "false"
+	},
+	{
 		"id": "picon",
 		"type": "bool",
 		"label": "Show Picons if available",

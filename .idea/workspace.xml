@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/DefaultPrefs.json" afterPath="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/__init__.py" afterPath="$PROJECT_DIR$/Contents/Code/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/enigma2.py" afterPath="$PROJECT_DIR$/Contents/Code/enigma2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -38,7 +40,7 @@
       <file leaf-file-name="enigma2.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="338" column="0" selection-start="13664" selection-end="13664" vertical-scroll-proportion="0.0" vertical-offset="5746" max-vertical-offset="5848">
+            <state line="418" column="116" selection-start="16244" selection-end="16244" vertical-scroll-proportion="0.0" vertical-offset="7106" max-vertical-offset="7208">
               <folding />
             </state>
           </provider>
@@ -47,7 +49,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="57" selection-start="3826" selection-end="3826" vertical-scroll-proportion="1.8751515" vertical-offset="0" max-vertical-offset="7548">
+            <state line="234" column="105" selection-start="10928" selection-end="10928" vertical-scroll-proportion="1.027366" vertical-offset="3077" max-vertical-offset="10200">
               <folding />
             </state>
           </provider>
@@ -65,16 +67,7 @@
       <file leaf-file-name="DefaultPrefs.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="22" selection-start="623" selection-end="623" vertical-scroll-proportion="-7.1538463" vertical-offset="426" max-vertical-offset="1377">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+            <state line="43" column="6" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1479">
               <folding />
             </state>
           </provider>
@@ -86,7 +79,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5738" column="0" selection-start="760170" selection-end="760170" vertical-scroll-proportion="0.0" vertical-offset="97546" max-vertical-offset="97648">
+            <state line="576" column="0" selection-start="71354" selection-end="71354" vertical-scroll-proportion="0.0" vertical-offset="9792" max-vertical-offset="9911">
               <folding />
             </state>
           </provider>
@@ -98,7 +91,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="0" selection-start="29163" selection-end="29163" vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="2584">
+            <state line="146" column="0" selection-start="18825" selection-end="18825" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="40256">
               <folding />
             </state>
           </provider>
@@ -139,8 +132,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="960" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -468,10 +463,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="960" height="1040" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -487,6 +481,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -533,37 +528,37 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>71</line>
+          <line>74</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>83</line>
+          <line>118</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>247</line>
+          <line>319</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>240</line>
+          <line>312</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>50</line>
+          <line>53</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>153</line>
+          <line>225</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>17</line>
+          <line>20</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
@@ -571,6 +566,16 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="0" selection-start="18825" selection-end="18825" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="40256">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="33" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="850">
@@ -633,7 +638,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5738" column="0" selection-start="760170" selection-end="760170" vertical-scroll-proportion="0.0" vertical-offset="97546" max-vertical-offset="97648">
+        <state line="576" column="0" selection-start="71354" selection-end="71354" vertical-scroll-proportion="0.0" vertical-offset="9792" max-vertical-offset="9911">
           <folding />
         </state>
       </provider>
@@ -643,14 +648,14 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="0" selection-start="29163" selection-end="29163" vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="2584">
+        <state line="146" column="0" selection-start="18825" selection-end="18825" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="40256">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="338" column="0" selection-start="13664" selection-end="13664" vertical-scroll-proportion="0.0" vertical-offset="5746" max-vertical-offset="5848">
+        <state line="418" column="116" selection-start="16244" selection-end="16244" vertical-scroll-proportion="0.0" vertical-offset="7106" max-vertical-offset="7208">
           <folding />
         </state>
       </provider>
@@ -664,21 +669,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="22" selection-start="623" selection-end="623" vertical-scroll-proportion="-7.1538463" vertical-offset="426" max-vertical-offset="1377">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+        <state line="43" column="6" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1479">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="57" selection-start="3826" selection-end="3826" vertical-scroll-proportion="1.8751515" vertical-offset="0" max-vertical-offset="7548">
+        <state line="234" column="105" selection-start="10928" selection-end="10928" vertical-scroll-proportion="1.027366" vertical-offset="3077" max-vertical-offset="10200">
           <folding />
         </state>
       </provider>

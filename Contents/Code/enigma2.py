@@ -14,8 +14,11 @@ def get_bouquets(host, web):
 def get_current_service(host, web):
 
     url = 'http://{}:{}/web/getcurrent'.format(host, web)
-    soup = get_data((url, None))
-    results = get_current_service_info(soup)
+    try:
+        soup = get_data((url, None))
+        results = get_current_service_info(soup)
+    except:
+        raise
     return results
 
 def get_channels_from_service(host, web, sRef, show_epg=False):
@@ -93,8 +96,40 @@ def get_movies(host, web):
         return 'Error', 'getmovies Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
     return movies
 
+#TODO Returning the wrong result when eventid was incorrectly named. eventID
+def set_timer(host, web, sRef, eventID):
+    #http://192.168.1.252/web/timeraddbyeventid?sRef=1:0:1:2077:7FA:2:11A0000:0:0:0:&eventid=674
+    state = False
+    error = ''
+    try:
+        url = 'http://{}:{}/web/timeraddbyeventid'.format(host, web)
+        data = urllib.urlencode({'sRef': sRef, 'eventid': eventID})
+        soup = get_data((url, data))
+        state = soup[0].e2state.string
+        if state == 'True':
+            state = True
+    except Exception as e:
+        error = e.message
+    return state, error
+
+
+def delete_timer(host, web, sRef=None, begin=0, end=0):
+    #http://192.168.1.252/web/timerdelete?sRef=1:0:19:2710:801:2:11A0000:0:0:0:&begin=1388863020&end=1388868780
+    state = False
+    error = ''
+    try:
+        url = 'http://{}:{}/web/timerdelete'.format(host, web)
+        data = urllib.urlencode({'sRef': sRef, 'begin': begin, 'end': end})
+        soup = get_data((url, data))
+        state = soup[0].e2state.string
+        if state == 'True':
+            state = True
+    except Exception as e:
+        error = e.message
+    return state, error
 
 def get_timers(host, web, active=False):
+    #not using active yet
     import time
     timers = []
     url = 'http://{}:{}/web/timerlist'.format(host, web)
@@ -112,7 +147,6 @@ def get_timers(host, web, active=False):
                                                                             'e2timeend',
                                                                             'e2duration'
                                                                        ])
-
             if long(format_string(begin)) > time.time():
                 timers.append((format_string(sref),
                            format_string(service_name, strip=True),
@@ -123,11 +157,10 @@ def get_timers(host, web, active=False):
                            int(format_string(end)),
                            int(format_string(duration)))
             )
-            print len(timers)
-
     except Exception as e:
         return 'Error', 'Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
-    return timers, active
+    return timers
+
 
 
 def get_number_of_tuners(host, web):
@@ -135,11 +168,50 @@ def get_number_of_tuners(host, web):
     try:
         soup = get_data((url, None))
         number_of_tuners = len(soup[0].findAll('e2nim'))
-
-
-    except Exception as e:
-        return 'Error', 'Error getting number of tuners : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
+    except:
+        raise
     return number_of_tuners
+
+def get_number_of_audio_tracks(host, web):
+    url = 'http://{}:{}/web/getaudiotracks'.format(host, web)
+    try:
+        soup = get_data((url, None))
+        number_of_audio_tracks = len(soup[0].findAll('e2audiotrack'))
+    except:
+        raise
+    return number_of_audio_tracks
+
+def get_audio_tracks(host, web):
+    url = 'http://{}:{}/web/getaudiotracks'.format(host, web)
+    audio_tracks = []
+    try:
+        soup = get_data((url, None))
+        soup = soup[0].findAll('e2audiotrack')
+        for elem in soup:
+            description, trackid, active = elem.findAll(['e2audiotrackdescription',
+                                                         'e2audiotrackid',
+                                                         'e2audiotrackactive'])
+            audio_tracks.append((int(trackid.string), description.string, bool(active.string)))
+
+    except:
+        raise
+    return audio_tracks
+
+def set_audio_track(host, web, trackid):
+
+    result = False
+    error = ''
+    try:
+        url = 'http://{}:{}/web/selectaudiotrack'.format(host, web)
+        data = urllib.urlencode({'id': trackid})
+        soup = get_data((url, data))
+        state = soup[0].e2result.string
+        if state == 'Success':
+            result = True
+    except:
+        raise
+    return result, error
+
 
 
 def zap(host, web, sRef):
@@ -153,8 +225,8 @@ def zap(host, web, sRef):
         state = soup[0].e2state.string
         if state == 'True':
             result = True
-    except Exception as e:
-        error = e.message
+    except:
+        raise
     return result, error
 
 #################################
@@ -329,10 +401,19 @@ def get_data(*args):
                 req = urllib2.Request(u, data)
             else:
                 req = urllib2.Request(u)
-            response = urllib2.urlopen(req)
+            response = urllib2.urlopen(req, timeout=10)
             r = response.read()
             soup = BeautifulSoup(r)
             results.append(soup)
         except Exception as e:
-            results.append(('Error', e.message))
+            raise
     return results
+"""
+try:
+    print get_current_service('192.168.1.252', 80)
+except Exception as e:
+    print e.reason
+    """
+
+print get_audio_tracks('192.168.1.252', 80)
+#print delete_timer('192.168.1.252', 80, sRef='1:0:19:1B1D:802:2:11A0000:0:0:0:', begin=1388885520 , end=1388886180)
