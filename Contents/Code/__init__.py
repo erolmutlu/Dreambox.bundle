@@ -9,6 +9,9 @@ BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
 
 
 def Start():
+    import urllib2
+    import os
+    os.environ['http_proxy']=''
     Log('Entered Start function ')
     from enigma2 import get_current_service
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
@@ -19,7 +22,7 @@ def Start():
     try:
         sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
         Data.Save('sRef', sRef)
-    except:
+    except urllib2.URLError as e:
         Log('Error in Start. Unable to get current service - {}'.format(e.reason))
 
 
