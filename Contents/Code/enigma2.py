@@ -3,6 +3,7 @@ import urllib
 from BeautifulSoup import BeautifulSoup
 
 
+
 def get_bouquets(host, web):
 
     url = 'http://{}:{}/web/getservices'.format(host, web)
@@ -24,7 +25,7 @@ def get_current_service(host, web):
 def get_channels_from_service(host, web, sRef, show_epg=False):
 
     url = 'http://{}:{}/web/getservices'.format(host, web)
-    data = urllib.urlencode({'sRef': sRef})
+    data = {'sRef': sRef}
     soup = get_data((url, data))
     results = get_service_name(soup, host, web, show_epg)
     return results
@@ -33,7 +34,7 @@ def get_channels_from_service(host, web, sRef, show_epg=False):
 def get_channels_from_epg(host, web, bRef):
 
     url = 'http://{}:{}/web/epgbouquet'.format(host, web)
-    data = urllib.urlencode({'bRef': bRef})
+    data = {'bRef': bRef}
     soup = get_data((url, data))
     results = get_events(soup)
     return results
@@ -42,7 +43,7 @@ def get_channels_from_epg(host, web, bRef):
 def get_fullepg(host, web, sRef):
 
     url = 'http://{}:{}/web/epgservice'.format(host, web)
-    data = urllib.urlencode({'sRef': sRef})
+    data = {'sRef': sRef}
     soup = get_data((url, data))
     results = get_events(soup)
     return results
@@ -50,7 +51,7 @@ def get_fullepg(host, web, sRef):
 def get_now(host, web, sRef):
 
     url = 'http://{}:{}/web/epgservicenow'.format(host, web)
-    data = urllib.urlencode({'sRef': sRef})
+    data = {'sRef': sRef}
     soup = get_data((url, data))
     results = get_events(soup)
     return results
@@ -60,7 +61,7 @@ def get_nownext(host, web, sRef):
 
     url = 'http://{}:{}/web/epgservicenow'.format(host, web)
     url2 = 'http://{}:{}/web/epgservicenext'.format(host, web)
-    data = urllib.urlencode({'sRef': sRef})
+    data = {'sRef': sRef}
     soup = get_data((url, data), (url2, data))
     results = get_events(soup)
     return results
@@ -103,7 +104,7 @@ def set_timer(host, web, sRef, eventID):
     error = ''
     try:
         url = 'http://{}:{}/web/timeraddbyeventid'.format(host, web)
-        data = urllib.urlencode({'sRef': sRef, 'eventid': eventID})
+        data = {'sRef': sRef, 'eventid': eventID}
         soup = get_data((url, data))
         state = soup[0].e2state.string
         if state == 'True':
@@ -119,7 +120,7 @@ def delete_timer(host, web, sRef=None, begin=0, end=0):
     error = ''
     try:
         url = 'http://{}:{}/web/timerdelete'.format(host, web)
-        data = urllib.urlencode({'sRef': sRef, 'begin': begin, 'end': end})
+        data = {'sRef': sRef, 'begin': begin, 'end': end}
         soup = get_data((url, data))
         state = soup[0].e2state.string
         if state == 'True':
@@ -136,7 +137,6 @@ def get_timers(host, web, active=False):
     try:
         soup = get_data((url, None))
         soup = soup[0].findAll('e2timer')
-        print soup
         for elem in soup:
             sref, service_name, name, description, disabled, begin, end, duration = elem.findAll(['e2servicereference',
                                                                             'e2servicename',
@@ -203,7 +203,7 @@ def set_audio_track(host, web, trackid):
     error = ''
     try:
         url = 'http://{}:{}/web/selectaudiotrack'.format(host, web)
-        data = urllib.urlencode({'id': trackid})
+        data = {'id': trackid}
         soup = get_data((url, data))
         state = soup[0].e2result.string
         if state == 'Success':
@@ -220,7 +220,7 @@ def zap(host, web, sRef):
     error = ''
     try:
         url = 'http://{}:{}/web/zap'.format(host, web)
-        data = urllib.urlencode({'sRef': sRef})
+        data = {'sRef': sRef}
         soup = get_data((url, data))
         state = soup[0].e2state.string
         if state == 'True':
@@ -236,7 +236,7 @@ def zap(host, web, sRef):
 ###############################################################
 # Extracts the service name from the soup                     #
 ###############################################################
-def get_service_name(soup_list, host=None, web=None, show_epg=None):
+def get_service_name(soup_list, host=None, web=None, show_epg=False):
     try:
         results = []
         for soup in soup_list:
@@ -391,29 +391,27 @@ def clean_filename(data):
 # Gets the stuff we need from the box and returns soup        #
 ###############################################################
 def get_data(*args):
-    import urllib2
+    from httplib2 import Http
+    from urllib import urlencode
+    req = Http(timeout=2)
     results = []
     for item in args:
         u = item[0]
         data = item[1]
+        print data
         try:
             if data:
-                req = urllib2.Request(u, data)
+                headers = {'Content-type': 'application/x-www-form-urlencoded'}
+                resp, content = req.request(u, "POST", headers=headers, body=urlencode(data))
+                print resp
+
+                print content
             else:
-                req = urllib2.Request(u)
-            response = urllib2.urlopen(req, timeout=10)
-            r = response.read()
-            soup = BeautifulSoup(r)
+                resp, content = req.request(u, "GET", data)
+            soup = BeautifulSoup(content)
             results.append(soup)
-        except Exception as e:
+        except:
             raise
     return results
-"""
-try:
-    print get_current_service('192.168.1.252', 80)
-except Exception as e:
-    print e.reason
-    """
 
-print get_audio_tracks('192.168.1.252', 80)
-#print delete_timer('192.168.1.252', 80, sRef='1:0:19:1B1D:802:2:11A0000:0:0:0:', begin=1388885520 , end=1388886180)
+

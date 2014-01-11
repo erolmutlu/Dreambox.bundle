@@ -34,7 +34,7 @@
 		"id": "host",
 		"type": "text",
 		"label": "Host",
-		"default": "192.168.1.252"
+		"default": "192.168.1.250"
 	},
 	{
 		"id": "port_web",

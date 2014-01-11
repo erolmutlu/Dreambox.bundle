@@ -1,3 +1,6 @@
+from httplib2 import ServerNotFoundError, HttpLib2Error
+from socket import error
+
 ART = 'art-default.jpg'
 ICON = 'icon-default.png'
 STREAM_URL = 'http://%s:%s/%s'
@@ -11,6 +14,7 @@ BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
 def Start():
     Log('Entered Start function ')
     from enigma2 import get_current_service
+
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
     ObjectContainer.art = R(ART)
     ObjectContainer.title1 = Locale.LocalString('Title')
@@ -19,9 +23,10 @@ def Start():
     try:
         sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
         Data.Save('sRef', sRef)
-    except:
-        Log('Error in Start. Unable to get current service - {}'.format(e.reason))
-
+    except (HttpLib2Error, error) as e:
+        Log('Error in Start. Unable to get current service - {}'.format(e.message))
+    except AttributeError as e:
+        Log('Error in Start. Caught an attribute error - {}'.format(e.message))
 
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
@@ -40,10 +45,13 @@ def MainMenu():
                                thumb= R(RECORDED),
                                tagline='Watch recorded content on your Enigma 2 based satellite receiver'))
         items = zap_menuitem(items)
-    except Exception as e:
+    except (HttpLib2Error, error)  as e:
         Log('Error in MainMenu. Unable to get create on_now  - {}'.format(e))
         # Need this entry in to make Home button work correctly
-        items.append(DirectoryObject(key='http://www.google.com',
+        items.append(DirectoryObject(key=Callback(MainMenu),
+                               title=Locale.LocalString('ConnectError')))
+    except AttributeError as e:
+        items.append(DirectoryObject(key=Callback(MainMenu),
                                title=Locale.LocalString('ConnectError')))
 
     items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
@@ -89,6 +97,7 @@ def Display_Bouquet_Channels(sender='', index=None):
 
     items = []
     channels = get_channels_from_service(Prefs['host'], Prefs['port_web'], index, show_epg=True)
+
     name = sender
     Log(channels)
     for id, start, duration, current_time, title, description, sRef, name in channels:
@@ -318,9 +327,9 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
 
 @route("video/dreambox/PlayVideo/{channel}")
 def PlayVideo(channel, filename=None,  recorded=False, audioid=None):
-    import urllib2, time
+    import time
     from enigma2 import format_string, zap
-    #TODO Id audio here we have already zapped, just set the audio
+
     channel = channel.strip('.m3u8')
     if Prefs['zap'] and not recorded:
         zapaudio(channel, audioid)
