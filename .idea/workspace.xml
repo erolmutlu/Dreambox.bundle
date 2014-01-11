@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Contents/Strings/en.json" />
+    <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="Included the Streing folder :)&#10;&#10;SHould be back up and running now">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -16,7 +15,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Dreambox.bundle$ServiceCode_pys.coverage" NAME="ServiceCode.pys Coverage Results" MODIFIED="1388318503487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Services/URL/Enigma2" />
-    <SUITE FILE_PATH="coverage/Dreambox.bundle$enigma2.coverage" NAME="enigma2 Coverage Results" MODIFIED="1388690449454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Code" />
+    <SUITE FILE_PATH="coverage/Dreambox.bundle$enigma2.coverage" NAME="enigma2 Coverage Results" MODIFIED="1389450553933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Code" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -35,20 +34,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="enigma2.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="enigma2.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="418" column="116" selection-start="16244" selection-end="16244" vertical-scroll-proportion="0.0" vertical-offset="7106" max-vertical-offset="7208">
+            <state line="15" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.44155845" vertical-offset="0" max-vertical-offset="7174">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="metadata.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Contents/Code/metadata.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="255">
+              <folding>
+                <marker date="1389296573097" expanded="true" signature="370:379" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urllib.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://C:/Python27/Lib/urllib.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1301" column="0" selection-start="46806" selection-end="46806" vertical-scroll-proportion="0.0" vertical-offset="22117" max-vertical-offset="27574">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="285" selection-end="315" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="10166">
-              <folding />
+            <state line="47" column="32" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="10319">
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,7 +86,7 @@
       <file leaf-file-name="DefaultPrefs.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="30" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0" vertical-offset="1326" max-vertical-offset="1479">
+            <state line="36" column="33" selection-start="640" selection-end="640" vertical-scroll-proportion="-12.269231" vertical-offset="293" max-vertical-offset="1479">
               <folding />
             </state>
           </provider>
@@ -77,7 +98,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9359" column="0" selection-start="1221737" selection-end="1221737" vertical-scroll-proportion="0.0" vertical-offset="159103" max-vertical-offset="159222">
+            <state line="7664" column="0" selection-start="909989" selection-end="909989" vertical-scroll-proportion="-13.28" vertical-offset="129956" max-vertical-offset="131580">
               <folding />
             </state>
           </provider>
@@ -89,7 +110,19 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="4365" selection-end="4365" vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="850">
+            <state line="146" column="0" selection-start="18068" selection-end="18068" vertical-scroll-proportion="-16.52" vertical-offset="2069" max-vertical-offset="2584">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Info.plist" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="340">
               <folding />
             </state>
           </provider>
@@ -120,12 +153,14 @@
         <option value="$PROJECT_DIR$/Contents/Services/ServiceInfo.plist" />
         <option value="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" />
         <option value="C:/Program Files (x86)/Plex/Plex Media Server/Resources/Profiles/Android.xml" />
-        <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
-        <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
-        <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="$PROJECT_DIR$/Contents/Info.plist" />
+        <option value="$PROJECT_DIR$/Contents/Code/metadata.py" />
+        <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
         <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
+        <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
+        <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
       </list>
     </option>
   </component>
@@ -194,6 +229,64 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dreambox.bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dreambox.bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Contents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dreambox.bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dreambox.bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Contents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dreambox.bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dreambox.bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Contents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -201,12 +294,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="vcs.Git" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="last_opened_file_path" value="C:/Program Files (x86)/Plex/Plex Media Server/Resources/Profiles/Android.xml" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -343,6 +436,9 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -364,9 +460,6 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -484,7 +577,15 @@
       <created>1389215168810</created>
       <updated>1389215168810</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Included the Streing folder :)&#10;&#10;SHould be back up and running now">
+      <created>1389215407070</created>
+      <updated>1389215407070</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixed startup error when the ip address was unreachable or timed out.">
+      <created>1389451946615</created>
+      <updated>1389451946615</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -511,22 +612,22 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33898306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.6714761" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5394877" sideWeight="0.6677741" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38870057" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1638207" sideWeight="0.62708104" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.372919" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33222592" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32527474" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.372919" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32542372" sideWeight="0.6403118" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33370912" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -548,9 +649,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53415155" sideWeight="0.6736959" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -568,34 +669,26 @@
     <MESSAGE value="Added a menu item to reset the receiver  if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility&#10;&#10;Added software version so we can keep track of where we are (JUst uses the date pushed to Github)" />
     <MESSAGE value="Fixed error of no preferences box if the receiver was unreachable.&#10;&#10;Added the ability to add and remove timers&#10;&#10;Added audio support :)&#10;&#10;Various menu changes to get round android client errors when a message or empty menu is presented" />
     <MESSAGE value="Widened the except" />
-    <option name="LAST_COMMIT_MESSAGE" value="Widened the except" />
+    <MESSAGE value="Included the Streing folder :)&#10;&#10;SHould be back up and running now" />
+    <MESSAGE value="Fixed startup error when the ip address was unreachable or timed out." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed startup error when the ip address was unreachable or timed out." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>74</line>
+          <line>75</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>118</line>
+          <line>119</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>319</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>312</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>53</line>
+          <line>54</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -605,51 +698,39 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>20</line>
-          <option name="timeStamp" value="30" />
+          <line>10</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>269</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>243</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>403</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>400</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="31" />
+      <option name="time" value="42" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="0" selection-start="18825" selection-end="18825" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="40256">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="33" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="850">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16765" column="0" selection-start="2448217" selection-end="2448217" vertical-scroll-proportion="0.0" vertical-offset="284549" max-vertical-offset="285107">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="0" selection-start="24584" selection-end="24584" vertical-scroll-proportion="0.0" vertical-offset="2722" max-vertical-offset="3230">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/urllib2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="201" column="0" selection-start="6712" selection-end="6712" vertical-scroll-proportion="5.463248" vertical-offset="0" max-vertical-offset="24871" />
@@ -680,33 +761,6 @@
         <state line="6" column="46" selection-start="348" selection-end="348" vertical-scroll-proportion="0.165692" vertical-offset="17" max-vertical-offset="1071" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9359" column="0" selection-start="1221737" selection-end="1221737" vertical-scroll-proportion="0.0" vertical-offset="159103" max-vertical-offset="159222">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="4365" selection-end="4365" vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="850">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="418" column="116" selection-start="16244" selection-end="16244" vertical-scroll-proportion="0.0" vertical-offset="7106" max-vertical-offset="7208">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="524" max-vertical-offset="2057">
@@ -714,16 +768,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/httplib2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="134" column="11" selection-start="3833" selection-end="3835" vertical-scroll-proportion="0.33333334" vertical-offset="2091" max-vertical-offset="28271">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/urllib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1301" column="0" selection-start="46806" selection-end="46806" vertical-scroll-proportion="0.0" vertical-offset="21804" max-vertical-offset="27438">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Code/metadata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <folding>
+            <marker date="1389296573097" expanded="true" signature="370:379" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="30" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0" vertical-offset="1326" max-vertical-offset="1479">
+        <state line="36" column="33" selection-start="640" selection-end="640" vertical-scroll-proportion="-12.269231" vertical-offset="293" max-vertical-offset="1479">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7664" column="0" selection-start="909989" selection-end="909989" vertical-scroll-proportion="-13.28" vertical-offset="129956" max-vertical-offset="131580">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="285" selection-end="315" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="10166">
+        <state line="47" column="32" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="10319">
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="0" selection-start="18068" selection-end="18068" vertical-scroll-proportion="-16.52" vertical-offset="2069" max-vertical-offset="2584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.44155845" vertical-offset="0" max-vertical-offset="7174">
           <folding />
         </state>
       </provider>
