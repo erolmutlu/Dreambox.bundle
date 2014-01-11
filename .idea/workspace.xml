@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="Included the Streing folder :)&#10;&#10;SHould be back up and running now">
+    <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/DefaultPrefs.json" afterPath="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -34,10 +35,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="enigma2.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="enigma2.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.44155845" vertical-offset="0" max-vertical-offset="7174">
+            <state line="15" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7174">
               <folding />
             </state>
           </provider>
@@ -66,7 +67,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="32" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="10319">
+            <state line="21" column="63" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="10319">
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
               </folding>
@@ -83,10 +84,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultPrefs.json" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DefaultPrefs.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="33" selection-start="640" selection-end="640" vertical-scroll-proportion="-12.269231" vertical-offset="293" max-vertical-offset="1479">
+            <state line="78" column="30" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.7017544" vertical-offset="966" max-vertical-offset="1479">
               <folding />
             </state>
           </provider>
@@ -98,7 +99,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7664" column="0" selection-start="909989" selection-end="909989" vertical-scroll-proportion="-13.28" vertical-offset="129956" max-vertical-offset="131580">
+            <state line="10521" column="0" selection-start="1237442" selection-end="1237442" vertical-scroll-proportion="-13.28" vertical-offset="178525" max-vertical-offset="180149">
               <folding />
             </state>
           </provider>
@@ -110,7 +111,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="0" selection-start="18068" selection-end="18068" vertical-scroll-proportion="-16.52" vertical-offset="2069" max-vertical-offset="2584">
+            <state line="217" column="0" selection-start="25907" selection-end="25907" vertical-scroll-proportion="-16.52" vertical-offset="3276" max-vertical-offset="3791">
               <folding />
             </state>
           </provider>
@@ -157,10 +158,10 @@
         <option value="$PROJECT_DIR$/Contents/Info.plist" />
         <option value="$PROJECT_DIR$/Contents/Code/metadata.py" />
         <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
-        <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
-        <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
         <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
         <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
+        <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
       </list>
     </option>
   </component>
@@ -585,7 +586,15 @@
       <created>1389451946615</created>
       <updated>1389451946615</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Included the Streing folder :)&#10;&#10;SHould be back up and running now">
+      <created>1389452032644</created>
+      <updated>1389452032644</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Included the Streing folder :)&#10;&#10;SHould be back up and running now">
+      <created>1389452141592</created>
+      <updated>1389452141592</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -610,7 +619,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -618,7 +627,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33898306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.6714761" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1638207" sideWeight="0.62708104" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1638207" sideWeight="0.62708104" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.372919" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.372919" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -669,9 +678,9 @@
     <MESSAGE value="Added a menu item to reset the receiver  if a single tuner receiver is being used&#10;&#10;Improved recorded tv compatibility&#10;&#10;Added software version so we can keep track of where we are (JUst uses the date pushed to Github)" />
     <MESSAGE value="Fixed error of no preferences box if the receiver was unreachable.&#10;&#10;Added the ability to add and remove timers&#10;&#10;Added audio support :)&#10;&#10;Various menu changes to get round android client errors when a message or empty menu is presented" />
     <MESSAGE value="Widened the except" />
-    <MESSAGE value="Included the Streing folder :)&#10;&#10;SHould be back up and running now" />
     <MESSAGE value="Fixed startup error when the ip address was unreachable or timed out." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed startup error when the ip address was unreachable or timed out." />
+    <MESSAGE value="Included the Streing folder :)&#10;&#10;SHould be back up and running now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Included the Streing folder :)&#10;&#10;SHould be back up and running now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -801,29 +810,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="33" selection-start="640" selection-end="640" vertical-scroll-proportion="-12.269231" vertical-offset="293" max-vertical-offset="1479">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7664" column="0" selection-start="909989" selection-end="909989" vertical-scroll-proportion="-13.28" vertical-offset="129956" max-vertical-offset="131580">
+        <state line="10521" column="0" selection-start="1237442" selection-end="1237442" vertical-scroll-proportion="-13.28" vertical-offset="178525" max-vertical-offset="180149">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="32" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="10319">
-          <folding>
-            <element signature="e#0#55#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -832,14 +825,30 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="0" selection-start="18068" selection-end="18068" vertical-scroll-proportion="-16.52" vertical-offset="2069" max-vertical-offset="2584">
+        <state line="217" column="0" selection-start="25907" selection-end="25907" vertical-scroll-proportion="-16.52" vertical-offset="3276" max-vertical-offset="3791">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.44155845" vertical-offset="0" max-vertical-offset="7174">
+        <state line="15" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7174">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="63" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="10319">
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="30" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.7017544" vertical-offset="966" max-vertical-offset="1479">
           <folding />
         </state>
       </provider>

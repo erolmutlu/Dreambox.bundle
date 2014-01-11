@@ -76,6 +76,6 @@
                 "id": "version",
                 "type": "text",
                 "label": "Version",
-                "default": "08012014.1"
+                "default": "11012014"
         }
 ]
