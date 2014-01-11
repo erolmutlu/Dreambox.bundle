@@ -19,7 +19,7 @@ def Start():
     ObjectContainer.art = R(ART)
     ObjectContainer.title1 = Locale.LocalString('Title')
     DirectoryObject.thumb = R(ICON)
-    #Save the inital channel to reset the box
+    #Save the inital channel to reset the box. Removed URLError
     try:
         sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
         Data.Save('sRef', sRef)
