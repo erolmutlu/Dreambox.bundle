@@ -16,6 +16,10 @@ finished testing.
 
 Audio support removed at the moment as it just does not want to play. This DID work though??????
 
+Hopefully better coimpatibility with Linux servers (Missing entries fixed I think).
+
+Also looking at why this doesnt work in Chromecast 
+
 Installation Instructions
 ====================================
 
