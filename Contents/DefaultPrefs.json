@@ -7,12 +7,6 @@
 		"default": "false"
 	},
 	{
-		"id": "audio",
-		"type": "bool",
-		"label": "Select audio (Needs Zap to channel)",
-		"default": "false"
-	},
-	{
 		"id": "picon",
 		"type": "bool",
 		"label": "Show Picons if available",
@@ -24,6 +18,18 @@
 		"label": "Show full event list instead of now/next",
 		"default": "false"
 	},
+    {
+         "id": "folders",
+         "type": "bool",
+         "label": "View recorded folders",
+         "default": "true"
+    },
+    {
+         "id": "merge",
+         "type": "bool",
+         "label": "merge recorded folders (if view folders is enabled)",
+         "default": "false"
+    },
     {
 		"id": "duration",
 		"type": "text",
@@ -54,6 +60,12 @@
 		"label": "Path to load picons",
 		"default": "hdd/picon"
 	},
+	{
+		"id": "moviepath",
+		"type": "text",
+		"label": "Path to load picons",
+		"default": "\Harddisk\movie"
+    },
         {
                 "id": "container",
                 "type": "text",
