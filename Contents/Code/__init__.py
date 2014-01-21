@@ -315,12 +315,13 @@ def Display_Movie_Event(sender=None, filename=None, subfolders=None, description
         Log('title in subfolders check = {}'.format(title))
         #strip the extension off
         if '.ts' in filename:
+
            title=filename[:-3]
         else:
             title=filename[:-4]
     Log('title = {}'.format(title))
     video = EpisodeObject(
-        key = Callback(Display_Movie_Event, sender=title, filename=filename, subfolders=subfolders, description=description, duration=duration , thumb=Callback(GetThumb, series=sender), include_oc=True, rating_key=rating_key),
+        key = Callback(Display_Movie_Event, sender=sender, filename=filename, subfolders=subfolders, description=description, duration=duration , thumb=Callback(GetThumb, series=sender), include_oc=True, rating_key=rating_key),
         rating_key=rating_key,
         title=title,
         summary=description,
