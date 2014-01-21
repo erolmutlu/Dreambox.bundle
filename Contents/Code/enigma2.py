@@ -4,6 +4,8 @@ from BeautifulSoup import BeautifulSoup
 from os import  name
 from string import split
 from itertools import chain
+from httplib_new import HTTP
+
 
 
 

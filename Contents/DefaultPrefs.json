@@ -27,7 +27,7 @@
     {
          "id": "merge",
          "type": "bool",
-         "label": "merge recorded folders (if view folders is enabled)",
+         "label": "merge recorded folders",
          "default": "false"
     },
     {
@@ -63,8 +63,8 @@
 	{
 		"id": "moviepath",
 		"type": "text",
-		"label": "Path to load picons",
-		"default": "\Harddisk\movie"
+		"label": "Path to movie folder",
+		"default": "mnt/Hardisk/movie"
     },
         {
                 "id": "container",
