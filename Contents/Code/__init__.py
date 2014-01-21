@@ -651,8 +651,8 @@ def generate_rating_key(rating_key):
     if rating_key:
         return rating_key
     else:
-        time.sleep(0.02)
-        return time.clock()
+        import uuid
+        return uuid.uuid4()
 
 
 ########################################################################

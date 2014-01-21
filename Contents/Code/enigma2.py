@@ -1,10 +1,8 @@
 
-import urllib
+
 from BeautifulSoup import BeautifulSoup
-from os import  name
-from string import split
 from itertools import chain
-from httplib_new import HTTP
+import os
 
 
 
@@ -424,7 +422,7 @@ def get_data(*args):
 
 
 def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders=False, folder_contents=None):
-    import os
+
     import re
     import fnmatch
 
@@ -478,7 +476,7 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
 def build_move_path(host=None, path=None):
 
     #set correct separators
-    name = 'nt'
+    name = os.name
     separator = '\\'  # need to escape
 
     if path:
@@ -506,7 +504,7 @@ def build_move_path(host=None, path=None):
 
 
 
-print get_movie_subfolders('192.168.1.252', path='\HardDisk\movie', folder_contents='Anchorman The Legend of Ron Burgundy 2004' )
+print get_movie_subfolders('192.168.1.252', path='/mnt/Hardisk/movie', folder_contents='Anchorman The Legend of Ron Burgundy 2004' )
 
 
 
