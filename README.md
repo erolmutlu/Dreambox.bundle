@@ -9,7 +9,7 @@ A Plex plugin to stream live TV from your Enigma 2 based receiver to your media 
 Current Work
 ====================================
 
-Adding support for subfolders on the hardrive, and also some partial support for episode icons .
+Adding support for sub folders on the hardrive, and also some partial support for episode icons .
 On windows server's only at the moment, and just english bu this will be updated to get the current locale when
 finished testing.
 
