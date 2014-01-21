@@ -1,6 +1,9 @@
 
 import urllib
 from BeautifulSoup import BeautifulSoup
+from os import  name
+from string import split
+from itertools import chain
 
 
 
@@ -173,6 +176,7 @@ def get_number_of_tuners(host, web):
     return number_of_tuners
 
 def get_number_of_audio_tracks(host, web):
+    #TODO May not be getting audio correct after update to HTTPlib2
     url = 'http://{}:{}/web/getaudiotracks'.format(host, web)
     try:
         soup = get_data((url, None))
@@ -198,15 +202,16 @@ def get_audio_tracks(host, web):
     return audio_tracks
 
 def set_audio_track(host, web, trackid):
-
     result = False
     error = ''
     try:
         url = 'http://{}:{}/web/selectaudiotrack'.format(host, web)
         data = {'id': trackid}
         soup = get_data((url, data))
+        print soup
         state = soup[0].e2result.string
-        if state == 'Success':
+        print state
+        if state == '	Success':
             result = True
     except:
         raise
@@ -391,9 +396,10 @@ def clean_filename(data):
 # Gets the stuff we need from the box and returns soup        #
 ###############################################################
 def get_data(*args):
+    #TODO Pass in a timeout value here
     from httplib2 import Http
     from urllib import urlencode
-    req = Http(timeout=2)
+    req = Http(timeout=10)
     results = []
     for item in args:
         u = item[0]
@@ -413,5 +419,95 @@ def get_data(*args):
         except:
             raise
     return results
+
+
+def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders=False, folder_contents=None):
+    import os
+    import re
+    import fnmatch
+
+    movie_path = build_move_path(host, path)
+    name = os.name
+
+    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', ]
+    includes = r'|'.join([fnmatch.translate(x) for x in includes])
+    pattern = '^(.*?\\.(\\bTrash\\b)[$]*)$' # To exclude the trash folder
+
+    folders_files = {}
+
+
+    try:
+        print movie_path
+        for root, folder, files in os.walk(movie_path):
+            #exclude trash and sub folders with no files
+            if not re.match(pattern, root, 0):
+                if len(files) > 0:
+                    folders_files[root] = ([f for f in files if re.match(includes, f)])
+    except:
+        raise
+    if folders:
+            folder = []
+            for f in folders_files.keys():
+                try:
+                    if name == 'nt':
+                        parts = f.split('\\').pop()
+                    else:
+                        parts = f.split('/').pop()
+                    if parts not in ('movie', '.Trash'):
+                        folder.append(parts)
+                except:
+                    pass
+            return folder
+    if merge:
+        # Just return the merged file list - all in one location
+        return list(chain(*folders_files.values()))
+    if folder_contents:
+        if name == 'nt':
+            separator = '\\'
+        else:
+            separator = '/'
+        full_path = '{}{}{}'.format(movie_path, separator, folder_contents)
+        print full_path
+        return folders_files.get(full_path)
+    else:
+        #return files in their folders
+        return folders_files
+
+def build_move_path(host=None, path=None):
+
+    #set correct separators
+    name = 'nt'
+    separator = '\\'  # need to escape
+
+    if path:
+        path.lstrip('\\').rstrip('\\').lstrip('/').rstrip('/')
+        parts = path.split(separator)
+        if '/' in path:
+            separator = '/'
+            parts = path.split(separator)
+            print parts
+        parts = [x if len(x) > 1 else None for x in parts]
+        print parts
+        if parts[0] != host and name == 'nt':
+            parts.insert(0, host)
+        # now build the path
+        fullpath = ''
+        if name == 'nt':
+            fullpath = fullpath.join('\\')
+        for f in parts:
+            if f:
+                fullpath = fullpath + separator + f
+        return fullpath
+    return None
+
+
+
+
+
+print get_movie_subfolders('192.168.1.252', path='\HardDisk\movie', folder_contents='Anchorman The Legend of Ron Burgundy 2004' )
+
+
+
+
 
 
