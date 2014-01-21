@@ -303,8 +303,8 @@ def DeleteTimer(sRef='', begin=0, end=0, servicename='', name='', oc=None):
     return     oc
 
 
-@route("/video/dreambox/Display_Movie_Event/{filename}")
-def Display_Movie_Event(sender=None, filename=None, subfolders=False, description=None, duration=None, thumb=R(ICON), include_oc=False, rating_key=None):
+@route("/video/dreambox/Display_Movie_Event/hdd/movie")
+def Display_Movie_Event(sender=None, filename=None, subfolders=None, description=None, duration=None, thumb=R(ICON), include_oc=False, rating_key=None):
     Log('Entered display movie event {} {} {} {} {} {} {}'.format(sender, filename, description, duration, thumb, include_oc, rating_key))
     from enigma2 import format_string
     container, video_codec, audio_codec = get_codecs()
@@ -312,13 +312,15 @@ def Display_Movie_Event(sender=None, filename=None, subfolders=False, descriptio
     title = sender
     Log('Subfolders is {}'.format(subfolders))
     if subfolders:
+        Log('title in subfolders check = {}'.format(title))
         #strip the extension off
         if '.ts' in filename:
            title=filename[:-3]
         else:
             title=filename[:-4]
+    Log('title = {}'.format(title))
     video = EpisodeObject(
-        key = Callback(Display_Movie_Event, sender=sender, filename=filename, subfolders=subfolders, description=description, duration=duration , thumb=Callback(GetThumb, series=sender), include_oc=True, rating_key=rating_key),
+        key = Callback(Display_Movie_Event, sender=title, filename=filename, subfolders=subfolders, description=description, duration=duration , thumb=Callback(GetThumb, series=sender), include_oc=True, rating_key=rating_key),
         rating_key=rating_key,
         title=title,
         summary=description,
@@ -371,7 +373,7 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
         thumb = None,
         items = [
             MediaObject(
-                container = 'webm',
+                container = container,
                 video_codec = video_codec,
                 audio_channels = 2,
                 audio_codec = audio_codec,
@@ -408,7 +410,8 @@ def PlayVideo(channel, filename=None, recorded=False, audioid=None):
         filename = format_string(filename, clean_file=True)
         if filename[:3] != 'hdd':
             #add subfolder and hhd path onto filename
-            filename= 'hdd//movie//{}//'.format(channel) + filename
+            #TODO May need a check here for os type. -double backslashes
+            filename= 'hdd/movie/{}/'.format(channel) + filename
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
         Log('Recorded file  to play {}'.format(stream))
     return Redirect(stream)
