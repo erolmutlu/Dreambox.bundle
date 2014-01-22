@@ -16,6 +16,9 @@ BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
 ##################################################################
 def Start():
     Log('Entered Start function ')
+    #TODO plugin loads default prefs, then overwrites them with ones you have saved
+    #TODO if there is extra ones I bet it knacks things up
+    #TODO get stored here AppData\Local\Plex Media Server\Plug-in Support\Preferences
     from enigma2 import get_current_service, get_movie_subfolders
     import os
 
@@ -80,7 +83,13 @@ def MainMenu():
 
 @route('/video/dreambox/thumb')
 def GetThumb(series):
-    data = get_thumb(series, 'en')
+    locale = Locale.DefaultLocale
+    if locale == 'en-us':
+        locale='en'
+
+    Log('Default locale = {}'.format(locale))
+
+    data = get_thumb(series, locale)
     return DataObject(data, 'image/jpeg')
 
 
@@ -315,7 +324,6 @@ def Display_Movie_Event(sender=None, filename=None, subfolders=None, description
         Log('title in subfolders check = {}'.format(title))
         #strip the extension off
         if '.ts' in filename:
-
            title=filename[:-3]
         else:
             title=filename[:-4]
@@ -363,7 +371,7 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
                        channel=channel,
                        description=description,
                        duration=duration,
-                       thumb=None,
+                       thumb=Callback(GetThumb, series=sender),
                        include_oc=True,
                        rating_key=rating_key,
                        audioid=audioid),
@@ -371,7 +379,7 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
         title = audio_description,
         summary = description,
         duration = duration,
-        thumb = None,
+        thumb = Callback(GetThumb, series=sender),
         items = [
             MediaObject(
                 container = container,

@@ -2,158 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Resources/art-default.jpg" afterPath="$PROJECT_DIR$/Contents/Resources/art-default.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Resources/icon-default.png" afterPath="$PROJECT_DIR$/Contents/Resources/icon-default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Resources/icon-prefs.png" afterPath="$PROJECT_DIR$/Contents/Resources/icon-prefs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/A.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/A.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/AAAA.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/AAAA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/AFSDB.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/AFSDB.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/APL.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/APL.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/BeautifulSoup.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/BeautifulSoup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/CERT.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/CERT.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/CNAME.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/CNAME.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Windows/i386/CallFavouritesChecker.vbs" afterPath="$PROJECT_DIR$/Contents/Libraries/Windows/i386/CallFavouritesChecker.vbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/DHCID.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/DHCID.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DLV.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DLV.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DNAME.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DNAME.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DNSKEY.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DNSKEY.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DS.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/DS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/DefaultPrefs.json" afterPath="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Dreambox.bundle.iml" afterPath="$PROJECT_DIR$/.idea/Dreambox.bundle.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/GPOS.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/GPOS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/HINFO.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/HINFO.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/HIP.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/HIP.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/IPSECKEY.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/IPSECKEY.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/ISDN.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/ISDN.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Info.plist" afterPath="$PROJECT_DIR$/Contents/Info.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/KX.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/KX.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/LOC.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/LOC.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/MANIFEST.in" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/MANIFEST.in" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/MX.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/MX.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/NAPTR.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/NAPTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NS.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/NSAP.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/NSAP.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/NSAP_PTR.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/NSAP_PTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NSEC.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NSEC.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NSEC3.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NSEC3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NSEC3PARAM.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/NSEC3PARAM.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/PTR.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/PTR.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/PX.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/PX.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/RP.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/RP.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/RRSIG.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/RRSIG.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/RT.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/RT.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/Rakefile" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/Rakefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/SOA.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/SOA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/SPF.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/SPF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/SRV.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/SRV.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/SSHFP.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/SSHFP.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" afterPath="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Services/ServiceInfo.plist" afterPath="$PROJECT_DIR$/Contents/Services/ServiceInfo.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/TXT.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/TXT.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/UNLICENSE" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/UNLICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/Utils.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/Utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/WKS.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/WKS.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/X25.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/X25.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/__init__.py" afterPath="$PROJECT_DIR$/Contents/Code/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/ANY/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/IN/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/__init__.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/_compat.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/_compat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/actor.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/actor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/api.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/backport.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/backport.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/banner.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/banner.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/basetest.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/basetest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/browser.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/browser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/cacerts.txt" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/cacerts.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/dnssec.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/dnssec.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/dsbase.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/dsbase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/e164.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/e164.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/edns.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/edns.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Strings/en.json" afterPath="$PROJECT_DIR$/Contents/Strings/en.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/entropy.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/entropy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/error.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/error.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/exception.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/exception.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/flags.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/flags.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/googlesets.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/googlesets.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tests/gprof2dot.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tests/gprof2dot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/hash.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/hash.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/inet.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/inet.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/ipv4.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/ipv4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/ipv6.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/ipv6.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/iri2uri.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/iri2uri.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/loader.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/loader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/message.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/message.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/metadata.py" afterPath="$PROJECT_DIR$/Contents/Code/metadata.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/mirror.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/mirror.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/data/mirrors.xml" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/data/mirrors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/enigma2.py" afterPath="$PROJECT_DIR$/Contents/Code/enigma2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/mxbase.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/mxbase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/name.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/name.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/namedict.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/namedict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/node.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/node.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/nsbase.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/nsbase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/opcode.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/opcode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/query.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/query.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rcode.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rcode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdata.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdata.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdataclass.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdataclass.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdataset.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdataset.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdatatype.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdatatype.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/readme.md" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/renderer.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/renderer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/resolver.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/resolver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/reversename.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/reversename.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rrset.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rrset.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tests/runtests.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tests/runtests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/search.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/search.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/set.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/set.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/setup.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/socks.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/httplib2/socks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/sponsoredlinks.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/sponsoredlinks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_actors.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_actors.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_api.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_banner.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_banner.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_compat.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_compat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_docs.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_docs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_languages.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_languages.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_loader.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_loader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_mirror.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_mirror.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tests/test_tvdb_api.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tests/test_tvdb_api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_utils.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/test_utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/tokenizer.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/tokenizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/translate.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/xgoogle/translate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/tsig.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/tsig.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/tsigkeyring.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/tsigkeyring.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/ttl.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/ttl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_api.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_cache.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_cache.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_exceptions.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_exceptions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_ui.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/tvdb_api/tvdb_ui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/txtbase.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/rdtypes/txtbase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/update.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/update.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/utils.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/utils.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/tests/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/version.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/version.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/wiredata.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/wiredata.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/xmlhelpers.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/pytvdbapi/xmlhelpers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/zone.py" afterPath="$PROJECT_DIR$/Contents/Libraries/Shared/dns/zone.py" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -166,7 +20,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Dreambox.bundle$ServiceCode_pys.coverage" NAME="ServiceCode.pys Coverage Results" MODIFIED="1388318503487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Services/URL/Enigma2" />
-    <SUITE FILE_PATH="coverage/Dreambox.bundle$enigma2.coverage" NAME="enigma2 Coverage Results" MODIFIED="1390330042964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Code" />
+    <SUITE FILE_PATH="coverage/Dreambox.bundle$enigma2.coverage" NAME="enigma2 Coverage Results" MODIFIED="1390409255559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Code" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -188,7 +42,18 @@
       <file leaf-file-name="enigma2.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="39" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9342">
+            <state line="485" column="19" selection-start="18184" selection-end="18184" vertical-scroll-proportion="0.0" vertical-offset="8061" max-vertical-offset="9095">
+              <folding>
+                <element signature="e#2#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="151" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.94086957" vertical-offset="258" max-vertical-offset="986">
               <folding />
             </state>
           </provider>
@@ -197,89 +62,70 @@
       <file leaf-file-name="metadata.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/metadata.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="0" selection-start="1804" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="1260">
+            <state line="64" column="0" selection-start="1804" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="1088" max-vertical-offset="1190">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="412" column="72" selection-start="17689" selection-end="17689" vertical-scroll-proportion="0.66360295" vertical-offset="7019" max-vertical-offset="13914">
+            <state line="89" column="43" selection-start="3794" selection-end="3794" vertical-scroll-proportion="0.0" vertical-offset="1513" max-vertical-offset="13294">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Plex DLNA Server.log" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../Logs/Plex DLNA Server.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="349" selection-end="349" vertical-scroll-proportion="-0.0" vertical-offset="72" max-vertical-offset="324">
-              <folding />
-            </state>
-          </provider>
+      <file leaf-file-name="Plex Media Server.log" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
           <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34750" column="0" selection-start="4893393" selection-end="4893393" vertical-scroll-proportion="4.08" vertical-offset="590852" max-vertical-offset="590852">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ServiceCode.pys" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="2178">
+            <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="2057">
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="DefaultPrefs.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="23" selection-start="939" selection-end="939" vertical-scroll-proportion="-8.666667" vertical-offset="702" max-vertical-offset="1782">
-              <folding>
-                <marker date="1390329476811" expanded="true" signature="0:1882" placeholder="[...]" />
-                <marker date="1390329476811" expanded="true" signature="1105:1219" placeholder="{&quot;id&quot;: &quot;moviepath&quot;...}" />
-                <marker date="1390329476811" expanded="true" signature="1229:1385" placeholder="{&quot;id&quot;: &quot;container&quot;...}" />
-                <marker date="1390329476811" expanded="true" signature="1395:1553" placeholder="{&quot;id&quot;: &quot;video_codec&quot;...}" />
-                <marker date="1390329476811" expanded="true" signature="1563:1720" placeholder="{&quot;id&quot;: &quot;audio_codec&quot;...}" />
-                <marker date="1390329476811" expanded="true" signature="1730:1880" placeholder="{&quot;id&quot;: &quot;version&quot;...}" />
-              </folding>
+            <state line="52" column="23" selection-start="939" selection-end="939" vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1683">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="com.plexapp.plugins.dreambox.log" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="741" column="0" selection-start="114780" selection-end="114780" vertical-scroll-proportion="-15.535714" vertical-offset="12903" max-vertical-offset="13446">
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="85" column="60" selection-start="9823" selection-end="9823" vertical-scroll-proportion="-42.84" vertical-offset="374" max-vertical-offset="9894">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Info.plist" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="360">
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
             <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="23" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0" vertical-offset="188" max-vertical-offset="774">
+            <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="340">
               <folding />
             </state>
           </provider>
@@ -316,20 +162,22 @@
         <option value="$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys" />
         <option value="C:/Program Files (x86)/Plex/Plex Media Server/Resources/Profiles/Android.xml" />
         <option value="$PROJECT_DIR$/Contents/Code/metadata.py" />
-        <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
         <option value="$PROJECT_DIR$/Contents/Info.plist" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Contents/DefaultPrefs.json" />
-        <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
-        <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
         <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="$PROJECT_DIR$/../../Logs/Plex DLNA Server.log" />
+        <option value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
+        <option value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
+        <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="213" />
-    <option name="width" value="1920" />
-    <option name="height" value="1055" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -408,24 +256,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dreambox.bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dreambox.bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Contents" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -433,16 +263,16 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Logs/Plex Media Server.log" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
-      <console-settings />
+      <PyConsoleSettings />
     </option>
   </component>
   <component name="RecentsManager">
@@ -575,6 +405,9 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -596,9 +429,6 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -768,7 +598,11 @@
       <created>1390330217314</created>
       <updated>1390330217314</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Updated enigma2.py to detect os running server, and updated code in __init__.py to use a UUID for the ratings key - Fixes missing entries in Linux">
+      <created>1390336761408</created>
+      <updated>1390336761408</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -792,25 +626,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="213" width="1920" height="1055" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33898306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.6714761" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16809422" sideWeight="0.6743674" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3725702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16755603" sideWeight="0.66703665" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37229437" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32563257" sideWeight="0.35974303" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32563257" sideWeight="0.64025694" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33296338" sideWeight="0.35965848" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33296338" sideWeight="0.6398079" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -832,9 +666,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53415155" sideWeight="0.6736959" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -912,63 +746,66 @@
           <line>406</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>463</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>478</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="42" />
+      <option name="time" value="44" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="2178">
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="10" selection-start="1412" selection-end="1412" vertical-scroll-proportion="0.0" vertical-offset="1314" max-vertical-offset="1782">
-          <folding>
-            <marker date="1390329476811" expanded="true" signature="0:1882" placeholder="[...]" />
-            <marker date="1390329476811" expanded="true" signature="1105:1219" placeholder="{&quot;id&quot;: &quot;moviepath&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1229:1385" placeholder="{&quot;id&quot;: &quot;container&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1395:1553" placeholder="{&quot;id&quot;: &quot;video_codec&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1563:1720" placeholder="{&quot;id&quot;: &quot;audio_codec&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1730:1880" placeholder="{&quot;id&quot;: &quot;version&quot;...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="517" column="0" selection-start="67946" selection-end="67946" vertical-scroll-proportion="0.0" vertical-offset="9306" max-vertical-offset="375894">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
       <provider selected="true" editor-type-id="text-editor">
         <state line="217" column="0" selection-start="39756" selection-end="39756" vertical-scroll-proportion="0.0" vertical-offset="3906" max-vertical-offset="9450">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="360">
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Services/ServiceInfo.plist">
@@ -976,24 +813,14 @@
         <state line="0" column="0" selection-start="0" selection-end="376" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="524" max-vertical-offset="2057">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="360">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="4" selection-start="367" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="340">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/metadata.py">
@@ -1003,67 +830,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5982" column="0" selection-start="816395" selection-end="816395" vertical-scroll-proportion="0.0" vertical-offset="107676" max-vertical-offset="474264">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/DefaultPrefs.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="23" selection-start="939" selection-end="939" vertical-scroll-proportion="-8.666667" vertical-offset="702" max-vertical-offset="1782">
-          <folding>
-            <marker date="1390329476811" expanded="true" signature="0:1882" placeholder="[...]" />
-            <marker date="1390329476811" expanded="true" signature="1105:1219" placeholder="{&quot;id&quot;: &quot;moviepath&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1229:1385" placeholder="{&quot;id&quot;: &quot;container&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1395:1553" placeholder="{&quot;id&quot;: &quot;video_codec&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1563:1720" placeholder="{&quot;id&quot;: &quot;audio_codec&quot;...}" />
-            <marker date="1390329476811" expanded="true" signature="1730:1880" placeholder="{&quot;id&quot;: &quot;version&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="39" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9342">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="23" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
+        <state line="52" column="23" selection-start="939" selection-end="939" vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1683">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Logs/Plex DLNA Server.log">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="349" selection-end="349" vertical-scroll-proportion="-0.0" vertical-offset="72" max-vertical-offset="540">
+        <state line="19" column="0" selection-start="1926" selection-end="1926" vertical-scroll-proportion="0.57678574" vertical-offset="0" max-vertical-offset="560" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="63" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.0" vertical-offset="524" max-vertical-offset="2057">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Logs/Plex Media Server.log">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34750" column="0" selection-start="4893393" selection-end="4893393" vertical-scroll-proportion="4.08" vertical-offset="590852" max-vertical-offset="590852">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="741" column="0" selection-start="114780" selection-end="114780" vertical-scroll-proportion="-15.535714" vertical-offset="12903" max-vertical-offset="13446">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="60" selection-start="9823" selection-end="9823" vertical-scroll-proportion="-42.84" vertical-offset="374" max-vertical-offset="9894">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="412" column="72" selection-start="17689" selection-end="17689" vertical-scroll-proportion="0.66360295" vertical-offset="7019" max-vertical-offset="13914">
+        <state line="89" column="43" selection-start="3794" selection-end="3794" vertical-scroll-proportion="0.0" vertical-offset="1513" max-vertical-offset="13294">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="485" column="19" selection-start="18184" selection-end="18184" vertical-scroll-proportion="0.0" vertical-offset="8061" max-vertical-offset="9095">
+          <folding>
+            <element signature="e#2#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="151" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.94086957" vertical-offset="258" max-vertical-offset="986">
           <folding />
         </state>
       </provider>

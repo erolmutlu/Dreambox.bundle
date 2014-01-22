@@ -421,6 +421,31 @@ def get_data(*args):
     return results
 
 
+def split_folders(name, folders_files):
+    folder = []
+    for f in folders_files.keys():
+        try:
+            if name == 'nt':
+                parts = f.split('\\').pop()
+            else:
+                parts = f.split('/').pop()
+            if parts not in ('movie', '.Trash'):
+                folder.append(parts)
+        except:
+            pass
+    return folder
+
+
+def get_folder_contents(name, movie_path, folders_files, folder_contents):
+    if name == 'nt':
+        separator = '\\'
+    else:
+        separator = '/'
+    full_path = '{}{}{}'.format(movie_path, separator, folder_contents)
+
+    return folders_files.get(full_path)
+
+
 def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders=False, folder_contents=None):
 
     import re
@@ -429,49 +454,40 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
     movie_path = build_move_path(host, path)
     name = os.name
 
-    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', ]
+    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', 'x264' ]
     includes = r'|'.join([fnmatch.translate(x) for x in includes])
     pattern = '^(.*?\\.(\\bTrash\\b)[$]*)$' # To exclude the trash folder
 
     folders_files = {}
-
-
-    try:
-        print movie_path
-        for root, folder, files in os.walk(movie_path):
-            #exclude trash and sub folders with no files
-            if not re.match(pattern, root, 0):
-                if len(files) > 0:
-                    folders_files[root] = ([f for f in files if re.match(includes, f)])
-    except:
-        raise
-    if folders:
-            folder = []
-            for f in folders_files.keys():
-                try:
-                    if name == 'nt':
-                        parts = f.split('\\').pop()
-                    else:
-                        parts = f.split('/').pop()
-                    if parts not in ('movie', '.Trash'):
-                        folder.append(parts)
-                except:
-                    pass
-            return folder
-    if merge:
-        # Just return the merged file list - all in one location
-        return list(chain(*folders_files.values()))
-    if folder_contents:
-        if name == 'nt':
-            separator = '\\'
-        else:
-            separator = '/'
-        full_path = '{}{}{}'.format(movie_path, separator, folder_contents)
-        print full_path
-        return folders_files.get(full_path)
+    
+    #first see if we have a request for multiple folders
+    multiples = path.split(',')
+    if len(multiples) > 1:
+        #we have passed in multiple folders
+        pass
     else:
-        #return files in their folders
-        return folders_files
+        #we have passed in just root
+        try:
+            print movie_path
+            for root, folder, files in os.walk(movie_path):
+                #exclude trash and sub folders with no files
+                if not re.match(pattern, root, 0):
+                    if len(files) > 0:
+                        folders_files[root] = ([f for f in files if re.match(includes, f)])
+        except:
+            raise
+        if folders:
+            split_folders(name, movie_path, folders_files, folder_contents)
+            return folder
+        if merge:
+            # Just return the merged file list - all in one location
+            return list(chain(*folders_files.values()))
+        if folder_contents:
+            return get_folder_contents(name, movie_path, folders_files, folder_contents)
+        else:
+            #return files in their folders
+            return folders_files
+
 
 def build_move_path(host=None, path=None):
 
@@ -504,7 +520,7 @@ def build_move_path(host=None, path=None):
 
 
 
-print get_movie_subfolders('192.168.1.252', path='/mnt/Hardisk/movie', folder_contents='Anchorman The Legend of Ron Burgundy 2004' )
+print get_movie_subfolders('192.168.1.252', path='\HardDisk\movie', folder_contents='Anchorman The Legend of Ron Burgundy 2004' )
 
 
 

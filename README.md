@@ -32,6 +32,21 @@ Make sure that you enter preferences via the plugin interface and do not hard-co
 
 If using Linux and Mac you will have to set the permissions of the folder to 755 ( chmod -R 755 ).
 
-There seems to be a problem when updating from certain versions. A fix has been found on the forum, around page 22 until I get chance to add it to this readme
+Preferences
+
+The plugin stores the user preferences in the following locations:-
+
+        Windoows - AppData\Local\Plex Media Server\Plug-in Support\Preferences
+
+        Linux -
+
+If you find that you are having trouble connecting to the receiver, even with the correct settings in the default preferences
+then it could be that the plugin is always using the cached values. These do not get changed unless you edit them from the plugin=in interface.
+
+In this case, delete the preferences file for the dreambox plugin, and restart the server. This will load the values in to the cache from your default preferences.
+
+I'll look at doing this automatically at some point, so the plugin only adds new prefrences that get added, and leaves the rest of your settings alone.
+
+
 
 
