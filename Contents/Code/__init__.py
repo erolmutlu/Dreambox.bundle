@@ -388,6 +388,7 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
                 video_codec = video_codec,
                 audio_channels = 2,
                 audio_codec = audio_codec,
+                duration = duration,
                 parts = [PartObject(key=Callback(PlayVideo, channel=channel, audioid=audioid))]
             )
         ]
