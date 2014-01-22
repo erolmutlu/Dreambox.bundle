@@ -19,8 +19,7 @@ def Start():
     #TODO plugin loads default prefs, then overwrites them with ones you have saved
     #TODO if there is extra ones I bet it knacks things up
     #TODO get stored here AppData\Local\Plex Media Server\Plug-in Support\Preferences
-    from enigma2 import get_current_service, get_movie_subfolders
-    import os
+    from enigma2 import get_current_service,
 
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
     ObjectContainer.art = R(ART)
@@ -36,23 +35,26 @@ def Start():
     except AttributeError as e:
         Log('Error in Start. Caught an attribute error - {}'.format(e.message))
 
-    # See if we have any subfolders on the hdd
-    try:
-        folders = get_movie_subfolders(Prefs['host'], folders=True)
-        if folders:
-            Data.SaveObject('folders', folders)
-            Log('Loaded subfolders from receiver')
-        else:
-            Data.Save('folders', None)
-    except os.error as e:
-        Log('Error in Start. Error reading movie subfolders on receiver - {}'.format(e.message))
+
 
 
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
     Log('Entered MainMenu function')
-    from enigma2 import  get_number_of_tuners
+    from enigma2 import  get_number_of_tuners, get_movie_subfolders
+    import os
+    # See if we have any subfolders on the hdd
+    try:
+        folders = get_movie_subfolders(Prefs['host'], path=Prefs['moviepath'], folders=True)
+        Log(folders)
+        if folders:
+            Data.SaveObject('folders', folders)
+            Log('Loaded subfolders from receiver')
+        else:
+            Data.Save('folders', None)
+    except os.error as e:
+        Log('Error in Main Menu. Error reading movie subfolders on receiver - {}'.format(e.message))
     items = []
     try:
         items.append(on_now())
@@ -137,8 +139,8 @@ def Display_RecordedTV(display_root=False):
         return oc
 
 
-@route("/video/dreambox/Display_FolderRecordings/{folder}")
-def Display_FolderRecordings(folder=None):
+@route("/video/dreambox/Display_FolderRecordings/{dummy}")
+def Display_FolderRecordings(dummy, folder=None):
     Log('Entered Display_FolderRecordings function folder={}'.format(folder))
 
     title2=folder
@@ -340,7 +342,7 @@ def Display_Movie_Event(sender=None, filename=None, subfolders=None, description
                 video_codec = video_codec,
                 audio_codec = audio_codec,
                 audio_channels = 2,
-                parts = [PartObject(key=Callback(PlayVideo, channel=sender, filename=filename, recorded=True))]
+                parts = [PartObject(key=Callback(PlayVideo, channel=None,folder=sender, filename=filename, recorded=True))]
             )
         ]
     )
@@ -403,11 +405,11 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
 
 
 @route("video/dreambox/PlayVideo/{channel}")
-def PlayVideo(channel, filename=None, recorded=False, audioid=None):
+def PlayVideo(channel, filename=None, folder=None, recorded=False, audioid=None):
     import time
     from enigma2 import format_string, zap
-
-    channel = channel.strip('.m3u8')
+    if channel:
+        channel = channel.strip('.m3u8')
     if Prefs['zap'] and not recorded:
         Log('Changing Audio to {}'.format(audioid))
         zapaudio(channel, audioid)
@@ -415,12 +417,12 @@ def PlayVideo(channel, filename=None, recorded=False, audioid=None):
         stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
         Log('Stream to play {}'.format(stream))
     else:
-        Log('channel={} filename={}'.format(channel, filename))
+        Log('channel={} filename={}'.format(folder, filename))
         filename = format_string(filename, clean_file=True)
         if filename[:3] != 'hdd':
             #add subfolder and hhd path onto filename
             #TODO May need a check here for os type. -double backslashes
-            filename= 'hdd/movie/{}/'.format(channel) + filename
+            filename= 'hdd/movie/{}/'.format(folder) + filename
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
         Log('Recorded file  to play {}'.format(stream))
     return Redirect(stream)
@@ -745,7 +747,7 @@ def get_folders():
             items.append(DirectoryObject(key=Callback(Display_RecordedTV, display_root=True),
                                    title='Root'))
             for f in folders:
-                items.append(DirectoryObject(key=Callback(Display_FolderRecordings, folder=f),
+                items.append(DirectoryObject(key=Callback(Display_FolderRecordings, dummy='dummy', folder=f),
                             title=f))
     return items, title2
 

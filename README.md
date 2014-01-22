@@ -38,7 +38,7 @@ The plugin stores the user preferences in the following locations:-
 
         Windoows - AppData\Local\Plex Media Server\Plug-in Support\Preferences
 
-        Linux -
+        Linux - /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Plug-in Support/Preferences
 
 If you find that you are having trouble connecting to the receiver, even with the correct settings in the default preferences
 then it could be that the plugin is always using the cached values. These do not get changed unless you edit them from the plugin=in interface.

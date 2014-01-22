@@ -421,15 +421,17 @@ def get_data(*args):
     return results
 
 
-def split_folders(name, folders_files):
+def split_folders(name, folders_files, path):
     folder = []
     for f in folders_files.keys():
         try:
             if name == 'nt':
                 parts = f.split('\\').pop()
             else:
-                parts = f.split('/').pop()
-            if parts not in ('movie', '.Trash'):
+                print build_move_path
+                print len(path)
+                parts = f[len(path)+1:]
+            if parts != '':
                 folder.append(parts)
         except:
             pass
@@ -477,7 +479,7 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
         except:
             raise
         if folders:
-            split_folders(name, movie_path, folders_files, folder_contents)
+            folder = split_folders(name, folders_files, path)
             return folder
         if merge:
             # Just return the merged file list - all in one location
@@ -519,9 +521,7 @@ def build_move_path(host=None, path=None):
 
 
 
-
-print get_movie_subfolders('192.168.1.252', path='\HardDisk\movie', folder_contents='Anchorman The Legend of Ron Burgundy 2004' )
-
+print get_movie_subfolders(host='192.168.1.252', path='mnt/Hardisk/movie', folders=True)
 
 
 
