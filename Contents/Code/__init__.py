@@ -1,6 +1,8 @@
 from httplib2 import ServerNotFoundError, HttpLib2Error
 from socket import error
 from metadata import get_thumb
+import os
+from enigma2 import  get_number_of_tuners, get_movie_subfolders, get_current_service, get_bouquets
 
 ART = 'art-default.jpg'
 ICON = 'icon-default.png'
@@ -19,7 +21,7 @@ def Start():
     #TODO plugin loads default prefs, then overwrites them with ones you have saved
     #TODO if there is extra ones I reckon it knacks things up
     #TODO get stored here AppData\Local\Plex Media Server\Plug-in Support\Preferences
-    from enigma2 import get_current_service,
+
 
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
     ObjectContainer.art = R(ART)
@@ -39,28 +41,9 @@ def Start():
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
     Log('Entered MainMenu function')
-    from enigma2 import  get_number_of_tuners, get_movie_subfolders
-    import os
     items = []
     # See if we have any subfolders on the hdd
-    try:
-       #TODO need to strip leading and trailing slashes to compare
-        multiples = Prefs['moviepath'].split(',')
-        folders = get_movie_subfolders(Prefs['host'], path=multiples[0], folders=True)
-        if folders:
-            temp = []
-            if len(multiples)  > 1:
-                for f in folders:
-                    if '/' + f in multiples:
-                        temp.append(f)
-                Data.SaveObject('folders', temp)
-            else:
-                 Data.SaveObject('folders', folders)
-            Log('Saved subfolders from receiver')
-        else:
-            Data.Save('folders', None)
-    except os.error as e:
-        Log('Error in Main Menu. Error reading movie subfolders on receiver - {}'.format(e.message))
+    load_folders_from_receiver()
     try:
         items.append(on_now())
         items.append(DirectoryObject(key=Callback(Display_Bouquets),
@@ -107,7 +90,6 @@ def GetThumb(series):
 @route("/video/dreambox/Display_Bouquets")
 def Display_Bouquets():
     Log('Entered Display Bouquets function')
-    from enigma2 import get_bouquets
 
     items = []
     bouquets = get_bouquets(Prefs['host'],Prefs['port_web'])
@@ -321,7 +303,8 @@ def DeleteTimer(sRef='', begin=0, end=0, servicename='', name='', oc=None):
 
 
 @route("/video/dreambox/Display_Movie_Event/hdd/movie")
-def Display_Movie_Event(sender=None, filename=None, subfolders=None, description=None, duration=None, thumb=R(ICON), include_oc=False, rating_key=None):
+def Display_Movie_Event(sender=None, filename=None, subfolders=None, description=None, duration=None,
+                        thumb=R(ICON), include_oc=False, rating_key=None):
     Log('Entered display movie event {} {} {} {} {} {} {}'.format(sender, filename, description, duration, thumb, include_oc, rating_key))
     from enigma2 import format_string
     container, video_codec, audio_codec = get_codecs()
@@ -362,7 +345,8 @@ def Display_Movie_Event(sender=None, filename=None, subfolders=None, description
 
 
 @route("/video/dreambox/Display_Event")
-def Display_Event(sender='', channel='', description='', duration=0, thumb=None, include_oc=False, rating_key=None, audioid=None, audio_description=None):
+def Display_Event(sender='', channel='', description='', duration=0, thumb=None, include_oc=False, rating_key=None,
+                  audioid=None, audio_description=None):
     container, video_codec, audio_codec = get_codecs()
     rating_key = generate_rating_key(rating_key)
     Log('Entering Display Event {}'.format(channel))
@@ -475,6 +459,35 @@ def get_packets(sRef):
     if tuner:
         return True
     return False
+
+#################################################################
+# Gets the sub folders from the receiver, if any                #
+#################################################################
+def load_folders_from_receiver():
+    try:
+       #TODO need to strip leading and trailing slashes to compare
+        temp = Prefs['moviepath'].split(',')
+        multiples = []
+        for m in temp:
+            multiples.append(m.rstrip(' /\\').lstrip(' /\\'))
+        Log(multiples)
+        folders = get_movie_subfolders(Prefs['host'], path=multiples[0], folders=True)
+        if folders:
+            temp = []
+            if len(multiples)  > 1:
+                for f in folders:
+                    s = f.lstrip(' /\\')
+                    Log('Check f {}'.format(f))
+                    if s in multiples:
+                        temp.append(s)
+                Data.SaveObject('folders', temp)
+            else:
+                 Data.SaveObject('folders', folders)
+            Log('Saved subfolders from receiver')
+        else:
+            Data.Save('folders', None)
+    except os.error as e:
+        Log('Error in Main Menu. Error reading movie subfolders on receiver - {}'.format(e.message))
 
 
 ##################################################################
