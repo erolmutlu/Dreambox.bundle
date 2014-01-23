@@ -518,12 +518,3 @@ def build_move_path(host=None, path=None):
         return fullpath
     return None
 
-
-
-
-print get_movie_subfolders(host='192.168.1.252', path='mnt/Hardisk/movie', folders=True)
-
-
-
-
-

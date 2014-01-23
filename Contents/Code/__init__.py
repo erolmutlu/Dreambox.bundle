@@ -17,7 +17,7 @@ BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
 def Start():
     Log('Entered Start function ')
     #TODO plugin loads default prefs, then overwrites them with ones you have saved
-    #TODO if there is extra ones I bet it knacks things up
+    #TODO if there is extra ones I reckon it knacks things up
     #TODO get stored here AppData\Local\Plex Media Server\Plug-in Support\Preferences
     from enigma2 import get_current_service,
 
@@ -36,26 +36,31 @@ def Start():
         Log('Error in Start. Caught an attribute error - {}'.format(e.message))
 
 
-
-
-
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
     Log('Entered MainMenu function')
     from enigma2 import  get_number_of_tuners, get_movie_subfolders
     import os
+    items = []
     # See if we have any subfolders on the hdd
     try:
-        folders = get_movie_subfolders(Prefs['host'], path=Prefs['moviepath'], folders=True)
-        Log(folders)
+       #TODO need to strip leading and trailing slashes to compare
+        multiples = Prefs['moviepath'].split(',')
+        folders = get_movie_subfolders(Prefs['host'], path=multiples[0], folders=True)
         if folders:
-            Data.SaveObject('folders', folders)
-            Log('Loaded subfolders from receiver')
+            temp = []
+            if len(multiples)  > 1:
+                for f in folders:
+                    if '/' + f in multiples:
+                        temp.append(f)
+                Data.SaveObject('folders', temp)
+            else:
+                 Data.SaveObject('folders', folders)
+            Log('Saved subfolders from receiver')
         else:
             Data.Save('folders', None)
     except os.error as e:
         Log('Error in Main Menu. Error reading movie subfolders on receiver - {}'.format(e.message))
-    items = []
     try:
         items.append(on_now())
         items.append(DirectoryObject(key=Callback(Display_Bouquets),
@@ -129,6 +134,7 @@ def Display_RecordedTV(display_root=False):
         oc = ObjectContainer( view_group='List', no_cache=True, title2=title2, no_history=True)
         if Prefs['folders'] and not display_root:
             m, t = get_folders()
+            Log('m is {}'.format(m))
             items.extend(m)
             oc.title2 = t
         else:
@@ -421,8 +427,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=False, audioid=None)
         Log('channel={} filename={}'.format(folder, filename))
         filename = format_string(filename, clean_file=True)
         if filename[:3] != 'hdd':
-            #add subfolder and hhd path onto filename
-            #TODO May need a check here for os type. -double backslashes
+
             filename= 'hdd/movie/{}/'.format(folder) + filename
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
         Log('Recorded file  to play {}'.format(stream))
@@ -731,7 +736,7 @@ def check_empty_items(items=[]):
 def get_folders():
 
     folders = Data.LoadObject('folders')
-    Log('Entering get_folders {}'.format(folders))
+    Log('Entering get_folders, loaded from data {}'.format(folders))
     items = []
     title2 = ''
     if folders:
@@ -771,7 +776,8 @@ def add_folder_items(folder=None):
     from enigma2 import get_movie_subfolders
     Log ('Entering AddFolderItems folder={}'.format(folder))
     items = []
-    result = get_movie_subfolders(host=Prefs['host'], path=Prefs['moviepath'], folder_contents=folder)
+    multiples = Prefs['moviepath'].split(',')
+    result = get_movie_subfolders(host=Prefs['host'], path=multiples[0], folder_contents=folder)
     Log('Result from getmovie_subfolders {}'.format(result))
     if result:
         for f in result:
