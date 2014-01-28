@@ -44,6 +44,8 @@ def MainMenu():
     items = []
     # See if we have any subfolders on the hdd
     load_folders_from_receiver()
+    Log(Response.Headers)
+    Log(Request.Body)
     try:
         items.append(on_now())
         items.append(DirectoryObject(key=Callback(Display_Bouquets),
@@ -120,8 +122,7 @@ def Display_RecordedTV(display_root=False):
             items.extend(m)
             oc.title2 = t
         else:
-            # No we dont want folder contents. Just display root
-            items = add_movie_items(items)
+             items = add_movie_items(items)
         items = check_empty_items(items)
         oc.objects = items
         return oc
@@ -299,76 +300,50 @@ def DeleteTimer(sRef='', begin=0, end=0, servicename='', name='', oc=None):
     else:
         oc.add(DirectoryObject(key=Callback(Display_Timer_Events),
                                      title='Unable to delete event deleted for {}.'.format(name)))
-    return     oc
-
-
-@route("/video/dreambox/Display_Movie_Event/hdd/movie")
-def Display_Movie_Event(sender=None, filename=None, subfolders=None, description=None, duration=None,
-                        thumb=R(ICON), include_oc=False, rating_key=None):
-    Log('Entered display movie event {} {} {} {} {} {} {}'.format(sender, filename, description, duration, thumb, include_oc, rating_key))
-    from enigma2 import format_string
-    container, video_codec, audio_codec = get_codecs()
-    rating_key = generate_rating_key(rating_key)
-    title = sender
-    Log('Subfolders is {}'.format(subfolders))
-    if subfolders:
-        Log('title in subfolders check = {}'.format(title))
-        #strip the extension off
-        if '.ts' in filename:
-           title=filename[:-3]
-        else:
-            title=filename[:-4]
-    Log('title = {}'.format(title))
-    video = EpisodeObject(
-        key = Callback(Display_Movie_Event, sender=sender, filename=filename, subfolders=subfolders, description=description, duration=duration , thumb=Callback(GetThumb, series=sender), include_oc=True, rating_key=rating_key),
-        rating_key=rating_key,
-        title=title,
-        summary=description,
-        thumb=Callback(GetThumb, series=sender),
-        items=[
-            MediaObject(
-                container = container,
-                video_codec = video_codec,
-                audio_codec = audio_codec,
-                audio_channels = 2,
-                parts = [PartObject(key=Callback(PlayVideo, channel=None,folder=sender, filename=filename, recorded=True))]
-            )
-        ]
-    )
-    if include_oc:
-        oc = ObjectContainer()
-        oc.add(video)
-        return oc
-    import re
-    video.title= re.sub('\On Now [-] *', '', video.title)
-    return video
+    return oc
 
 
 @route("/video/dreambox/Display_Event")
-def Display_Event(sender='', channel='', description='', duration=0, thumb=None, include_oc=False, rating_key=None,
-                  audioid=None, audio_description=None):
+def Display_Event(sender='', channel='', description='', filename=None, subfolders=None, duration=0,
+                  thumb=None, include_oc=False, rating_key=None,audioid=None, audio_description=None):
+    import re
     container, video_codec, audio_codec = get_codecs()
     rating_key = generate_rating_key(rating_key)
-    Log('Entering Display Event {}'.format(channel))
-
-    sender = sender
-    if not audio_description:
-        # This takes into account the return callback.
-        audio_description = sender
-        if duration:
-            duration= int(duration) #Needs to be cast to an int as it gets converted to an str when passsed in
+    Log('Entering Display Event sender {} channel {} desciprion {} filename {} subfolders {} duration {} '
+        'includeOC {} ratingkey {}'.format(sender, channel, description, filename,
+                                           subfolders, duration, include_oc, rating_key))
+    recorded=False
+    folder=None
+    title=sender
+    if filename:
+        recorded=True
+        #channel=None
+        folder=sender
+        Log('Subfolders is {}'.format(channel))
+        if subfolders:
+            Log('title in subfolders check = {}'.format(title))
+            #strip the extension off
+            if '.ts' not in filename:
+                title=filename[:-4]
+            else:
+                title = re.sub('^[0-9]* [0-9]* - [a-zA-Z0-9 \+]* - ', '', filename)[:-3]
+    if duration:
+        duration= int(duration) #Needs to be cast to an int as it gets converted to an str when passsed in
     video = MovieObject(
         key = Callback(Display_Event,
                        sender=sender,
                        channel=channel,
                        description=description,
                        duration=duration,
-                       thumb=Callback(GetThumb, series=sender),
+                       thumb=None,
                        include_oc=True,
                        rating_key=rating_key,
-                       audioid=audioid),
+                       audioid=audioid,
+                       filename=filename,
+                       subfolders=subfolders),
         rating_key = rating_key,
-        title = audio_description,
+        # This is what get displayedwhen the episode is displayed
+        title = title,
         summary = description,
         duration = duration,
         thumb = Callback(GetThumb, series=sender),
@@ -379,16 +354,17 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
                 audio_channels = 2,
                 audio_codec = audio_codec,
                 duration = duration,
-                parts = [PartObject(key=Callback(PlayVideo, channel=channel, audioid=audioid))]
+                parts = [PartObject(key=Callback(PlayVideo, channel=channel, audioid=audioid, filename=filename, folder=folder, recorded=recorded))]
             )
         ]
     )
-    if include_oc:
-        import re
+    if include_oc :
         oc = ObjectContainer()
         title = video.title
         video.title = re.sub('\On Now [-] *', '', title)
-        duration = int(Prefs['duration'])*6000*10
+        if not recorded:
+            #Just update this if its live
+            duration = int(Prefs['duration'])*6000*10
         video.duration= duration
         oc.add(video)
         return oc
@@ -396,7 +372,8 @@ def Display_Event(sender='', channel='', description='', duration=0, thumb=None,
 
 
 @route("video/dreambox/PlayVideo/{channel}")
-def PlayVideo(channel, filename=None, folder=None, recorded=False, audioid=None):
+def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None):
+    Log('Entering PlayVideo channel={} filename={} folder={} recorded={} audioid={}'.format(channel, filename, folder, recorded, audioid))
     import time
     from enigma2 import format_string, zap
     if channel:
@@ -404,14 +381,13 @@ def PlayVideo(channel, filename=None, folder=None, recorded=False, audioid=None)
     if Prefs['zap'] and not recorded:
         Log('Changing Audio to {}'.format(audioid))
         zapaudio(channel, audioid)
-    if not recorded:
+    if recorded == 'False':
         stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
         Log('Stream to play {}'.format(stream))
     else:
         Log('channel={} filename={}'.format(folder, filename))
         filename = format_string(filename, clean_file=True)
         if filename[:3] != 'hdd':
-
             filename= 'hdd/movie/{}/'.format(folder) + filename
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
         Log('Recorded file  to play {}'.format(stream))
@@ -465,13 +441,13 @@ def get_packets(sRef):
 #################################################################
 def load_folders_from_receiver():
     try:
-       #TODO need to strip leading and trailing slashes to compare
         temp = Prefs['moviepath'].split(',')
         multiples = []
         for m in temp:
             multiples.append(m.rstrip(' /\\').lstrip(' /\\'))
-        Log(multiples)
+        Log('Multiples are {}'.format(multiples))
         folders = get_movie_subfolders(Prefs['host'], path=multiples[0], folders=True)
+        Log('Folders fetched from receiver {}'.format(folders))
         if folders:
             temp = []
             if len(multiples)  > 1:
@@ -514,37 +490,29 @@ def add_current_event(sRef=None, name=None, title=None, description=None, remain
                       piconfile=None,
                       audioid=None,
                       audio_description=None):
-    # now check if we need to use the service
     Log ('Entered Add Current Event {} {} {} {} {} {} audio = {} type = {}'.format(sRef, name, title, description,
                                                                                    remaining,
                                                                                    piconfile,
                                                                                    audioid,
                                                                                    audio_description))
+
     thumb=None
     if not audioid:
         thumb = Callback(GetThumb, series=title)
-
-    if Client.Platform in CLIENT:
-        return VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'], sRef),
-                               title='{}  - {}'.format(name, title),
-                               summary=description,
-                               thumb=Callback(GetThumb, series=title))
+    tuner = 1
+    if title == 'N/A':
+        tuner = get_packets(sRef)
+    if tuner:
+        from metadata import get_image
+        return Display_Event(sender=title,
+                                     channel=sRef,
+                                     description=description,
+                                     duration=remaining,
+                                     thumb=thumb,
+                                     audioid=audioid,
+                                     audio_description=audio_description)
     else:
-        tuner = 1
-        if title == 'N/A':
-            tuner = get_packets(sRef)
-        if tuner:
-            from metadata import get_image
-
-            return Display_Event(sender=title,
-                                 channel=sRef,
-                                 description=description,
-                                 duration=remaining,
-                                 thumb=thumb,
-                                 audioid=audioid,
-                                 audio_description=audio_description)
-        else:
-            return None
+        return check_empty_items([])
 
 
 ##################################################################
@@ -568,8 +536,12 @@ def on_now_menuitem():
     from enigma2 import get_current_service, get_number_of_audio_tracks, get_audio_tracks
     sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
     if Client.Platform in CLIENT:
-        result = VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'], sRef),
-                                               title='On Now - {}   {}'.format(channel, description))
+    #    container, video_codec, audio_codec = get_codecs()
+    #    result = VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'],
+    #                                                             sRef),
+    #
+    #                                             title='On Now - {}   {}'.format(channel, description))
+        result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
     else:
         """if Prefs['zap'] and Prefs['audio'] and (get_number_of_audio_tracks(Prefs['host'], Prefs['port_web']) > 1):
 
@@ -606,9 +578,7 @@ def zapaudio( channel=None, audioid=None):
         audio = set_audio_track(Prefs['host'], Prefs['port_web'], audioid)
         Log('Audio returned from enigma2 module {}'.format(audio))
         time.sleep(2)
-
         if audio:
-
             Log('Changed Audio to channel {}'.format(audioid))
         else:
             Log("Unable to change audio")
@@ -766,6 +736,7 @@ def get_folders():
             items.append(DirectoryObject(key=Callback(Display_RecordedTV, display_root=True),
                                    title='Root'))
             for f in folders:
+                Log('Folder is {}'.format(f))
                 items.append(DirectoryObject(key=Callback(Display_FolderRecordings, dummy='dummy', folder=f),
                             title=f))
     return items, title2
@@ -778,10 +749,18 @@ def add_movie_items(items=[]):
     Log('Entering Add Movie Items')
     movies = get_movies(Prefs['host'],Prefs['port_web'])
     items = items
-
     for sref, title, description, channel, e2time, length, filename in movies:
-        items.append(Display_Movie_Event(sender=title, filename=filename[1:],
-                                         description=description, duration=int(100000)))
+        secs = length.split(':')
+        duration = 0
+        try:
+            duration = (int(secs[0]) * 60 + int(secs[1])* 60) * 1000
+        except:
+            pass
+        try:
+            items.append(Display_Event(sender=title, filename=filename[1:],
+                                         description=description, duration=duration))
+        except Exception as e:
+            Log('Error creating movie item  --> {}'.format(e.message))
     return items
 
 
@@ -794,7 +773,8 @@ def add_folder_items(folder=None):
     Log('Result from getmovie_subfolders {}'.format(result))
     if result:
         for f in result:
-            items.append(Display_Movie_Event(sender=folder, subfolders=True, filename=f, description=None, duration=0))
+
+            items.append(Display_Event(sender=folder, subfolders=True, filename=f, description=None, duration=0))
     return items
 
 

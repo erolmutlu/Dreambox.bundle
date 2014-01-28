@@ -9,11 +9,12 @@ def MetadataObjectForURL(url):
     from urllib import urlencode
     from urllib2 import urlopen
 
-    param = get_url_part(url, 'sRef')
+    sRef = get_url_part(url, 'sRef')
+
     web_port = get_url_part(url, 'web_port')
     url = get_url_part(url)
     try:
-        data = urlencode({'sRef': param})
+        data = urlencode({'sRef': sRef})
         response = urlopen('http://{}:{}/web/epgservicenow'.format(url, web_port), data)
         res = response.read()
         soup = BeautifulSoup(res)
@@ -37,28 +38,13 @@ def MetadataObjectForURL(url):
 
 def MediaObjectsForURL(url):
     #TODO Get a few packets and get the stream info etc. Media values go in here
+
     return [
         MediaObject(
-            video_codec = 'h264',
-            container = 'mpegts',
-            parts = [PartObject(key=Callback(PlayVideoIndirect, url = url),
-                                    streams=[
-                                        VideoStreamObject(id=0,
-                                                          frame_rate=25,
-                                                          selected=1),
-                                        AudioStreamObject(language_code=Locale.Language.English,
-
-                                                          id=1,
-                                                          index='1',
-                                                          sampling_rate=48000,
-                                                          channels = 2),
-                                        AudioStreamObject(language_code=Locale.Language.English,
-                                                          id=12,
-                                                          index='2',
-                                                          sampling_rate=48000,
-                                                          channels = 6,
-                                                          selected=True)
-                                    ]
+            video_codec='h264',
+            container='mpegts',
+            audio_codec='mp3',
+            parts=[PartObject(key=Callback(PlayVideoIndirect, url = url)
 
 
             )]
@@ -74,20 +60,40 @@ def PlayVideoIndirect(url):
 
     param = get_url_part(url, 'sRef')
     video_port = get_url_part(url, 'video_port')
-    url = get_url_part(url)
-
     oc = ObjectContainer(objects=[
             VideoClipObject(items=[
                             MediaObject(
-                                video_codec = 'h264',
+                                video_codec = ',h264',
                                 audio_codec = 'mp3',
                                 container = 'mpegts',
                                  parts=[PartObject(key='http://{}:{}/{}'.format(url, video_port, param))])
                             ])
-    ])
+        ])
     return oc
 
 
+
+
+"""
+    import time
+    from enigma2 import format_string, zap
+    if channel:
+        channel = channel.strip('.m3u8')
+    if Prefs['zap'] and not recorded:
+        Log('Changing Audio to {}'.format(audioid))
+        zapaudio(channel, audioid)
+    if not recorded:
+        stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
+        Log('Stream to play {}'.format(stream))
+    else:
+        Log('channel={} filename={}'.format(folder, filename))
+        filename = format_string(filename, clean_file=True)
+        if filename[:3] != 'hdd':
+
+            filename= 'hdd/movie/{}/'.format(folder) + filename
+        stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
+        Log('Recorded file  to play {}'.format(stream))
+"""
 #######################################
 # Helpers                             #
 #######################################
@@ -106,8 +112,17 @@ def get_url_part(url, type='url'):
         return data[1]
     elif type== 'video_port':
         return data[2]
+    elif type == 'container':
+        return data[4]
+    elif type== 'video_codec':
+        return data[5]
+    elif type== 'audio_codec':
+        return data[6]
     else:
         return query.netloc
+
+
+print get_url_part('http://192.168.1.252/80/8001/1:0:19:1B1D:802:2:11A0000:0:0:0:/mp4/h264/mp3/False', 'recorded')
 
 
 

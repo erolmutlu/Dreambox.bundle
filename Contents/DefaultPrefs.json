@@ -22,7 +22,7 @@
          "id": "folders",
          "type": "bool",
          "label": "View recorded folders",
-         "default": "true"
+         "default": "false"
     },
     {
          "id": "merge",

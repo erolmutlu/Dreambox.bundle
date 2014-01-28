@@ -426,7 +426,9 @@ def split_folders(name, folders_files, path):
     for f in folders_files.keys():
         try:
             if name == 'nt':
-                parts = f.split('\\').pop()
+                #Need to remove the initial path here
+                parts = f.split(path).pop().rstrip(' /\\').lstrip(' /\\')
+
             else:
                 print build_move_path
                 print len(path)
@@ -456,7 +458,7 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
     movie_path = build_move_path(host, path)
     name = os.name
 
-    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', 'x264' ]
+    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', '*.x264' ]
     includes = r'|'.join([fnmatch.translate(x) for x in includes])
     pattern = '^(.*?\\.(\\bTrash\\b)[$]*)$' # To exclude the trash folder
 
@@ -518,3 +520,8 @@ def build_move_path(host=None, path=None):
         return fullpath
     return None
 
+
+#print get_movie_subfolders('192.168.1.252', 'Harddisk\movie', folders=True)
+import time, datetime
+x = '65:65'.split(':')
+print int(x[0])*60 + int(x[1])*60
