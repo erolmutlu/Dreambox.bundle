@@ -449,17 +449,18 @@ def load_folders_from_receiver():
         folders = get_movie_subfolders(Prefs['host'], path=multiples[0], folders=True)
         Log('Folders fetched from receiver {}'.format(folders))
         if folders:
-            temp = []
-            if len(multiples)  > 1:
-                for f in folders:
-                    s = f.lstrip(' /\\')
-                    Log('Check f {}'.format(f))
+            t = []
+
+            for f in folders:
+                s = f.lstrip(' /\\')
+                Log('Check f {}'.format(f))
+                if len(multiples)  > 1:
                     if s in multiples:
-                        temp.append(s)
-                Data.SaveObject('folders', temp)
-            else:
-                 Data.SaveObject('folders', folders)
-            Log('Saved subfolders from receiver')
+                        t.append(s)
+                else:
+                    t.append(s)
+            Data.SaveObject('folders', t)
+            Log('Saved subfolders from receiver {}'.format(t))
         else:
             Data.Save('folders', None)
     except os.error as e:

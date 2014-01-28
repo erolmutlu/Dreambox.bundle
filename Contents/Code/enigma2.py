@@ -83,6 +83,7 @@ def get_movies(host, web):
                                                                             'e2eventcurrenttime',
                                                                             'e2servicename',
                                                                             'e2time',
+
                                                                             'e2length',
                                                                             'e2filename'
                                                                             ])
@@ -521,7 +522,5 @@ def build_move_path(host=None, path=None):
     return None
 
 
-#print get_movie_subfolders('192.168.1.252', 'Harddisk\movie', folders=True)
-import time, datetime
-x = '65:65'.split(':')
-print int(x[0])*60 + int(x[1])*60
+print get_movie_subfolders('192.168.1.252', '/mnt/Hardisk/movie', folders=True)
+
