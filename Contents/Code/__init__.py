@@ -44,8 +44,6 @@ def MainMenu():
     items = []
     # See if we have any subfolders on the hdd
     load_folders_from_receiver()
-    Log(Response.Headers)
-    Log(Request.Body)
     try:
         items.append(on_now())
         items.append(DirectoryObject(key=Callback(Display_Bouquets),
@@ -57,18 +55,21 @@ def MainMenu():
                                thumb= R(RECORDED),
                                tagline='Watch recorded content on your Enigma 2 based satellite receiver'))
         items = zap_menuitem(items)
+        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
     except (HttpLib2Error, error)  as e:
         Log('Error in MainMenu. Unable to get create on_now  - {}'.format(e))
         # Need this entry in to make Home button work correctly
         items.append(DirectoryObject(key=Callback(MainMenu),
                                title=Locale.LocalString('ConnectError')))
+        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
     except AttributeError as e:
         items.append(DirectoryObject(key=Callback(MainMenu),
                                title=Locale.LocalString('ConnectError')))
+        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
 
     items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
     oc = ObjectContainer(objects=items, view_group='List', no_cache=True)
-    if len(items) > 2:
+    if len(items) > 3:
         timers(oc)
     return oc
 
@@ -409,6 +410,19 @@ def ResetReceiver():
     return ObjectContainer(title2='Reset Receiver', no_cache=False, header='Reset receiver', message=message)
 
 
+@route('/video/dreambox/RebootReceiver')
+def RebootReceiver():
+
+    items = check_empty_items([])
+    oc = ObjectContainer(objects=items, title2='Reboot receiver')
+    return oc
+
+@route('/video/dreambox/ResetUserPrefs')
+def ResetUserPrefs():
+    items = check_empty_items([])
+    oc = ObjectContainer(objects=items, title2='Reset user preferences')
+    return oc
+
 
 ##################################################
 # Helpers                                        #
@@ -531,6 +545,25 @@ def on_now():
             ResetReceiver()
             result = on_now_menuitem()
     return result
+
+def add_tools():
+
+    items = []
+    items.append(DirectoryObject(key=Callback(RebootReceiver, Prefs['host'], Prefs['port_web']),
+                                 title='Reboot receiver'))
+    items.append(DirectoryObject(key=Callback(RebootReceiver, Prefs['host'], Prefs['port_web']),
+                                 title='Restart Enigma2'))
+    items.append(DirectoryObject(key=Callback(RebootReceiver, Prefs['host'], Prefs['port_web']),
+                                 title='Deep standby'))
+    items.append(DirectoryObject(key=Callback(ResetUserPrefs, Prefs['host'], Prefs['port_web']),
+                                 title='Reset channels'))
+    items.append(DirectoryObject(key=Callback(ResetUserPrefs, Prefs['host'], Prefs['port_web']),
+                                 title='Reset user preferences'))
+
+    oc = ObjectContainer( view_group='List', no_cache=True, title2='Tools', no_history=True)
+    oc.objects = items
+    return oc
+
 
 
 def on_now_menuitem():
