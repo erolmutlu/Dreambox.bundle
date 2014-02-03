@@ -235,6 +235,46 @@ def zap(host, web, sRef):
         raise
     return result, error
 
+##############################################################
+# Send a power signal to the box                             #
+##############################################################
+def set_power_state(host=None, web=None, state=0):
+    import socket
+    result = False
+    error = None
+    try:
+        url = 'http://{}:{}/web/powerstate'.format(host, web)
+        data = {'newstate': state}
+        soup = get_data((url, data))
+        if 'false' in soup[0].e2instandby.string:
+            result = True
+            error = 0
+        else:
+            result = False
+            error = 0
+    except socket.error as e:
+
+        if e.errno:
+            print e.errno
+            print e.message
+            print e.args
+            if int(e.errno) == 10054:  # 1, 2 returns 0054
+                result = True
+                if state == 1:
+                    error = 1
+                elif state == 2:
+                    error = 2
+                else:
+                    error = 3
+            if int(e.errno) == 10061:  # 3  return 0061
+                result = True
+                error = 4  # stil restarting
+        else:
+            #Unable to connect - Timed out
+            return True, e.args[0]
+    return result, error
+
+
 #################################
 # Helpers                       #
 #################################
@@ -335,6 +375,8 @@ def get_current_service_info(soup_list):
     return results
 
 
+
+
 ###############################################################
 # Formats the string returned from the satellite box          #
 ###############################################################
@@ -410,14 +452,13 @@ def get_data(*args):
             if data:
                 headers = {'Content-type': 'application/x-www-form-urlencoded'}
                 resp, content = req.request(u, "POST", headers=headers, body=urlencode(data))
-                print resp
-
-                print content
+                print resp, content
             else:
                 resp, content = req.request(u, "GET", data)
             soup = BeautifulSoup(content)
             results.append(soup)
         except:
+
             raise
     return results
 
@@ -458,11 +499,9 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
 
     movie_path = build_move_path(host, path)
     name = os.name
-
     includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', '*.x264' ]
     includes = r'|'.join([fnmatch.translate(x) for x in includes])
     pattern = '^(.*?\\.(\\bTrash\\b)[$]*)$' # To exclude the trash folder
-
     folders_files = {}
     
     #first see if we have a request for multiple folders
@@ -494,6 +533,7 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
             return folders_files
 
 
+
 def build_move_path(host=None, path=None):
 
     #set correct separators
@@ -521,6 +561,6 @@ def build_move_path(host=None, path=None):
         return fullpath
     return None
 
+# Stuff here actually gets loaded by the server, so remember if things start going wierd
 
-print get_movie_subfolders('192.168.1.252', '/mnt/Hardisk/movie', folders=True)
 

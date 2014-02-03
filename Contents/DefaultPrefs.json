@@ -40,7 +40,7 @@
 		"id": "host",
 		"type": "text",
 		"label": "Host",
-		"default": "192.168.1.250"
+		"default": "192.168.1.252"
 	},
 	{
 		"id": "port_web",
@@ -64,13 +64,13 @@
 		"id": "moviepath",
 		"type": "text",
 		"label": "Path to movie folder",
-		"default": "mnt/Hardisk/movie"
+		"default": "HardDisk\movie"
     },
         {
                 "id": "container",
                 "type": "text",
                 "label": "Use container",
-                "default": "mpegts"
+                "default": "mp4"
         },
         {
                 "id": "video_codec",
@@ -82,12 +82,6 @@
                 "id": "audio_codec",
                 "type": "text",
                 "label": "Use audio codec",
-                "default": "aac"
-        },
-        {
-                "id": "version",
-                "type": "text",
-                "label": "Version",
-                "default": "11012014"
+                "default": "mp3"
         }
 ]

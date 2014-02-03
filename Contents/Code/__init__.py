@@ -10,6 +10,10 @@ LIVE = 'livetv.png'
 RECORDED = 'recordedtv.png'
 CLIENT = ['Plex Home Theater']
 BROWSERS = ('Chrome', 'Internet Explorer', 'Opera', 'Safari')
+RECEIVER_STANDBY = 0
+RECEIVER_DEEP_STANDBY = 1
+RECEIVER_REBOOT = 2
+RECEIVER_RESTART_ENIGMA2 = 3
 
 ##################################################################
 # The entry point. Sets variables and gets                       #
@@ -32,10 +36,13 @@ def Start():
         sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
         Data.Save('sRef', sRef)
         Log('Loaded iniital channel from receiver')
+        Data.SaveObject('Started', True)
     except (HttpLib2Error, error) as e:
-        Log('Error in Start. Unable to get current service - {}'.format(e.message))
+        Log('Error in Start.Httplib2 error. Unable to get current service - {}'.format(e.message))
+        Data.SaveObject('Started', False)
     except AttributeError as e:
         Log('Error in Start. Caught an attribute error - {}'.format(e.message))
+        Data.SaveObject('Started', False)
 
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
@@ -43,34 +50,48 @@ def MainMenu():
     Log('Entered MainMenu function')
     items = []
     # See if we have any subfolders on the hdd
-    load_folders_from_receiver()
-    try:
-        items.append(on_now())
-        items.append(DirectoryObject(key=Callback(Display_Bouquets),
-                               title=Locale.LocalString('Live'),
-                               thumb = R(LIVE),
-                               tagline=Locale.LocalString('LiveTag')))
-        items.append(DirectoryObject(key=Callback(Display_RecordedTV),
-                               title=Locale.LocalString('Recorded'),
-                               thumb= R(RECORDED),
-                               tagline='Watch recorded content on your Enigma 2 based satellite receiver'))
-        items = zap_menuitem(items)
-        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
-    except (HttpLib2Error, error)  as e:
-        Log('Error in MainMenu. Unable to get create on_now  - {}'.format(e))
-        # Need this entry in to make Home button work correctly
-        items.append(DirectoryObject(key=Callback(MainMenu),
-                               title=Locale.LocalString('ConnectError')))
-        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
-    except AttributeError as e:
-        items.append(DirectoryObject(key=Callback(MainMenu),
-                               title=Locale.LocalString('ConnectError')))
-        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
+    Log(Data.LoadObject('Started'))
+    if Data.LoadObject('Started'):
+        try:
+            load_folders_from_receiver()
+            items.append(on_now())
+            items.append(DirectoryObject(key=Callback(Display_Bouquets),
+                                   title=Locale.LocalString('Live'),
+                                   thumb = R(LIVE),
+                                   tagline=Locale.LocalString('LiveTag')))
+            items.append(DirectoryObject(key=Callback(Display_RecordedTV),
+                                   title=Locale.LocalString('Recorded'),
+                                   thumb= R(RECORDED),
+                                   tagline='Watch recorded content on your Enigma 2 based satellite receiver'))
+            items = zap_menuitem(items)
+            items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
+        except (Exception, error)  as e:
+            Log('Error in HTTPLib2 MainMenu. Unable to get create on_now  - {}'.format(e.message))
+            # Need this entry in to make Home button work correctly
+            items.append(DirectoryObject(key=Callback(MainMenu),
+                                   title=Locale.LocalString('ConnectError')))
+            #items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
+        except AttributeError as e:
+            items.append(DirectoryObject(key=Callback(MainMenu),
+                                   title=Locale.LocalString('ConnectError')))
+            items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
 
-    items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
+        items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
+        items = check_empty_items(items)
+    else:
+
+        Log('Cannot start correctly.')
+        items.append(DirectoryObject(key=Callback(MainMenu),
+                                   title=Locale.LocalString('ConnectError')))
+        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
+        items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
+        #may want to update prefs here, so update Started value
+
     oc = ObjectContainer(objects=items, view_group='List', no_cache=True)
     if len(items) > 3:
         timers(oc)
+
+
     return oc
 
 
@@ -410,11 +431,78 @@ def ResetReceiver():
     return ObjectContainer(title2='Reset Receiver', no_cache=False, header='Reset receiver', message=message)
 
 
-@route('/video/dreambox/RebootReceiver')
-def RebootReceiver():
 
-    items = check_empty_items([])
-    oc = ObjectContainer(objects=items, title2='Reboot receiver')
+@route('/video/dreambox/ResetPrefs')
+def ResetPrefs():
+    items = []
+    #Log(result)
+    Data.SaveObject('Started', False)
+
+    re = XML.ElementFromURL('http://127.0.0.1:32400/:/plugins/com.plexapp.plugins.dreambox/prefs', timeout=3)
+    settings = re.xpath('//Setting')
+    vals ={}
+    for s in settings:
+        pref =s.xpath('./@id')[0]
+        vals[pref] = None
+        Log(pref)
+        re2 = HTTP.Request('http://127.0.0.1:32400/:/plugins/com.plexapp.plugins.dreambox/prefs/set?{}='.format(pref), timeout=5)
+        re2.load()
+
+
+    items.append(DirectoryObject(key=Callback(MainMenu),
+                                         title='User Prefs reset. Restart plugin to load DefaultPrefs'))
+    items = check_empty_items(items)
+    oc = ObjectContainer(objects=items, title2='Reset user preference', no_history=True)
+    return oc
+
+@route('/video/dreambox/About')
+def About():
+    items = []
+    items.append(DirectoryObject(key=Callback(MainMenu),
+                                         title='Dreambox plugin for Plex'))
+    items.append(DirectoryObject(key=Callback(MainMenu),
+                                         title='Version: 02022014'))
+
+    items = check_empty_items(items)
+    oc = ObjectContainer(objects=items, title2='About', no_history=True)
+    return oc
+
+@route('/video/dreambox/SetPowerState')
+def SetPowerState(state):
+    from enigma2 import set_power_state
+    Log('setting power state {}'.format(state))
+    items = []
+    title = ''
+    title2 = ''
+    try:
+        result, error = set_power_state(Prefs['host'], Prefs['port_web'], state=state)
+
+        if result and error == 0:
+            title = 'Receiver in standby.'
+            title2= 'Standby'
+        if not result and error == 0:
+            title = 'Receiver out of standby.'
+            title2 = 'Standby'
+        if result and error == 1:
+            title='Receiver in deep standby.'
+            title2 = 'Deep standby'
+        if result and error == 2:
+            title='Receiver rebooted.'
+            title2 = 'Reboot receiver'
+        if result and error == 3:
+            title='Enigma2 restarted.'
+            title2='Restart Enigma2'
+        if result and error == 4:
+            title='Enigma2 still restarting.'
+            title2='Restarting Enigma2'
+        items.append(DirectoryObject(key=Callback(MainMenu),
+                                         title=title))
+    except Exception as e:
+        Log('Error setting powerstae {}'.format(e.message))
+        title = 'Error. Return to main menu.'
+
+    items = check_empty_items(items, title)
+    oc = ObjectContainer(objects=items, title2=title2)
     return oc
 
 @route('/video/dreambox/ResetUserPrefs')
@@ -462,7 +550,7 @@ def load_folders_from_receiver():
         Log('Multiples are {}'.format(multiples))
         folders = get_movie_subfolders(Prefs['host'], path=multiples[0], folders=True)
         Log('Folders fetched from receiver {}'.format(folders))
-        if folders:
+        if len(folders) > 0:
             t = []
 
             for f in folders:
@@ -479,6 +567,8 @@ def load_folders_from_receiver():
             Data.Save('folders', None)
     except os.error as e:
         Log('Error in Main Menu. Error reading movie subfolders on receiver - {}'.format(e.message))
+    except HttpLib2Error as he:
+        Log('Error in Main Menu. Httplib2 error - {}'.format(he.message))
 
 
 ##################################################################
@@ -539,28 +629,34 @@ def on_now():
         result = None
         try:
             result = on_now_menuitem()
-        except:
-            #if we get here then there's no free tuners, so issue a zap.
-            #What do we zap to if there's no tuners when we start?
-            ResetReceiver()
-            result = on_now_menuitem()
+        except Exception as e:
+            if e.args[0] != 'timed out':
+                ResetReceiver()
+                result = on_now_menuitem()
+            else:
+                Log('Just about to raise')
+                raise
     return result
 
 def add_tools():
-
     items = []
-    items.append(DirectoryObject(key=Callback(RebootReceiver, Prefs['host'], Prefs['port_web']),
-                                 title='Reboot receiver'))
-    items.append(DirectoryObject(key=Callback(RebootReceiver, Prefs['host'], Prefs['port_web']),
-                                 title='Restart Enigma2'))
-    items.append(DirectoryObject(key=Callback(RebootReceiver, Prefs['host'], Prefs['port_web']),
-                                 title='Deep standby'))
-    items.append(DirectoryObject(key=Callback(ResetUserPrefs, Prefs['host'], Prefs['port_web']),
-                                 title='Reset channels'))
-    items.append(DirectoryObject(key=Callback(ResetUserPrefs, Prefs['host'], Prefs['port_web']),
-                                 title='Reset user preferences'))
-
-    oc = ObjectContainer( view_group='List', no_cache=True, title2='Tools', no_history=True)
+    try:
+        items.append(DirectoryObject(key=Callback(SetPowerState, state = RECEIVER_STANDBY),
+                                     title='Standby'))
+        items.append(DirectoryObject(key=Callback(SetPowerState, state = RECEIVER_DEEP_STANDBY),
+                                     title='Deep standby **cannot restart from plugin **'))
+        items.append(DirectoryObject(key=Callback(SetPowerState, state = RECEIVER_REBOOT),
+                                     title='Reboot receiver'))
+        items.append(DirectoryObject(key=Callback(SetPowerState, state = RECEIVER_RESTART_ENIGMA2),
+                                     title='Restart Enigma2'))
+        items.append(DirectoryObject(key=Callback(ResetPrefs),
+                                     title='Reset user preferences'))
+        items.append(DirectoryObject(key=Callback(About),
+                                     title='About'))
+    except Exception as e:
+        Log(e.message)
+        items = check_empty_items(items, message='Unable to list tools.Return to main menu.')
+    oc = ObjectContainer( view_group='List', no_cache=True, title2='Tools')
     oc.objects = items
     return oc
 
@@ -739,11 +835,15 @@ def zap_menuitem(items=None):
 # Adds a blank entry to the menu items if empty to stop     #
 # android client crashing                                   #
 #############################################################
-def check_empty_items(items=[]):
+def check_empty_items(items=[], message=None):
     #if we dont have any items, just return a blank entry. To stop Android crashing
     if not items:
         items= []
-        items.append(DirectoryObject(title='No recordings found.', key=Callback(MainMenu)))
+        if message:
+            title = message
+        else:
+            title = 'No recordings found.'
+        items.append(DirectoryObject(title=title, key=Callback(MainMenu)))
     return items
 
 
