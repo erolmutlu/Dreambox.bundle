@@ -499,11 +499,11 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
 
     movie_path = build_move_path(host, path)
     name = os.name
-    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', '*.x264' ]
+    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', '*.x264', 'mkv' ]
     includes = r'|'.join([fnmatch.translate(x) for x in includes])
     pattern = '^(.*?\\.(\\bTrash\\b)[$]*)$' # To exclude the trash folder
     folders_files = {}
-    
+
     #first see if we have a request for multiple folders
     multiples = path.split(',')
     if len(multiples) > 1:
@@ -512,13 +512,14 @@ def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders
     else:
         #we have passed in just root
         try:
-            print movie_path
+            print 'movie path is {}'.format(movie_path)
             for root, folder, files in os.walk(movie_path):
                 #exclude trash and sub folders with no files
                 if not re.match(pattern, root, 0):
                     if len(files) > 0:
                         folders_files[root] = ([f for f in files if re.match(includes, f)])
         except:
+            print 'Error'
             raise
         if folders:
             folder = split_folders(name, folders_files, path)
@@ -541,12 +542,11 @@ def build_move_path(host=None, path=None):
     separator = '\\'  # need to escape
 
     if path:
-        path.lstrip('\\').rstrip('\\').lstrip('/').rstrip('/')
+        path.lstrip('\\/').rstrip('\\/').lstrip('/').rstrip('/')
         parts = path.split(separator)
         if '/' in path:
             separator = '/'
             parts = path.split(separator)
-            print parts
         parts = [x if len(x) > 1 else None for x in parts]
         print parts
         if parts[0] != host and name == 'nt':
@@ -562,5 +562,3 @@ def build_move_path(host=None, path=None):
     return None
 
 # Stuff here actually gets loaded by the server, so remember if things start going wierd
-
-

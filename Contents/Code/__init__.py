@@ -50,10 +50,10 @@ def MainMenu():
     Log('Entered MainMenu function')
     items = []
     # See if we have any subfolders on the hdd
-    Log(Data.LoadObject('Started'))
     if Data.LoadObject('Started'):
         try:
-            load_folders_from_receiver()
+            if(Prefs['folders']):
+                load_folders_from_receiver()
             items.append(on_now())
             items.append(DirectoryObject(key=Callback(Display_Bouquets),
                                    title=Locale.LocalString('Live'),
@@ -79,7 +79,6 @@ def MainMenu():
         items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
         items = check_empty_items(items)
     else:
-
         Log('Cannot start correctly.')
         items.append(DirectoryObject(key=Callback(MainMenu),
                                    title=Locale.LocalString('ConnectError')))
@@ -90,8 +89,6 @@ def MainMenu():
     oc = ObjectContainer(objects=items, view_group='List', no_cache=True)
     if len(items) > 3:
         timers(oc)
-
-
     return oc
 
 
@@ -407,6 +404,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None):
         stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
         Log('Stream to play {}'.format(stream))
     else:
+        folder = folder.replace('\\', '/')  # required to make correct path for subfolders
         Log('channel={} filename={}'.format(folder, filename))
         filename = format_string(filename, clean_file=True)
         if filename[:3] != 'hdd':
@@ -666,23 +664,8 @@ def on_now_menuitem():
     from enigma2 import get_current_service, get_number_of_audio_tracks, get_audio_tracks
     sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
     if Client.Platform in CLIENT:
-    #    container, video_codec, audio_codec = get_codecs()
-    #    result = VideoClipObject(url='http://{}/{}/{}/{}'.format(Prefs['host'], Prefs['port_web'], Prefs['port_video'],
-    #                                                             sRef),
-    #
-    #                                             title='On Now - {}   {}'.format(channel, description))
         result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
     else:
-        """if Prefs['zap'] and Prefs['audio'] and (get_number_of_audio_tracks(Prefs['host'], Prefs['port_web']) > 1):
-
-            result = DirectoryObject(key=Callback(Display_Audio_Events, sender=channel, title=title, sRef=sRef, description=description, onnow=True),
-                               title='On Now - {}   {}'.format(channel, title),
-                               thumb = picon(sRef),
-                               summary=description,
-                               duration=int(remaining*1000),
-                               tagline='Current chnnel')
-        else:
-            #Just present the usual link directly to the"""
         result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
     return result
 
