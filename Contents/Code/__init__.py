@@ -348,6 +348,9 @@ def Display_Event(sender='', channel='', description='', filename=None, subfolde
                 title = re.sub('^[0-9]* [0-9]* - [a-zA-Z0-9 \+]* - ', '', filename)[:-3]
     if duration:
         duration= int(duration) #Needs to be cast to an int as it gets converted to an str when passsed in
+    Log('Channel is {}'.format(channel))
+    if recorded:
+        channel =None
     video = MovieObject(
         key = Callback(Display_Event,
                        sender=sender,
@@ -391,7 +394,7 @@ def Display_Event(sender='', channel='', description='', filename=None, subfolde
 
 
 @route("video/dreambox/PlayVideo/{channel}")
-def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None):
+def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None, onnow=False):
     Log('Entering PlayVideo channel={} filename={} folder={} recorded={} audioid={}'.format(channel, filename, folder, recorded, audioid))
     import time
     from enigma2 import format_string, zap
@@ -411,6 +414,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None):
             filename= 'hdd/movie/{}/'.format(folder) + filename
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
         Log('Recorded file  to play {}'.format(stream))
+
     return Redirect(stream)
 
 
