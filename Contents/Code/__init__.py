@@ -336,6 +336,8 @@ def Display_Event(sender='', channel='', description='', filename=None, subfolde
     title=sender
     if filename:
         recorded=True
+        if '+' in filename and include_oc == False:
+            filename = filename.replace('+','zxz')
         #channel=None
         folder=sender
         Log('Subfolders is {}'.format(channel))
@@ -408,7 +410,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None, 
         Log('Stream to play {}'.format(stream))
     else:
         folder = folder.replace('\\', '/')  # required to make correct path for subfolders
-        Log('channel={} filename={}'.format(folder, filename))
+        Log('channel={} filename={}'.format(format_string(folder,clean_file=True), filename))
         filename = format_string(filename, clean_file=True)
         if filename[:3] != 'hdd':
             filename= 'hdd/movie/{}/'.format(folder) + filename
