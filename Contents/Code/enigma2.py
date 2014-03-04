@@ -1,6 +1,9 @@
 
-import urllib
+
 from BeautifulSoup import BeautifulSoup
+from itertools import chain
+import os
+
 
 
 
@@ -80,6 +83,7 @@ def get_movies(host, web):
                                                                             'e2eventcurrenttime',
                                                                             'e2servicename',
                                                                             'e2time',
+
                                                                             'e2length',
                                                                             'e2filename'
                                                                             ])
@@ -173,6 +177,7 @@ def get_number_of_tuners(host, web):
     return number_of_tuners
 
 def get_number_of_audio_tracks(host, web):
+    #TODO May not be getting audio correct after update to HTTPlib2
     url = 'http://{}:{}/web/getaudiotracks'.format(host, web)
     try:
         soup = get_data((url, None))
@@ -198,15 +203,16 @@ def get_audio_tracks(host, web):
     return audio_tracks
 
 def set_audio_track(host, web, trackid):
-
     result = False
     error = ''
     try:
         url = 'http://{}:{}/web/selectaudiotrack'.format(host, web)
         data = {'id': trackid}
         soup = get_data((url, data))
+        print soup
         state = soup[0].e2result.string
-        if state == 'Success':
+        print state
+        if state == '	Success':
             result = True
     except:
         raise
@@ -228,6 +234,46 @@ def zap(host, web, sRef):
     except:
         raise
     return result, error
+
+##############################################################
+# Send a power signal to the box                             #
+##############################################################
+def set_power_state(host=None, web=None, state=0):
+    import socket
+    result = False
+    error = None
+    try:
+        url = 'http://{}:{}/web/powerstate'.format(host, web)
+        data = {'newstate': state}
+        soup = get_data((url, data))
+        if 'false' in soup[0].e2instandby.string:
+            result = True
+            error = 0
+        else:
+            result = False
+            error = 0
+    except socket.error as e:
+
+        if e.errno:
+            print e.errno
+            print e.message
+            print e.args
+            if int(e.errno) == 10054:  # 1, 2 returns 0054
+                result = True
+                if state == 1:
+                    error = 1
+                elif state == 2:
+                    error = 2
+                else:
+                    error = 3
+            if int(e.errno) == 10061:  # 3  return 0061
+                result = True
+                error = 4  # stil restarting
+        else:
+            #Unable to connect - Timed out
+            return True, e.args[0]
+    return result, error
+
 
 #################################
 # Helpers                       #
@@ -329,6 +375,8 @@ def get_current_service_info(soup_list):
     return results
 
 
+
+
 ###############################################################
 # Formats the string returned from the satellite box          #
 ###############################################################
@@ -373,6 +421,7 @@ def unicode_replace(data):
 ###############################################################
 def clean_filename(data):
     escape_chars = {'++': ' %2B',
+                    'zxz': '%2B',
                     '+': '%20',
                     '&': '%26',
                     ' ': '%20',
@@ -391,9 +440,10 @@ def clean_filename(data):
 # Gets the stuff we need from the box and returns soup        #
 ###############################################################
 def get_data(*args):
+    #TODO Pass in a timeout value here
     from httplib2 import Http
     from urllib import urlencode
-    req = Http(timeout=2)
+    req = Http(timeout=10)
     results = []
     for item in args:
         u = item[0]
@@ -403,15 +453,113 @@ def get_data(*args):
             if data:
                 headers = {'Content-type': 'application/x-www-form-urlencoded'}
                 resp, content = req.request(u, "POST", headers=headers, body=urlencode(data))
-                print resp
-
-                print content
+                print resp, content
             else:
                 resp, content = req.request(u, "GET", data)
             soup = BeautifulSoup(content)
             results.append(soup)
         except:
+
             raise
     return results
 
 
+def split_folders(name, folders_files, path):
+    folder = []
+    for f in folders_files.keys():
+        try:
+            if name == 'nt':
+                #Need to remove the initial path here
+                parts = f.split(path).pop().rstrip(' /\\').lstrip(' /\\')
+
+            else:
+                print build_move_path
+                print len(path)
+                parts = f[len(path)+1:]
+            if parts != '':
+                folder.append(parts)
+        except:
+            pass
+    return folder
+
+
+def get_folder_contents(name, movie_path, folders_files, folder_contents):
+    if name == 'nt':
+        separator = '\\'
+    else:
+        separator = '/'
+    full_path = '{}{}{}'.format(movie_path, separator, folder_contents)
+
+    return folders_files.get(full_path)
+
+
+def get_movie_subfolders(host=None, path='\Harddisk\movie', merge=False, folders=False, folder_contents=None):
+
+    import re
+    import fnmatch
+
+    movie_path = build_move_path(host, path)
+    name = os.name
+    includes = ['*.mp4', '*.ts', '*.avi', '*.mpg', '*.mpeg', '*.webm', '*.x264', 'mkv' ]
+    includes = r'|'.join([fnmatch.translate(x) for x in includes])
+    pattern = '^(.*?\\.(\\bTrash\\b)[$]*)$' # To exclude the trash folder
+    folders_files = {}
+
+    #first see if we have a request for multiple folders
+    multiples = path.split(',')
+    if len(multiples) > 1:
+        #we have passed in multiple folders
+        pass
+    else:
+        #we have passed in just root
+        try:
+            print 'movie path is {}'.format(movie_path)
+            for root, folder, files in os.walk(movie_path):
+                #exclude trash and sub folders with no files
+                if not re.match(pattern, root, 0):
+                    if len(files) > 0:
+                        folders_files[root] = ([f for f in files if re.match(includes, f)])
+        except:
+            print 'Error'
+            raise
+        if folders:
+            folder = split_folders(name, folders_files, path)
+            return folder
+        if merge:
+            # Just return the merged file list - all in one location
+            return list(chain(*folders_files.values()))
+        if folder_contents:
+            return get_folder_contents(name, movie_path, folders_files, folder_contents)
+        else:
+            #return files in their folders
+            return folders_files
+
+
+
+def build_move_path(host=None, path=None):
+
+    #set correct separators
+    name = os.name
+    separator = '\\'  # need to escape
+
+    if path:
+        path.lstrip('\\/').rstrip('\\/').lstrip('/').rstrip('/')
+        parts = path.split(separator)
+        if '/' in path:
+            separator = '/'
+            parts = path.split(separator)
+        parts = [x if len(x) > 1 else None for x in parts]
+        print parts
+        if parts[0] != host and name == 'nt':
+            parts.insert(0, host)
+        # now build the path
+        fullpath = ''
+        if name == 'nt':
+            fullpath = fullpath.join('\\')
+        for f in parts:
+            if f:
+                fullpath = fullpath + separator + f
+        return fullpath
+    return None
+
+# Stuff here actually gets loaded by the server, so remember if things start going wierd

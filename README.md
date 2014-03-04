@@ -1,7 +1,24 @@
-Dreambox.bundle
+Dreambox.bundle.Testing ******** May work, may not work. PLEASE USE THE MASTER FOR THE MOST STABLE VERSION.  ********
 ===============
 
 A Plex plugin to stream live TV from your Enigma 2 based receiver to your media device.
+
+
+
+
+Current Work
+====================================
+
+Adding support for sub folders on the hardrive, and also some partial support for episode icons .
+On windows server's only at the moment, and just english bu this will be updated to get the current locale when
+finished testing.
+
+
+Audio support removed at the moment as it just does not want to play. This DID work though??????
+
+Hopefully better coimpatibility with Linux servers (Missing entries fixed I think).
+
+Also looking at why this doesnt work in Chromecast 
 
 Installation Instructions
 ====================================
@@ -15,32 +32,21 @@ Make sure that you enter preferences via the plugin interface and do not hard-co
 
 If using Linux and Mac you will have to set the permissions of the folder to 755 ( chmod -R 755 ).
 
-There seems to be a problem when updating from certain versions. A fix has been found on the forum, around page 22 until I get chance to add it to this readme
+Preferences
 
+The plugin stores the user preferences in the following locations:-
 
+        Windoows - AppData\Local\Plex Media Server\Plug-in Support\Preferences
 
-Updates
-=======
+        Linux - /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Plug-in Support/Preferences
 
-This is just a quick update mainly to try and fix the issue of the receiver locking up when you have a single tuner.
+If you find that you are having trouble connecting to the receiver, even with the correct settings in the default preferences
+then it could be that the plugin is always using the cached values. These do not get changed unless you edit them from the plugin=in interface.
 
-If you have one of these receivers, then a menu item will be displayed on the main menu that will ZAP back to the original channel
-when you first started the plugin. when you select it.
+In this case, delete the preferences file for the dreambox plugin, and restart the server. This will load the values in to the cache from your default preferences.
 
-I've also improved the 'On now' selection as this crashed when no tuners were available
-
-Added the software version in the preferences folder.
-
-A few updates to improve compatibility of recorded TV on web clients. Probably not working still on PHT. I'll get round to looking at PHT in more detail
-at some point.
+I'll look at doing this automatically at some point, so the plugin only adds new prefrences that get added, and leaves the rest of your settings alone.
 
 
 
 
-Current codec settings that seem to work for most are
-=====================================================
-
-MP4 Container(Better quality and compression than MPEGTS), H264 Video and MP3 Audio
-
-
-And thanks for all the suggestions everyone. I'll try and get to look at them as I can.
