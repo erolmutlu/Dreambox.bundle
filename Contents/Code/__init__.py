@@ -324,7 +324,7 @@ def DeleteTimer(sRef='', begin=0, end=0, servicename='', name='', oc=None):
 
 @route("/video/dreambox/Display_Event")
 def Display_Event(sender='', channel='', description='', filename=None, subfolders=None, duration=0,
-                  thumb=None, include_oc=False, rating_key=None,audioid=None, audio_description=None):
+                  thumb=None, include_oc=False, rating_key=None,audioid=None, audio_description=None, includeExtras=0, includeRelated=0, includeRelatedCount=0):
     import re
     container, video_codec, audio_codec = get_codecs()
     rating_key = generate_rating_key(rating_key)
