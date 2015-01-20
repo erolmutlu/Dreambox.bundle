@@ -417,7 +417,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None, 
         stream = 'http://{}:{}/file?file=/{}'.format(Prefs['host'], Prefs['port_web'], filename)
         Log('Recorded file  to play {}'.format(stream))
 
-    return Redirect(stream)
+    return Redirect('http://192.168.1.100:28090/audio1.mkv')
 
 
 @route("video/dreambox/ResetReceiver")
