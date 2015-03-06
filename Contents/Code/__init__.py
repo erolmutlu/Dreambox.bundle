@@ -795,12 +795,14 @@ def calculate_remaining(start=None, duration=None, current_time=None):
 ########################################################################
 def picon(sRef=None):
     Log('Entered picon function sRef={}'.format(sRef))
+    Log(str(Prefs['picon'] ))
     if Prefs['picon'] :
 
         piconfile = sRef.replace(':', '_')
         piconfile = piconfile.rstrip('_')
         piconfile = piconfile + '.png'
         piconpath = 'http://{}:{}/{}/'.format(Prefs['host'], Prefs['port_web'], Prefs['piconpath'].lstrip('/').rstrip('/'))
+        Log('{}{}'.format(piconpath, piconfile))
         return '{}{}'.format(piconpath, piconfile)
     else:
         return None
