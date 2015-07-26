@@ -2,7 +2,7 @@ from httplib2 import ServerNotFoundError, HttpLib2Error
 from socket import error
 from metadata import get_thumb
 import os
-from enigma2 import  get_number_of_tuners, get_movie_subfolders, get_current_service, get_bouquets
+from enigma2 import  get_number_of_tuners, get_movie_subfolders, Receiver
 
 ART = 'art-default.jpg'
 ICON = 'icon-default.png'
@@ -15,6 +15,13 @@ RECEIVER_DEEP_STANDBY = 1
 RECEIVER_REBOOT = 2
 RECEIVER_RESTART_ENIGMA2 = 3
 
+r = Receiver()
+
+def test(r=r):
+    Log('In new thread')
+    r.get_next()
+
+
 ##################################################################
 # The entry point. Sets variables and gets                       #
 # the initial channel so we can reset the                        #
@@ -22,39 +29,30 @@ RECEIVER_RESTART_ENIGMA2 = 3
 ##################################################################
 def Start():
     Log('Entered Start function ')
-    #TODO plugin loads default prefs, then overwrites them with ones you have saved
-    #TODO if there is extra ones I reckon it knacks things up
-    #TODO get stored here AppData\Local\Plex Media Server\Plug-in Support\Preferences
-
+    r.setup(host=Prefs['host'], port=Prefs['port_web'])
+    Thread.Create(test, r=r )
 
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
     ObjectContainer.art = R(ART)
     ObjectContainer.title1 = Locale.LocalString('Title')
     DirectoryObject.thumb = R(ICON)
-    #Save the inital channel to reset the box.
-    try:
-        sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
-        Data.Save('sRef', sRef)
-        Log('Loaded iniital channel from receiver')
-        Data.SaveObject('Started', True)
-    except (HttpLib2Error, error) as e:
-        Log('Error in Start.Httplib2 error. Unable to get current service - {}'.format(e.message))
-        Data.SaveObject('Started', False)
-    except AttributeError as e:
-        Log('Error in Start. Caught an attribute error - {}'.format(e.message))
-        Data.SaveObject('Started', False)
 
 
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
     Log('Entered MainMenu function')
+    #r.get_current()
+    #Data.Save('sRef', r.current.service_reference)
     items = []
     # See if we have any subfolders on the hdd
     if Data.LoadObject('Started'):
         try:
             if(Prefs['folders']):
                 load_folders_from_receiver()
-            items.append(on_now())
+            #items.append(Display_Event(sender='On Now - {}'.format(r.current),event=r,
+            #                                                                 channel=r.current.service_reference,
+            #                                                                 description=r.current.event_description,
+            #                                                                 duration=r.current.get_remaining()))
             items.append(DirectoryObject(key=Callback(Display_Bouquets),
                                    title=Locale.LocalString('Live'),
                                    thumb = R(LIVE),
@@ -112,12 +110,13 @@ def GetThumb(series):
 def Display_Bouquets():
     Log('Entered Display Bouquets function')
 
-    items = []
-    bouquets = get_bouquets(Prefs['host'],Prefs['port_web'])
-    for bouquet in bouquets:
-            items.append(DirectoryObject(key = Callback(Display_Bouquet_Channels, sender = str(bouquet[7]), index=str(bouquet[6])),
-                                    title = str(bouquet[7])))
-    items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
+
+    x = lambda bouquet: DirectoryObject(key = Callback(Display_Bouquet_Channels,
+                                                         sref = bouquet['service_reference'],
+                                                         name = bouquet['service_name']),
+                                                         title = bouquet['service_name'])
+    Log(str(r.bouquets()))
+    items = [x(bouquet) for bouquet in r.bouquets()]
     oc = ObjectContainer(objects=items, view_group='List', no_cache=True, title2=Locale.LocalString('Live'))
     return oc
 
@@ -161,33 +160,20 @@ def Display_FolderRecordings(dummy, folder=None):
 
 
 
-@route("/video/dreambox/Display_Bouquet_Channels/{sender}")
-def Display_Bouquet_Channels(sender='', index=None):
-    Log('Entered DisplayBouquetChannels function sender={} index={}'.format(sender, index))
-    from enigma2 import get_channels_from_service
+@route("/video/dreambox/Display_Bouquet_Channels")
+def Display_Bouquet_Channels(sref=None, name=None):
 
     items = []
-    channels = get_channels_from_service(Prefs['host'], Prefs['port_web'], index, show_epg=True)
 
-    name = sender
-    Log(channels)
-    for id, start, duration, current_time, title, description, sRef, name in channels:
-        remaining = calculate_remaining(start, duration, current_time)
-        if remaining == 0:
-            remaining = None
-        if description:
-            name = '{}  - {}'.format(str(name), str(title))
-        else:
-            name = '{}'.format(str(name))
-        #gets rid of na
-        if name != '&lt;n/a>':
-            items.append(DirectoryObject(key = Callback(Display_Channel_Events, sender=name, sRef=str(sRef), title=title),
-                                    title = name,
-                                    duration = remaining,
-                                 thumb = picon(sRef)))
-    items = check_empty_items(items)
-    oc = ObjectContainer(objects=items, title2=sender, view_group='List', no_cache=True)
-    Log(len(oc))
+    for channel in r.channels(where={'bo_id': sref}):
+        items.append(DirectoryObject(key = Callback(Display_Channel_Events,
+                                                    sref = channel['service_reference'],
+                                                    title=str(channel['service_name'])),
+                                     title = str(channel['service_name']),
+                                     duration = 12,
+                                     thumb = picon(channel['service_reference'])))
+    #items = check_empty_items(items)
+    oc = ObjectContainer(objects=items, title2=name, view_group='List', no_cache=True)
     return oc
 
 
@@ -214,9 +200,8 @@ def Display_Audio_Events(sender, sRef, title=None, description=None, onnow=False
     return oc
 
 
-@route("/video/dreambox/Display_Channel_Events/{sender}")
-def Display_Channel_Events(sender, sRef, title=None):
-    Log('Entered DisplayChannelEvents function sender={} sRef={} title={}'.format(sender, sRef, title))
+@route("/video/dreambox/Display_Channel_Events")
+def Display_Channel_Events(sref, title=None):
     import time
     from enigma2 import zap, get_number_of_audio_tracks
 
@@ -323,7 +308,7 @@ def DeleteTimer(sRef='', begin=0, end=0, servicename='', name='', oc=None):
 
 
 @route("/video/dreambox/Display_Event")
-def Display_Event(sender='', channel='', description='', filename=None, subfolders=None, duration=0,
+def Display_Event(sender='', event=r ,channel='', description='', filename=None, subfolders=None, duration=0,
                   thumb=None, include_oc=False, rating_key=None,audioid=None, audio_description=None, includeExtras=0, includeRelated=0, includeRelatedCount=0):
     import re
     container, video_codec, audio_codec = get_codecs()
@@ -624,22 +609,6 @@ def add_current_event(sRef=None, name=None, title=None, description=None, remain
         return check_empty_items([])
 
 
-##################################################################
-# Adds a menu iem for the current service .                      #
-##################################################################
-def on_now():
-    if Prefs['host'] and Prefs['port_web'] and Prefs['port_video']:
-        # Add a item for the current serviceon now
-        result = None
-        try:
-            result = on_now_menuitem()
-        except Exception as e:
-            if e.args[0] != 'timed out':
-                ResetReceiver()
-                result = on_now_menuitem()
-            else:
-                Log('Just about to raise')
-                raise
     return result
 
 def add_tools():
@@ -666,14 +635,6 @@ def add_tools():
 
 
 
-def on_now_menuitem():
-    from enigma2 import get_current_service, get_number_of_audio_tracks, get_audio_tracks
-    sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
-    if Client.Platform in CLIENT:
-        result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
-    else:
-        result = Display_Event(sender='On Now - {}   {}'.format(channel, title), channel=sRef, description=description, duration=int(remaining*1000))
-    return result
 
 
 ##################################################################

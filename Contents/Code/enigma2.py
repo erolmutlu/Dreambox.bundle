@@ -1,29 +1,336 @@
 
-
-from BeautifulSoup import BeautifulSoup
-from itertools import chain
-import os
-
-
-
-
-def get_bouquets(host, web):
-
-    url = 'http://{}:{}/web/getservices'.format(host, web)
-    soup = get_data((url, None))
-    results = get_service_name(soup)
-    return results
+from httplib2 import Http
+from urllib import urlencode
+from BeautifulSoup import BeautifulSoup as Soup
+import time
+from database import DB
 
 
-def get_current_service(host, web):
+escape = lambda x : x.decode('utf8').encode('windows-1252', errors='ignore') if x else None
 
-    url = 'http://{}:{}/web/getcurrent'.format(host, web)
-    try:
-        soup = get_data((url, None))
-        results = get_current_service_info(soup)
-    except:
-        raise
-    return results
+EARLIEST_STAR_TIME = """Select MAX(event_start) AS event_start from Channel
+  inner JOIN Event
+  ON Event.ch_id = Channel.service_reference
+  GROUP BY Channel.service_reference
+  order by event_start ASC
+  LIMIT 1"""
+
+LAST_SCANNED = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.LastScanned.tv" ORDER BY bouquet'
+
+
+
+
+class Receiver():
+
+    # classes for factory methods
+
+    class Bouquet():
+
+        def __init__(self, kwargs):
+            self.service_reference = kwargs.get('service_reference')
+            self.service_name = kwargs.get('service_name')
+
+        def __str__(self):
+            return self.service_name
+
+
+    class Channel():
+
+        def __init__(self, bouquet, channel_data):
+
+            self.bouquet = bouquet
+            self.on_now = None
+            self.events = []
+            self.service_reference = escape(channel_data.get('service_reference', u''))
+            self.service_name = escape(channel_data.get('service_name', u''))
+
+        def __str__(self):
+
+            event_title = ' - ' + self.on_now.event_title + ' ( ' + self.on_now.get_remaining() + ' )' if self.on_now.event_title else ''
+            return self.service_name + event_title
+
+    class Event():
+
+        def __init__(self, kwargs):
+
+            self.service_reference = kwargs.get('service_reference', u'')
+            self.service_name = escape(kwargs.get('service_name', u''))
+            self.event_id = kwargs.get('event_id')
+            self.event_title = escape(kwargs.get('event_title', u''))
+            self.event_description = escape(kwargs.get('event_description', u''))
+            self.event_description_extended = escape(kwargs.get('event_description_extended', u''))
+            self.event_start = kwargs.get('event_start')
+            self.event_duration = kwargs.get('event_duration')
+
+        def get_remaining(self):
+
+            try:
+                return str((self.event_duration - (int(time.time()) - int(self.event_start))) / 60)
+            except:
+                return '0'
+
+        def __str__(self):
+
+            return self.event_title if self.event_title else u''
+
+
+
+    def factory(self, type, args, obj=None):
+
+        if type == 'channel':
+            return self.Channel(obj, args)
+        if type == 'bouquet':
+            return self.Bouquet(args)
+
+        if type == 'event':
+            return self.Event(args)
+
+    def __init__(self):
+
+        self.db = DB()
+
+        self.host = ''
+        self.port = ''
+        self.username = ''
+        self.password = ''
+        self.no_of_tuners = ''
+        self.zap = False
+        self.timers = {}
+
+
+    def setup(self, **kwargs):
+
+        print('Setting up object')
+
+        self.host = kwargs.get('host', '127.0.0.1')
+        self.port = kwargs.get('port', 0)
+
+
+        self.process_device_info()
+        self.get_bouquets()
+        self.get_channels()
+        self.get_now()
+        print('Finished setting up')
+
+
+    def process_device_info(self):
+        """
+        Issues a /web/deviceinfoo command to the receiver and processes the result.
+
+        """
+        path = 'web/deviceinfo'
+        deviceinfo = self.fetch(path)
+        self.psrse_device_info(deviceinfo)
+
+    def psrse_device_info(self, deviceinfo):
+        """
+        Takes the deviceinfo that was returned by the receiver, parses the XML and
+         populates the requires properties
+        """
+        self.no_of_tuners = len(Soup(deviceinfo).findAll('e2frontend'))
+
+    def bouquets(self):
+
+        return self.db.get('Bouquet')
+
+    def channels(self, where=None):
+        return self.db.get('Channel', where=where)
+
+    def events(self):
+        earliest_start_time = self.db.raw_sql(EARLIEST_STAR_TIME).fetchall()
+
+
+        channels = self.channels()
+
+        self.get_events(earliest_start_time[0], channels)
+
+    def get_events(self, earliest_start_time=None, channels=None):
+
+        path = 'web/epgservice'
+        channels = self.db.get('Channel')
+        events = []
+        for channel in channels:
+            event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference'], 'time': earliest_start_time}))]
+            event = self.parse_events(event_xml)
+            events.extend(event)
+        self.db.insert('Event', filter(None, events))
+
+
+
+    def get_bouquets(self):
+
+        path = 'web/getservices'
+        bouquet_xml = self.fetch(path=path)
+        bouquets = self.parse_bouquets(bouquet_xml)
+        bouquets = filter(lambda x : LAST_SCANNED  not in x.values(), bouquets)
+        self.db.insert('Bouquet', bouquets)
+
+    def parse_bouquets(self, bouquet_xml):
+
+        return map(lambda x: self.get_names(x),
+                   Soup(bouquet_xml).findAll('e2service'))
+
+    def get_channels(self):
+
+        path = 'web/getservices'
+        bouquet = self.bouquets()
+        channels_xml = map(lambda b: (b['service_reference'],self.fetch(path, {'sRef': b['service_reference']})), bouquet)
+        channels = self.parse_channels(channels_xml)
+        self.db.insert('Channel', channels)
+
+    @staticmethod
+    def get_names(x):
+        elements = x.findAll(['e2servicereference', 'e2servicename'])
+        return {'service_reference': elements[0].text, 'service_name': elements[1].text}
+
+    def parse_channels(self, channel_xml):
+
+        channels = []
+        for b, channel in channel_xml:
+
+            s = Soup(channel).findAll('e2service')
+            if s:
+                a = map(lambda x: self.get_names(x), s)
+                d = [c.update({'bo_id': b}) for c in a]
+                channels.extend(a)
+
+        return channels
+
+
+
+    def get_current(self):
+
+        path = 'web/getcurrent'
+        current = self.fetch(path)
+        self.parse_current(current)
+
+    def parse_current(self, current):
+
+        self.current = self.create_event(current)
+
+
+    def create_event(self, event_xml):
+
+
+        try:
+            event_soup = Soup(str(event_xml))
+            event_details = {
+                             'event_title': event_soup.find('e2eventtitle').text,
+                             'event_description': event_soup.find('e2eventdescription').text,
+                             'event_description_extended': event_soup.find('e2eventdescriptionextended').text,
+                             'event_start': int(event_soup.find('e2eventstart').text),
+                             'event_duration': int(event_soup.find('e2eventduration').text),
+                             'event_id': int(event_soup.find('e2eventid').text)
+                             }
+            return event_details
+        except Exception as e:
+            return None
+
+
+
+    def get_now(self):
+
+        path = 'web/epgservicenow'
+        channels = self.db.get('Channel')
+        events = []
+        for channel in channels:
+            event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
+            event = self.parse_events(event_xml)
+
+            events.extend(event)
+        self.db.insert('Event', filter(None, events))
+
+    def get_next(self):
+
+        path = 'web/epgservicenext'
+        channels = self.db.get('Channel')
+        events = []
+        for channel in channels:
+            event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
+            event = self.parse_events(event_xml)
+
+            events.extend(event)
+        self.db.insert('Event', filter(None, events))
+
+    def parse_events(self, event_xml):
+
+        events = []
+        for b, event in event_xml:
+
+            s = Soup(event).findAll('e2event')
+            if s:
+                a = map(lambda x: self.create_event(x), s)
+
+                d = [c.update({'ch_id': b}) for c in a if c]
+                events.extend(a)
+
+        return events
+
+
+    def get_channel_epg(self, service_reference=None):
+
+        path = 'web/epgservice'
+        for channel in [service_reference] if service_reference else self.channels:
+            epg_xml = self.fetch(path, {'sRef': channel.service_reference})
+
+
+            channel.events = self.parse_channel_epg(epg_xml)
+
+        return None
+
+    def get_multi_epg(self, bouquet_reference=None):
+
+        events = []
+
+        path = 'web/epgmulti'
+        for bouquet in [bouquet_reference] if bouquet_reference else self.bouquets:
+            epg_xml = self.fetch(path, {'bRef': bouquet.service_reference})
+            events.append(self.parse_channel_epg(epg_xml))
+
+
+        return None
+
+
+    def get_channel(self, service_reference):
+
+        return (ch for ch in self.channels if ch.service_reference == service_reference)
+
+    def parse_channel_epg(self, epg_xml):
+
+        #get each event xml
+        events = Soup(epg_xml).findAll('e2event')
+
+        return [self.create_event(event) for event in events]
+
+
+
+
+
+    def fetch(self, path='', data=None):
+        """
+        Fetch data from the receiver
+        """
+        req = Http(timeout=60)
+        headers = []
+
+        url = 'http://{}:{}/{}'.format(self.host, self.port, path)
+        try:
+            if data:
+                headers = {'Content-type': 'application/x-www-form-urlencoded'}
+                resp, content = req.request(url, "POST", headers=headers, body=urlencode(data))
+            else:
+                resp, content = req.request(url, "GET", data)
+        except:
+            raise
+        return content
+
+
+
+r = Receiver()
+
+r.setup(host='192.168.1.252', port=80)
+r.events()
+
 
 def get_channels_from_service(host, web, sRef, show_epg=False):
 
@@ -101,7 +408,8 @@ def get_movies(host, web):
         return 'Error', 'getmovies Messsage and vals : {} host: {} port: {}  url: {}'.format(e.message, host, web, url)
     return movies
 
-#TODO Returning the wrong result when eventid was incorrectly named. eventID
+
+# TODO Returning the wrong result when eventid was incorrectly named. eventID
 def set_timer(host, web, sRef, eventID):
     #http://192.168.1.252/web/timeraddbyeventid?sRef=1:0:1:2077:7FA:2:11A0000:0:0:0:&eventid=674
     state = False
@@ -456,7 +764,7 @@ def get_data(*args):
                 print resp, content
             else:
                 resp, content = req.request(u, "GET", data)
-            soup = BeautifulSoup(content)
+            soup = Soup(content)
             results.append(soup)
         except:
 
@@ -475,7 +783,7 @@ def split_folders(name, folders_files, path):
             else:
                 print build_move_path
                 print len(path)
-                parts = f[len(path)+1:]
+                parts = f[len(path) +1:]
             if parts != '':
                 folder.append(parts)
         except:
@@ -563,3 +871,5 @@ def build_move_path(host=None, path=None):
     return None
 
 # Stuff here actually gets loaded by the server, so remember if things start going wierd
+
+

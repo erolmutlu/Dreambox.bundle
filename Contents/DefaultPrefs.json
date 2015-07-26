@@ -1,10 +1,27 @@
 [
-
+	{
+		"id": "port_web",
+		"type": "text",
+		"label": "Web Interface Port",
+		"default": "80"
+	},
+	{
+		"id": "port_video",
+		"type": "text",
+		"label": "Streaming Video Port",
+		"default": "8001"
+	},
 	{
 		"id": "zap",
 		"type": "bool",
-		"label": "Zap to channel before stream",
+		"label": "Zap before stream",
 		"default": "false"
+	},
+    {
+		"id": "audio",
+		"type": "bool",
+		"label": "Select Audio",
+		"default": "true"
 	},
 	{
 		"id": "picon",
@@ -15,10 +32,29 @@
 	{
 		"id": "fullepg",
 		"type": "bool",
-		"label": "Show full event list instead of now/next",
+		"label": "Full EPG instead of now/next",
 		"default": "false"
 	},
     {
+		"id": "quick_stream",
+		"type": "bool",
+		"label": "View after channel",
+		"default": "false"
+	},
+
+    {
+		"id": "piconpath",
+		"type": "text",
+		"label": "Path to load picons",
+		"default": "hdd/picon"
+	},
+	{
+		"id": "moviepath",
+		"type": "text",
+		"label": "Path to movie folder",
+		"default": "\Harddisk\movie"
+    },
+	{
          "id": "folders",
          "type": "bool",
          "label": "View recorded folders",
@@ -42,30 +78,7 @@
 		"label": "Host",
 		"default": "192.168.1.252"
 	},
-	{
-		"id": "port_web",
-		"type": "text",
-		"label": "Web Interface Port",
-		"default": "80"
-	},
-	{
-		"id": "port_video",
-		"type": "text",
-		"label": "Streaming Video Port",
-		"default": "8001"
-	},
-	{
-		"id": "piconpath",
-		"type": "text",
-		"label": "Path to load picons",
-		"default": "hdd/picon"
-	},
-	{
-		"id": "moviepath",
-		"type": "text",
-		"label": "Path to movie folder",
-		"default": "\Harddisk\movie"
-    },
+
         {
                 "id": "container",
                 "type": "text",
