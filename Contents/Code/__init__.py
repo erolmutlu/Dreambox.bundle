@@ -18,8 +18,9 @@ RECEIVER_RESTART_ENIGMA2 = 3
 r = Receiver()
 
 def test(r=r):
-    Log('In new thread')
-    r.get_next()
+
+    for i in range(1, 12000, 1):
+        time.sleep(1)
 
 
 ##################################################################
@@ -30,7 +31,7 @@ def test(r=r):
 def Start():
     Log('Entered Start function ')
     r.setup(host=Prefs['host'], port=Prefs['port_web'])
-    Thread.Create(test, r=r )
+
 
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
     ObjectContainer.art = R(ART)
@@ -41,10 +42,13 @@ def Start():
 @handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
     Log('Entered MainMenu function')
+
     #r.get_current()
     #Data.Save('sRef', r.current.service_reference)
     items = []
     # See if we have any subfolders on the hdd
+    r.get_channels()
+    #Thread.Create(test, r=r )
     if Data.LoadObject('Started'):
         try:
             if(Prefs['folders']):
@@ -62,7 +66,7 @@ def MainMenu():
                                    thumb= R(RECORDED),
                                    tagline='Watch recorded content on your Enigma 2 based satellite receiver'))
             items = zap_menuitem(items)
-            items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
+            #items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
         except (Exception, error)  as e:
             Log('Error in HTTPLib2 MainMenu. Unable to get create on_now  - {}'.format(e.message))
             # Need this entry in to make Home button work correctly
@@ -72,9 +76,7 @@ def MainMenu():
         except AttributeError as e:
             items.append(DirectoryObject(key=Callback(MainMenu),
                                    title=Locale.LocalString('ConnectError')))
-            items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
-
-        items.append(PrefsObject(title='Preferences', thumb=R('icon-prefs.png')))
+            #items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
         items = check_empty_items(items)
     else:
         Log('Cannot start correctly.')
@@ -107,15 +109,16 @@ def GetThumb(series):
 # Live TV from the main menu                                     #
 ##################################################################
 @route("/video/dreambox/Display_Bouquets")
+
 def Display_Bouquets():
     Log('Entered Display Bouquets function')
+
 
 
     x = lambda bouquet: DirectoryObject(key = Callback(Display_Bouquet_Channels,
                                                          sref = bouquet['service_reference'],
                                                          name = bouquet['service_name']),
                                                          title = bouquet['service_name'])
-    Log(str(r.bouquets()))
     items = [x(bouquet) for bouquet in r.bouquets()]
     oc = ObjectContainer(objects=items, view_group='List', no_cache=True, title2=Locale.LocalString('Live'))
     return oc
@@ -125,6 +128,7 @@ def Display_Bouquets():
 # Displays Recorded TV when we have selected                     #
 # Recorded TV from the main menu                                 #
 ##################################################################
+
 @route("/video/dreambox/Display_RecordedTV")
 def Display_RecordedTV(display_root=False):
     Log('Entered DisplayMovies function')

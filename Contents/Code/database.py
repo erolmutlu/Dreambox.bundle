@@ -71,51 +71,59 @@ class DB():
             for table in TABLE_CREATION:
                 self.cu.execute(table)
                 self.myDB.commit()
+            self.myDB.close()
 
         except:
             raise
 
     def insert(self, table, data):
 
+        if data:
+            Log(str(table) + str(data))
+            cols = ','.join(data[0].keys())
+            vals = ', '.join('?' * len(data[0].keys()))
 
+            data = [tuple(data.values()) for data in data]
 
-        cols = ','.join(data[0].keys())
-        vals = ', '.join('?' * len(data[0].keys()))
+            sql = """INSERT INTO {} ({}) values({})""".format(table, cols, vals)
+            myDB = sqlite3.connect('receiver.sqlite', timeout=30, check_same_thread=False)
+            myDB.row_factory = sqlite3.Row
+            cu = myDB.cursor()
+            for d in data:
 
-        data = [tuple(data.values()) for data in data]
+                try:
+                    cu.execute(sql, d )
 
-
-
-        sql = """INSERT INTO {} ({}) values({})""".format(table, cols, vals)
-
-        cu = self.myDB.cursor()
-        for d in data:
-
-            try:
-                cu.execute(sql, d )
-
-            except sqlite3.IntegrityError:
-                print d
-                pass
-        self.myDB.commit()
+                except sqlite3.IntegrityError as e:
+                    #print 'Exception {} {}'.format(d, e)
+                    pass
+            myDB.commit()
+            myDB.close()
 
     def get (self, table, column_list=None, where=None):
 
-
+        Log('Database received a get request : - {}, {}'.format(table, str(column_list)))
         cols = ','.join(column_list) if column_list else '*'
 
         sql = """SELECT {} FROM {} """.format(cols, table)
         if where:
             where = """ WHERE {} = '{}' """.format(where.keys()[0], where.values()[0])
             sql = sql + where
-        rows = self.cu.execute(sql)
-
+        myDB = sqlite3.connect('receiver.sqlite', timeout=30, check_same_thread=False)
+        myDB.row_factory = sqlite3.Row
+        cu = myDB.cursor()
+        rows = cu.execute(sql).fetchall()
+        myDB.close()
         return rows
 
     def raw_sql(self, sql):
 
-        return self.cu.execute(sql)
-
+        myDB = sqlite3.connect('receiver.sqlite', timeout=30, check_same_thread=False)
+        myDB.row_factory = sqlite3.Row
+        cu = myDB.cursor()
+        rows = cu.execute(sql).fetchall()
+        myDB.close()
+        return rows
 
 
 

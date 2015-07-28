@@ -105,13 +105,20 @@ class Receiver():
         self.host = kwargs.get('host', '127.0.0.1')
         self.port = kwargs.get('port', 0)
 
-
+        #todo check if we have an epty database. If so, do an initial bouquet, channel, and on now else we check in the thread that gets the events maybe update method.
         self.process_device_info()
-        self.get_bouquets()
-        self.get_channels()
-        self.get_now()
+        if not self.bouquets():
+            self.get_bouquets()
+            #self.get_channels()
+            #self.get_now()
         print('Finished setting up')
 
+    def update_database(self):
+
+        #todo purge old events, older than now minus 12 hours ago.
+        #todo get bouquets, channels etc. get rid of any old channels that no longer link to bouquets etc
+
+        pass
 
     def process_device_info(self):
         """
@@ -137,18 +144,22 @@ class Receiver():
         return self.db.get('Channel', where=where)
 
     def events(self):
-        earliest_start_time = self.db.raw_sql(EARLIEST_STAR_TIME).fetchall()
+        earliest_start_time = self.db.raw_sql(EARLIEST_STAR_TIME)
 
 
         channels = self.channels()
-
-        self.get_events(earliest_start_time[0], channels)
+        try:
+            t = earliest_start_time[0][0]
+        except:
+            t = 0
+        self.get_events(t, channels)
 
     def get_events(self, earliest_start_time=None, channels=None):
 
         path = 'web/epgservice'
         channels = self.db.get('Channel')
         events = []
+        #todo recursive use of cursors not allowed. do a fetchall?
         for channel in channels:
             event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference'], 'time': earliest_start_time}))]
             event = self.parse_events(event_xml)
