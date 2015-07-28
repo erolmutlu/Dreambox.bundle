@@ -17,73 +17,10 @@ EARLIEST_STAR_TIME = """Select MAX(event_start) AS event_start from Channel
 
 LAST_SCANNED = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.LastScanned.tv" ORDER BY bouquet'
 
-
-
+dev = 0
+message = lambda x: print x if dev else Log(str(x))
 
 class Receiver():
-
-    # classes for factory methods
-
-    class Bouquet():
-
-        def __init__(self, kwargs):
-            self.service_reference = kwargs.get('service_reference')
-            self.service_name = kwargs.get('service_name')
-
-        def __str__(self):
-            return self.service_name
-
-
-    class Channel():
-
-        def __init__(self, bouquet, channel_data):
-
-            self.bouquet = bouquet
-            self.on_now = None
-            self.events = []
-            self.service_reference = escape(channel_data.get('service_reference', u''))
-            self.service_name = escape(channel_data.get('service_name', u''))
-
-        def __str__(self):
-
-            event_title = ' - ' + self.on_now.event_title + ' ( ' + self.on_now.get_remaining() + ' )' if self.on_now.event_title else ''
-            return self.service_name + event_title
-
-    class Event():
-
-        def __init__(self, kwargs):
-
-            self.service_reference = kwargs.get('service_reference', u'')
-            self.service_name = escape(kwargs.get('service_name', u''))
-            self.event_id = kwargs.get('event_id')
-            self.event_title = escape(kwargs.get('event_title', u''))
-            self.event_description = escape(kwargs.get('event_description', u''))
-            self.event_description_extended = escape(kwargs.get('event_description_extended', u''))
-            self.event_start = kwargs.get('event_start')
-            self.event_duration = kwargs.get('event_duration')
-
-        def get_remaining(self):
-
-            try:
-                return str((self.event_duration - (int(time.time()) - int(self.event_start))) / 60)
-            except:
-                return '0'
-
-        def __str__(self):
-
-            return self.event_title if self.event_title else u''
-
-
-
-    def factory(self, type, args, obj=None):
-
-        if type == 'channel':
-            return self.Channel(obj, args)
-        if type == 'bouquet':
-            return self.Bouquet(args)
-
-        if type == 'event':
-            return self.Event(args)
 
     def __init__(self):
 
@@ -100,18 +37,16 @@ class Receiver():
 
     def setup(self, **kwargs):
 
-        print('Setting up object')
+        message('Setting up object')
 
         self.host = kwargs.get('host', '127.0.0.1')
         self.port = kwargs.get('port', 0)
 
-        #todo check if we have an epty database. If so, do an initial bouquet, channel, and on now else we check in the thread that gets the events maybe update method.
+
         self.process_device_info()
         if not self.bouquets():
             self.get_bouquets()
-            #self.get_channels()
-            #self.get_now()
-        print('Finished setting up')
+        message('Finished setting up')
 
     def update_database(self):
 
@@ -125,34 +60,100 @@ class Receiver():
         Issues a /web/deviceinfoo command to the receiver and processes the result.
 
         """
+
+        def parse_device_info(self, deviceinfo):
+            """
+            Takes the deviceinfo that was returned by the receiver, parses the XML and
+             populates the requires properties
+            """
+            self.no_of_tuners = len(Soup(deviceinfo).findAll('e2frontend'))
+
         path = 'web/deviceinfo'
         deviceinfo = self.fetch(path)
-        self.psrse_device_info(deviceinfo)
-
-    def psrse_device_info(self, deviceinfo):
-        """
-        Takes the deviceinfo that was returned by the receiver, parses the XML and
-         populates the requires properties
-        """
-        self.no_of_tuners = len(Soup(deviceinfo).findAll('e2frontend'))
+        parse_device_info(deviceinfo)
 
     def bouquets(self):
+        """
+        Get bouquets. If no bouquets exist in the database, or the database query
+        fails then just get the bouquets from the reciever.
+        """
 
-        return self.db.get('Bouquet')
+        def get_bouquets():
+
+            path = 'web/getservices'
+            bouquet_xml = self.fetch(path=path)
+            bouquets = parse_bouquets(bouquet_xml)
+            bouquets = filter(lambda x : LAST_SCANNED  not in x.values(), bouquets)
+            self.db.insert('Bouquet', bouquets)
+
+        def parse_bouquets( bouquet_xml):
+
+            return map(lambda x: self.get_names(x),
+                       Soup(bouquet_xml).findAll('e2service'))
+
+        try:
+            return self.db.get('Bouquet')
+        except:
+            return get_bouquets()
 
     def channels(self, where=None):
-        return self.db.get('Channel', where=where)
+        """
+        Get channels. If no channels exist in the database, or the database query
+        fails then just get the channels from the reciever.
+        """
 
-    def events(self):
-        earliest_start_time = self.db.raw_sql(EARLIEST_STAR_TIME)
+        def get_channels():
 
+            path = 'web/getservices'
+            bouquet = self.bouquets()
+            channels_xml = map(lambda b: (b['service_reference'],self.fetch(path, {'sRef': b['service_reference']})), bouquet)
+            channels = parse_channels(channels_xml)
+            self.db.insert('Channel', channels)
 
-        channels = self.channels()
+        def parse_channels(channel_xml):
+
+            channels = []
+            for b, channel in channel_xml:
+
+                s = Soup(channel).findAll('e2service')
+                if s:
+                    a = map(lambda x: self.get_names(x), s)
+                    d = [c.update({'bo_id': b}) for c in a]
+                    channels.extend(a)
+
+            return channels
+
         try:
-            t = earliest_start_time[0][0]
+            channel_list = self.db.get('Channel', where=where)
+            return channel_list if channel_list else get_channels()
         except:
-            t = 0
-        self.get_events(t, channels)
+            return get_channels()
+
+    def events(self, update=False):
+        """
+        Get events. First, for all the events in the database, get the lowest(earliest time)
+        of all the maximum event start times for each channel. This will prevent us from having gaps
+        in the events that we have on a specific channel.
+        We then get all the channels, and get all the events after a given start time. If the start time
+        is unable to be calculated, then just fetch all the events for each channels
+        """
+
+        earliest_start_time = self.db.raw_sql(EARLIEST_STAR_TIME)
+        channels = self.channels()
+
+        try:
+            start_time = earliest_start_time[0][0]
+        except :
+            start_time = 0
+
+        try:
+            if update:
+                self.get_events(start_time, channels)
+
+            event_list = self.db.get('Events', where=where)
+            return event_list if event_list else self.get_events()
+        except:
+            return self.get_events()
 
     def get_events(self, earliest_start_time=None, channels=None):
 
@@ -167,58 +168,19 @@ class Receiver():
         self.db.insert('Event', filter(None, events))
 
 
+    def current(self):
 
-    def get_bouquets(self):
+        def get_current():
 
-        path = 'web/getservices'
-        bouquet_xml = self.fetch(path=path)
-        bouquets = self.parse_bouquets(bouquet_xml)
-        bouquets = filter(lambda x : LAST_SCANNED  not in x.values(), bouquets)
-        self.db.insert('Bouquet', bouquets)
+            path = 'web/getcurrent'
+            current = self.fetch(path)
+            parse_current(current)
 
-    def parse_bouquets(self, bouquet_xml):
+        def parse_current(self, current):
 
-        return map(lambda x: self.get_names(x),
-                   Soup(bouquet_xml).findAll('e2service'))
+            self.current = create_event(current)
 
-    def get_channels(self):
-
-        path = 'web/getservices'
-        bouquet = self.bouquets()
-        channels_xml = map(lambda b: (b['service_reference'],self.fetch(path, {'sRef': b['service_reference']})), bouquet)
-        channels = self.parse_channels(channels_xml)
-        self.db.insert('Channel', channels)
-
-    @staticmethod
-    def get_names(x):
-        elements = x.findAll(['e2servicereference', 'e2servicename'])
-        return {'service_reference': elements[0].text, 'service_name': elements[1].text}
-
-    def parse_channels(self, channel_xml):
-
-        channels = []
-        for b, channel in channel_xml:
-
-            s = Soup(channel).findAll('e2service')
-            if s:
-                a = map(lambda x: self.get_names(x), s)
-                d = [c.update({'bo_id': b}) for c in a]
-                channels.extend(a)
-
-        return channels
-
-
-
-    def get_current(self):
-
-        path = 'web/getcurrent'
-        current = self.fetch(path)
-        self.parse_current(current)
-
-    def parse_current(self, current):
-
-        self.current = self.create_event(current)
-
+        return get_current()
 
     def create_event(self, event_xml):
 
@@ -238,8 +200,7 @@ class Receiver():
             return None
 
 
-
-    def get_now(self):
+    def event_now(self):
 
         path = 'web/epgservicenow'
         channels = self.db.get('Channel')
@@ -251,7 +212,7 @@ class Receiver():
             events.extend(event)
         self.db.insert('Event', filter(None, events))
 
-    def get_next(self):
+    def event_next(self):
 
         path = 'web/epgservicenext'
         channels = self.db.get('Channel')
@@ -276,6 +237,11 @@ class Receiver():
                 events.extend(a)
 
         return events
+
+    @staticmethod
+    def get_names(x):
+        elements = x.findAll(['e2servicereference', 'e2servicename'])
+        return {'service_reference': elements[0].text, 'service_name': elements[1].text}
 
 
     def get_channel_epg(self, service_reference=None):

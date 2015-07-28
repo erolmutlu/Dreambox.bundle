@@ -32,7 +32,6 @@ def Start():
     Log('Entered Start function ')
     r.setup(host=Prefs['host'], port=Prefs['port_web'])
 
-
     Plugin.AddViewGroup('List', viewMode='InfoList', mediaType='items')
     ObjectContainer.art = R(ART)
     ObjectContainer.title1 = Locale.LocalString('Title')
@@ -43,11 +42,11 @@ def Start():
 def MainMenu():
     Log('Entered MainMenu function')
 
-    #r.get_current()
+    r.current()
     #Data.Save('sRef', r.current.service_reference)
     items = []
     # See if we have any subfolders on the hdd
-    r.get_channels()
+    r.channels()
     #Thread.Create(test, r=r )
     if Data.LoadObject('Started'):
         try:
@@ -114,8 +113,8 @@ def Display_Bouquets():
     Log('Entered Display Bouquets function')
 
 
-    r.get_now()
-    r.get_next()
+    r.event_now()
+    r.event_next()
     x = lambda bouquet: DirectoryObject(key = Callback(Display_Bouquet_Channels,
                                                          sref = bouquet['service_reference'],
                                                          name = bouquet['service_name']),
