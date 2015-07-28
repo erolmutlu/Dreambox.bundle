@@ -1,4 +1,6 @@
+import logging
 import sqlite3
+import sys
 
 TABLE_CREATION = [
     """
@@ -60,7 +62,14 @@ TABLE_CREATION = [
 ]
 
 dev = 0
-message = lambda x: print x if dev else Log(str(x))
+def message(x):
+    try:
+        if dev:
+            logging.warning(x)
+        else:
+            Log(str(x))
+    except NameError:
+        pass
 
 class DB():
 
@@ -81,7 +90,7 @@ class DB():
     def insert(self, table, data):
 
         if data:
-            message(str(table) + str(data))
+            message('Database attempting to insert into ' + str(table) + str(data))
             cols = ','.join(data[0].keys())
             vals = ', '.join('?' * len(data[0].keys()))
 
@@ -95,7 +104,7 @@ class DB():
                 for d in data:
 
                     try:
-                        cu.execute(sql, d )
+                        cu.execute(sql, d)
 
                     except sqlite3.IntegrityError as e:
                         #print 'Exception {} {}'.format(d, e)

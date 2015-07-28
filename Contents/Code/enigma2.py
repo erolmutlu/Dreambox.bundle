@@ -1,8 +1,9 @@
-
+import logging
 from httplib2 import Http
 from urllib import urlencode
 from BeautifulSoup import BeautifulSoup as Soup
 import time
+import sys
 from database import DB
 
 
@@ -18,7 +19,16 @@ EARLIEST_STAR_TIME = """Select MAX(event_start) AS event_start from Channel
 LAST_SCANNED = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.LastScanned.tv" ORDER BY bouquet'
 
 dev = 0
-message = lambda x: print x if dev else Log(str(x))
+
+
+def message(x):
+    try:
+        if dev:
+            logging.warning(x)
+        else:
+            Log(str(x))
+    except NameError:
+        pass
 
 class Receiver():
 
@@ -27,25 +37,28 @@ class Receiver():
         self.db = DB()
 
         self.host = ''
-        self.port = ''
+        self.port = 0
         self.username = ''
         self.password = ''
         self.no_of_tuners = ''
         self.zap = False
         self.timers = {}
+        self.connected = False
 
+    def is_connected(self):
+
+        return self.connected
 
     def setup(self, **kwargs):
 
         message('Setting up object')
 
-        self.host = kwargs.get('host', '127.0.0.1')
+        self.host = kwargs.get('host', '')
         self.port = kwargs.get('port', 0)
 
 
         self.process_device_info()
-        if not self.bouquets():
-            self.get_bouquets()
+        self.bouquets()
         message('Finished setting up')
 
     def update_database(self):
@@ -61,7 +74,7 @@ class Receiver():
 
         """
 
-        def parse_device_info(self, deviceinfo):
+        def parse_device_info( deviceinfo):
             """
             Takes the deviceinfo that was returned by the receiver, parses the XML and
              populates the requires properties
@@ -70,6 +83,7 @@ class Receiver():
 
         path = 'web/deviceinfo'
         deviceinfo = self.fetch(path)
+        message('device info is {}'.format(str(deviceinfo)))
         parse_device_info(deviceinfo)
 
     def bouquets(self):
@@ -80,11 +94,19 @@ class Receiver():
 
         def get_bouquets():
 
+
             path = 'web/getservices'
-            bouquet_xml = self.fetch(path=path)
-            bouquets = parse_bouquets(bouquet_xml)
-            bouquets = filter(lambda x : LAST_SCANNED  not in x.values(), bouquets)
-            self.db.insert('Bouquet', bouquets)
+            try:
+                bouquet_xml = self.fetch(path=path)
+                bouquets = parse_bouquets(bouquet_xml)
+                bouquets = filter(lambda x : LAST_SCANNED  not in x.values(), bouquets)
+                message('bouquests fetched from database is {}'.format(str(bouquets)))
+                if bouquets:
+                    self.db.insert('Bouquet', bouquets)
+                    #TODO Could do with raising a custome exception here...
+            except Exception as e:
+                message('Error fetching bouquets from receiver. Exception was {}'.format(str(e)))
+
 
         def parse_bouquets( bouquet_xml):
 
@@ -92,9 +114,19 @@ class Receiver():
                        Soup(bouquet_xml).findAll('e2service'))
 
         try:
-            return self.db.get('Bouquet')
-        except:
-            return get_bouquets()
+            rows =  self.db.get('Bouquet')
+            message(rows)
+            if rows:
+                message('returning rows {}'.format(str(rows)))
+                return rows
+            else:
+                message('No bouquets found so I am calling the receiver')
+                get_bouquets()
+                self.bouquets()
+        except Exception as e:
+            message(e)
+            get_bouquets()
+            self.bouquets()
 
     def channels(self, where=None):
         """
@@ -106,6 +138,7 @@ class Receiver():
 
             path = 'web/getservices'
             bouquet = self.bouquets()
+            bouquet = bouquet if bouquet else []
             channels_xml = map(lambda b: (b['service_reference'],self.fetch(path, {'sRef': b['service_reference']})), bouquet)
             channels = parse_channels(channels_xml)
             self.db.insert('Channel', channels)
@@ -176,9 +209,9 @@ class Receiver():
             current = self.fetch(path)
             parse_current(current)
 
-        def parse_current(self, current):
+        def parse_current( current):
 
-            self.current = create_event(current)
+            self.current = self.create_event(current)
 
         return get_current()
 
@@ -314,11 +347,10 @@ class Receiver():
         return content
 
 
+#r = Receiver()
 
-r = Receiver()
-
-r.setup(host='192.168.1.252', port=80)
-r.events()
+#r.setup(host='', port=80)
+#r.events()
 
 
 def get_channels_from_service(host, web, sRef, show_epg=False):

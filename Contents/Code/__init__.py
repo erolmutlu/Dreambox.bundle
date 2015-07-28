@@ -42,7 +42,7 @@ def Start():
 def MainMenu():
     Log('Entered MainMenu function')
 
-    r.current()
+    #r.current()
     #Data.Save('sRef', r.current.service_reference)
     items = []
     # See if we have any subfolders on the hdd
