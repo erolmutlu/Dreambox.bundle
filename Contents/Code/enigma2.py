@@ -201,18 +201,30 @@ class Receiver():
 
 
     def event_now(self):
+        """
+        Gets the current event for each channel, and stores then in the database
+        """
+        try:
+            path = 'web/epgservicenow'
+            channels = self.db.get('Channel')
+            events = []
+            for channel in channels:
+                event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
+                event = self.parse_events(event_xml)
 
-        path = 'web/epgservicenow'
-        channels = self.db.get('Channel')
-        events = []
-        for channel in channels:
-            event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
-            event = self.parse_events(event_xml)
-
-            events.extend(event)
-        self.db.insert('Event', filter(None, events))
+                events.extend(event)
+            self.db.insert('Event', filter(None, events))
+        except:
+            pass
 
     def event_next(self):
+        """
+        Gets the next event for each channel, and stores then in the database. Really we only want to do this when we
+        initially start using the database, rather than loading all the events in one go, just to get us started.
+        Further
+        """
+
+        #TODO Need to get the now next etc, from database, and if none,, get from receiver and store in database. So we use this intially, then use whenever to get all the on now rather than going to the box each time
 
         path = 'web/epgservicenext'
         channels = self.db.get('Channel')
