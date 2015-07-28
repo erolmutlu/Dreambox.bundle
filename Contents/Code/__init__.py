@@ -114,7 +114,8 @@ def Display_Bouquets():
     Log('Entered Display Bouquets function')
 
 
-
+    r.get_now()
+    r.get_next()
     x = lambda bouquet: DirectoryObject(key = Callback(Display_Bouquet_Channels,
                                                          sref = bouquet['service_reference'],
                                                          name = bouquet['service_name']),
