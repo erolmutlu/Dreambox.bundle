@@ -107,7 +107,6 @@ class Receiver():
             except Exception as e:
                 message('Error fetching bouquets from receiver. Exception was {}'.format(str(e)))
 
-
         def parse_bouquets( bouquet_xml):
 
             return map(lambda x: self.get_names(x),
@@ -115,14 +114,15 @@ class Receiver():
 
         try:
             rows =  self.db.get('Bouquet')
-            message(rows)
-            if rows:
-                message('returning rows {}'.format(str(rows)))
-                return rows
-            else:
-                message('No bouquets found so I am calling the receiver')
-                get_bouquets()
-                self.bouquets()
+            return self.check_rows(rows, self.bouquets, get_bouquets())
+            #message(rows)
+            #if rows:
+            #    message('returning rows {}'.format(str(rows)))
+            #    return rows
+            #else:
+            #    message('No bouquets found so I am calling the receiver')
+            #    get_bouquets()
+            #    self.bouquets()
         except Exception as e:
             message(e)
             get_bouquets()
@@ -158,16 +158,28 @@ class Receiver():
 
         try:
             rows = self.db.get('Channel', where=where)
-            if rows:
-                message('Returning rows {}'.format(str(rows)))
-                return rows
-            else:
-                message('No channels found  so I am calling the receiver')
-                get_channels()
-                self.channels()
+            return self.check_rows(rows, self.channels, get_channels)
+
+            #if rows:
+            #    message('Returning rows {}'.format(str(rows)))
+            #    return rows
+            #else:
+            #    message('No channels found  so I am calling the receiver')
+            #    get_channels()
+            #    self.channels()
         except:
             get_channels()
             self.channels()
+
+    def check_rows(self, rows, sender_function, callback):
+
+        if rows:
+            message('Returning rows for function {}'.format(str(sender)))
+            return rows
+        else:
+            message('Unable to  find any rows in database invoking {} , so calling the receiver using {}'.format(str(sender.__name__), str(callback.__name__)))
+            callback()
+            sender_function()
 
     def events(self, update=False):
         """
@@ -190,10 +202,12 @@ class Receiver():
             if update:
                 self.get_events(start_time, channels)
 
-            event_list = self.db.get('Events', where=where)
-            return event_list if event_list else self.get_events()
+            rows = self.db.get('Events', where=where)
+            return self.check_rows(rows, events, get_events())
+
         except:
-            return self.get_events()
+            self.get_events()
+            self.events()
 
     def get_events(self, earliest_start_time=None, channels=None):
 
@@ -222,7 +236,6 @@ class Receiver():
         return get_current()
 
     def create_event(self, event_xml):
-
 
         try:
             event_soup = Soup(str(event_xml))
@@ -263,7 +276,7 @@ class Receiver():
                     events.extend(event)
                 self.db.insert('Event', filter(None, events))
                 self.event_now()
-        except BaseException as    e:
+        except BaseException as e:
             message(e)
             pass
 
@@ -287,7 +300,6 @@ class Receiver():
                 for channel in channels:
                     event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
                     event = self.parse_events(event_xml)
-
                     events.extend(event)
                 self.db.insert('Event', filter(None, events))
                 self.event_next()
@@ -295,7 +307,6 @@ class Receiver():
             pass
 
     def parse_events(self, event_xml):
-
         events = []
         for b, event in event_xml:
 
@@ -338,9 +349,6 @@ class Receiver():
         return None
 
 
-    def get_channel(self, service_reference):
-
-        return (ch for ch in self.channels if ch.service_reference == service_reference)
 
     def parse_channel_epg(self, epg_xml):
 
