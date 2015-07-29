@@ -131,7 +131,7 @@ class Receiver():
     def channels(self, where=None):
         """
         Get channels. If no channels exist in the database, or the database query
-        fails then just get the channels from the reciever.
+        fails then get the channels from the reciever.
         """
 
         def get_channels():
@@ -157,10 +157,17 @@ class Receiver():
             return channels
 
         try:
-            channel_list = self.db.get('Channel', where=where)
-            return channel_list if channel_list else get_channels()
+            rows = self.db.get('Channel', where=where)
+            if rows:
+                message('Returning rows {}'.format(str(rows)))
+                return rows
+            else:
+                message('No channels found  so I am calling the receiver')
+                get_channels()
+                self.channels()
         except:
-            return get_channels()
+            get_channels()
+            self.channels()
 
     def events(self, update=False):
         """
@@ -193,7 +200,6 @@ class Receiver():
         path = 'web/epgservice'
         channels = self.db.get('Channel')
         events = []
-        #todo recursive use of cursors not allowed. do a fetchall?
         for channel in channels:
             event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference'], 'time': earliest_start_time}))]
             event = self.parse_events(event_xml)
@@ -237,17 +243,28 @@ class Receiver():
         """
         Gets the current event for each channel, and stores then in the database
         """
-        try:
-            path = 'web/epgservicenow'
-            channels = self.db.get('Channel')
-            events = []
-            for channel in channels:
-                event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
-                event = self.parse_events(event_xml)
 
-                events.extend(event)
-            self.db.insert('Event', filter(None, events))
-        except:
+        try:
+            channels = self.db.get('Channel')
+            rows = self.db.get('NowNext')
+            message('Now next rows is {}'.format(str(rows)))
+            if len(rows) > len(channels) / 2:
+                message('Returning rows {}'.format(str(rows)))
+                return rows
+            else:
+                message('No or not enough now events found  so I am calling the receiver')
+                path = 'web/epgservicenow'
+                channels = self.db.get('Channel')
+                events = []
+                for channel in channels:
+                    event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
+                    event = self.parse_events(event_xml)
+
+                    events.extend(event)
+                self.db.insert('Event', filter(None, events))
+                self.event_now()
+        except BaseException as    e:
+            message(e)
             pass
 
     def event_next(self):
@@ -256,18 +273,26 @@ class Receiver():
         initially start using the database, rather than loading all the events in one go, just to get us started.
         Further
         """
+        try:
+            channels = self.db.get('Channel')
+            rows = self.db.get('NowNext')
+            if len(rows) > len(channels) / 1.5:
+                message('Returning rows {}'.format(str(rows)))
+                return rows
+            else:
+                message('No or not enough next events found  so I am calling the receiver')
+                path = 'web/epgservicenext'
+                channels = self.db.get('Channel')
+                events = []
+                for channel in channels:
+                    event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
+                    event = self.parse_events(event_xml)
 
-        #TODO Need to get the now next etc, from database, and if none,, get from receiver and store in database. So we use this intially, then use whenever to get all the on now rather than going to the box each time
-
-        path = 'web/epgservicenext'
-        channels = self.db.get('Channel')
-        events = []
-        for channel in channels:
-            event_xml = [(channel['service_reference'], self.fetch(path, {'sRef': channel['service_reference']}))]
-            event = self.parse_events(event_xml)
-
-            events.extend(event)
-        self.db.insert('Event', filter(None, events))
+                    events.extend(event)
+                self.db.insert('Event', filter(None, events))
+                self.event_next()
+        except:
+            pass
 
     def parse_events(self, event_xml):
 
@@ -346,11 +371,12 @@ class Receiver():
             raise
         return content
 
-
+#dev = 1
 #r = Receiver()
 
-#r.setup(host='', port=80)
-#r.events()
+#r.setup(host='192.168.1.252', port=80)
+#r.channels()
+#r.event_now()
 
 
 def get_channels_from_service(host, web, sRef, show_epg=False):

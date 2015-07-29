@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10cb5510-13d2-4533-9016-27f736768fa5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Dreambox.bundle.iml" afterPath="$PROJECT_DIR$/.idea/Dreambox.bundle.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/__init__.py" afterPath="$PROJECT_DIR$/Contents/Code/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Contents/Code/enigma2.py" afterPath="$PROJECT_DIR$/Contents/Code/enigma2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Dreambox.bundle.iws" />
@@ -16,7 +15,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Dreambox.bundle$enigma2.coverage" NAME="enigma2 Coverage Results" MODIFIED="1437902248355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Code" />
+    <SUITE FILE_PATH="coverage/Dreambox.bundle$enigma2.coverage" NAME="enigma2 Coverage Results" MODIFIED="1438154790315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Code" />
     <SUITE FILE_PATH="coverage/Dreambox.bundle$ServiceCode_pys.coverage" NAME="ServiceCode.pys Coverage Results" MODIFIED="1390849483962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Contents/Services/URL/Enigma2" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -31,44 +30,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="com.plexapp.plugins.dreambox.log" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="com.plexapp.plugins.dreambox.log" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.326923" vertical-offset="0" max-vertical-offset="3210">
-              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state vertical-scroll-proportion="5.504792" vertical-offset="2147" max-vertical-offset="3960">
+              <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.2" vertical-offset="1260" max-vertical-offset="13095">
-              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NowNext" pinned="false" current="true" current-in-tab="true">
-        <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..NowNext">
-          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event" pinned="false" current="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Event">
-          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-24.6" vertical-offset="1065" max-vertical-offset="13080">
+              <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -77,26 +56,73 @@
       <file leaf-file-name="enigma2.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.2" vertical-offset="3105" max-vertical-offset="13320">
-              <caret line="238" column="0" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.92" vertical-offset="3637" max-vertical-offset="13560">
+              <caret line="278" column="46" selection-start-line="278" selection-start-column="46" selection-end-line="278" selection-end-column="46" />
               <folding>
-                <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
+                <element signature="e#3859#4197#0" expanded="false" />
+                <element signature="e#4253#4575#0" expanded="false" />
+                <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pydevd.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.0" vertical-offset="24770" max-vertical-offset="25110">
+              <caret line="1718" column="12" selection-start-line="1718" selection-start-column="12" selection-end-line="1718" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NowNext" pinned="false" current="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..NowNext">
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event" pinned="false" current="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Event">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Channel" pinned="false" current="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Channel">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="database.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Contents/Code/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.24" vertical-offset="1019" max-vertical-offset="2070">
-              <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1965" max-vertical-offset="2310">
+              <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
               <folding>
-                <marker date="1438064463000" expanded="true" signature="92:211" placeholder="CREATE TABLE..IF..." />
-                <marker date="1438064463000" expanded="true" signature="233:522" placeholder="CREATE TABLE..IF..." />
-                <marker date="1438064463000" expanded="true" signature="544:680" placeholder="CREATE TABLE..IF..." />
-                <marker date="1438064463000" expanded="true" signature="2602:2632" placeholder="INSERT INTO ..." />
-                <marker date="1438064463000" expanded="true" signature="3331:3348" placeholder="SELECT {} FR..." />
+                <marker date="1438110945000" expanded="true" signature="118:237" placeholder="CREATE TABLE..IF..." />
+                <marker date="1438110945000" expanded="true" signature="259:548" placeholder="CREATE TABLE..IF..." />
+                <marker date="1438110945000" expanded="true" signature="570:706" placeholder="CREATE TABLE..IF..." />
+                <marker date="1438110945000" expanded="true" signature="2825:2855" placeholder="INSERT INTO ..." />
+                <marker date="1438110945000" expanded="true" signature="3131:3161" placeholder="INSERT INTO ..." />
+                <marker date="1438110945000" expanded="true" signature="3660:3677" placeholder="SELECT {} FR..." />
+                <marker date="1438110945000" expanded="true" signature="3824:3841" placeholder="SELECT {} FR..." />
               </folding>
             </state>
           </provider>
@@ -147,23 +173,24 @@
         <option value="db-console:/6ab310a5/9b04421b-6b66-4fa5-b481-79157d511531/" />
         <option value="db-console:/6ab310a5/f7942add-37f4-4366-8888-caba53311ebb/" />
         <option value="dbtable:/6ab310a5/f7942add-37f4-4366-8888-caba53311ebb/..Bouquet" />
-        <option value="dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Channel" />
-        <option value="dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Channel" />
-        <option value="dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Bouquet" />
         <option value="db-console:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/" />
         <option value="db-console:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/" />
         <option value="dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Event" />
-        <option value="dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Bouquet" />
-        <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
-        <option value="dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Event" />
         <option value="$PROJECT_DIR$/Contents/Code/database.py" />
-        <option value="$PROJECT_DIR$/../../../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
+        <option value="dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Bouquet" />
+        <option value="dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Channel" />
+        <option value="dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Bouquet" />
+        <option value="dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Event" />
         <option value="$PROJECT_DIR$/Contents/Code/__init__.py" />
+        <option value="dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Channel" />
+        <option value="$PROJECT_DIR$/Contents/Code/enigma2.py" />
+        <option value="$PROJECT_DIR$/../../../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+    <option name="x" value="-320" />
+    <option name="y" value="150" />
     <option name="width" value="1920" />
     <option name="height" value="971" />
   </component>
@@ -400,6 +427,9 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -421,9 +451,6 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
@@ -616,7 +643,15 @@
       <created>1438065311839</created>
       <updated>1438065311839</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Created new branch to push to GIT">
+      <created>1438067800727</created>
+      <updated>1438067800727</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Further updates to bouquet and channel code">
+      <created>1438115012522</created>
+      <updated>1438115012522</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -640,17 +675,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="971" extended-state="0" />
+    <frame x="-320" y="150" width="1920" height="971" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33821872" sideWeight="0.4995809" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19169329" sideWeight="0.6714761" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19595315" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20181043" sideWeight="0.6561443" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39021614" sideWeight="0.92119277" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20820022" sideWeight="0.6561443" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5381115" sideWeight="0.92119277" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2902439" sideWeight="0.36421725" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2901024" sideWeight="0.6357827" order="2" side_tool="false" content_ui="tabs" />
@@ -658,11 +692,12 @@
       <window_info id="Database Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48464164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32804877" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32804877" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -681,9 +716,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53415155" sideWeight="0.6736959" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263041" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -720,80 +755,55 @@
     <MESSAGE value="Fixed problem where recorded files dont play on some clients. &#10;Still an issue with +1 in the path" />
     <MESSAGE value="Code update... Commit before I  delete a code file instead of a database file" />
     <MESSAGE value="Created new branch to push to GIT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created new branch to push to GIT" />
+    <MESSAGE value="Further updates to bouquet and channel code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Further updates to bouquet and channel code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/__init__.py</url>
-          <line>583</line>
+          <line>582</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/__init__.py</url>
-          <line>491</line>
+          <line>490</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>289</line>
+          <line>325</line>
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>154</line>
+          <line>196</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
-          <line>166</line>
+          <line>204</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Contents/Code/enigma2.py</url>
+          <line>378</line>
+          <option name="timeStamp" value="162" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="158" />
+      <option name="time" value="163" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Contents/Code/database.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1405" max-vertical-offset="1950">
-          <caret line="97" column="17" selection-start-line="97" selection-start-column="17" selection-end-line="97" selection-end-column="17" />
-          <folding>
-            <marker date="1438064463000" expanded="true" signature="92:211" placeholder="CREATE TABLE..IF..." />
-            <marker date="1438064463000" expanded="true" signature="233:522" placeholder="CREATE TABLE..IF..." />
-            <marker date="1438064463000" expanded="true" signature="544:680" placeholder="CREATE TABLE..IF..." />
-            <marker date="1438064463000" expanded="true" signature="2602:2632" placeholder="INSERT INTO ..." />
-            <marker date="1438064463000" expanded="true" signature="3331:3348" placeholder="SELECT {} FR..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..NowNext">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Event">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8550">
           <caret line="556" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
+            <element signature="e#3859#4197#0" expanded="false" />
+            <element signature="e#4253#4575#0" expanded="false" />
+            <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
           </folding>
         </state>
       </provider>
@@ -825,7 +835,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8550">
           <caret line="556" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
+            <element signature="e#3859#4197#0" expanded="false" />
+            <element signature="e#4253#4575#0" expanded="false" />
+            <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
           </folding>
         </state>
       </provider>
@@ -857,7 +869,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8550">
           <caret line="556" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
+            <element signature="e#3859#4197#0" expanded="false" />
+            <element signature="e#4253#4575#0" expanded="false" />
+            <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
           </folding>
         </state>
       </provider>
@@ -889,7 +903,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8550">
           <caret line="556" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
+            <element signature="e#3859#4197#0" expanded="false" />
+            <element signature="e#4253#4575#0" expanded="false" />
+            <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
           </folding>
         </state>
       </provider>
@@ -921,7 +937,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8550">
           <caret line="556" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
+            <element signature="e#3859#4197#0" expanded="false" />
+            <element signature="e#4253#4575#0" expanded="false" />
+            <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
           </folding>
         </state>
       </provider>
@@ -941,13 +959,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="300">
           <caret line="5" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
@@ -966,13 +984,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="360">
           <caret line="10" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -983,33 +1001,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Info.plist">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14177693" vertical-offset="0" max-vertical-offset="529">
           <caret line="5" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Logs/Plex Media Server.log.1">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Logs/Plex Media Server.log.1">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="713550">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Logs/Plex Media Server.log.1">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Logs/Plex Media Server.log.1">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="713550">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/metadata.py">
@@ -1020,13 +1038,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../Logs/Plex Media Server.log">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="7365" max-vertical-offset="17745">
           <caret line="491" column="0" selection-start-line="491" selection-start-column="0" selection-end-line="491" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Services/ServiceInfo.plist">
@@ -1037,13 +1055,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Services/URL/Enigma2/ServiceCode.pys">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="2040">
           <caret line="68" column="23" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py">
@@ -1076,20 +1094,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreamboxserver.log.1">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.89821184" vertical-offset="653" max-vertical-offset="1680">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="18375" max-vertical-offset="26085">
-          <caret line="1225" column="0" selection-start-line="1225" selection-start-column="0" selection-end-line="1225" selection-end-column="0" />
-        </state>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="dbDummy://db-console:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/">
@@ -1107,13 +1118,13 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Event">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..NowNext">
@@ -1121,72 +1132,116 @@
         <state />
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Bouquet">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
+    <entry file="dbDummy://dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Bouquet">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/6ab310a5/22006ded-64b3-486f-81fb-a12c50c4009a/..Channel">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.24" vertical-offset="1019" max-vertical-offset="2070">
-          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1965" max-vertical-offset="2310">
+          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
           <folding>
-            <marker date="1438064463000" expanded="true" signature="92:211" placeholder="CREATE TABLE..IF..." />
-            <marker date="1438064463000" expanded="true" signature="233:522" placeholder="CREATE TABLE..IF..." />
-            <marker date="1438064463000" expanded="true" signature="544:680" placeholder="CREATE TABLE..IF..." />
-            <marker date="1438064463000" expanded="true" signature="2602:2632" placeholder="INSERT INTO ..." />
-            <marker date="1438064463000" expanded="true" signature="3331:3348" placeholder="SELECT {} FR..." />
+            <marker date="1438110945000" expanded="true" signature="118:237" placeholder="CREATE TABLE..IF..." />
+            <marker date="1438110945000" expanded="true" signature="259:548" placeholder="CREATE TABLE..IF..." />
+            <marker date="1438110945000" expanded="true" signature="570:706" placeholder="CREATE TABLE..IF..." />
+            <marker date="1438110945000" expanded="true" signature="2825:2855" placeholder="INSERT INTO ..." />
+            <marker date="1438110945000" expanded="true" signature="3131:3161" placeholder="INSERT INTO ..." />
+            <marker date="1438110945000" expanded="true" signature="3660:3677" placeholder="SELECT {} FR..." />
+            <marker date="1438110945000" expanded="true" signature="3824:3841" placeholder="SELECT {} FR..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.326923" vertical-offset="0" max-vertical-offset="960">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Event">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
+    <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Bouquet">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.2" vertical-offset="3105" max-vertical-offset="13320">
-          <caret line="238" column="0" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
-          <folding>
-            <marker date="1437979259000" expanded="true" signature="259:448" placeholder="Select MAX(e..Channel..." />
-          </folding>
+    <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Channel">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..Event">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Contents/Code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.2" vertical-offset="1260" max-vertical-offset="13095">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+        <state vertical-scroll-proportion="-24.6" vertical-offset="1065" max-vertical-offset="13080">
+          <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/6ab310a5/de610bb4-647a-42f1-a4c0-fb0e24412393/..NowNext">
       <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Contents/Code/enigma2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.92" vertical-offset="3637" max-vertical-offset="13560">
+          <caret line="278" column="46" selection-start-line="278" selection-start-column="46" selection-end-line="278" selection-end-column="46" />
+          <folding>
+            <element signature="e#3859#4197#0" expanded="false" />
+            <element signature="e#4253#4575#0" expanded="false" />
+            <marker date="1438155392000" expanded="true" signature="284:473" placeholder="Select MAX(e..Channel..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0" vertical-offset="24770" max-vertical-offset="25110">
+          <caret line="1718" column="12" selection-start-line="1718" selection-start-column="12" selection-end-line="1718" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Logs/PMS Plugin Logs/com.plexapp.plugins.dreambox.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.504792" vertical-offset="2147" max-vertical-offset="3960">
+          <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
     </entry>
