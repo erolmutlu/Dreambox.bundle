@@ -24,7 +24,7 @@ dev = 0
 def message(x):
     try:
         if dev:
-            logging.warning(x)
+            logging.info(x)
         else:
             Log(str(x))
     except NameError:
@@ -44,6 +44,7 @@ class Receiver():
         self.zap = False
         self.timers = {}
         self.connected = False
+        self.current_event = ''
 
     def is_connected(self):
 
@@ -114,7 +115,7 @@ class Receiver():
 
         try:
             rows =  self.db.get('Bouquet')
-            return self.check_rows(rows, self.bouquets, get_bouquets())
+            return self.check_rows(rows, self.bouquets, get_bouquets)
             #message(rows)
             #if rows:
             #    message('returning rows {}'.format(str(rows)))
@@ -174,14 +175,14 @@ class Receiver():
     def check_rows(self, rows, sender_function, callback):
 
         if rows:
-            message('Returning rows for function {}'.format(str(sender)))
+            message('Returning rows for function {}'.format(str(sender_function.__name__)))
             return rows
         else:
-            message('Unable to  find any rows in database invoking {} , so calling the receiver using {}'.format(str(sender.__name__), str(callback.__name__)))
+            message('Unable to  find any rows in database invoking {} , so calling the receiver using {}'.format(str(sender_function.__name__), str(callback.__name__)))
             callback()
             sender_function()
 
-    def events(self, update=False):
+    def events(self, update=False, where = None):
         """
         Get events. First, for all the events in the database, get the lowest(earliest time)
         of all the maximum event start times for each channel. This will prevent us from having gaps
@@ -203,7 +204,7 @@ class Receiver():
                 self.get_events(start_time, channels)
 
             rows = self.db.get('Events', where=where)
-            return self.check_rows(rows, events, get_events())
+            return self.check_rows(rows, self.events, self.get_events)
 
         except:
             self.get_events()
@@ -220,29 +221,39 @@ class Receiver():
             events.extend(event)
         self.db.insert('Event', filter(None, events))
 
-
     def current(self):
 
         def get_current():
 
             path = 'web/getcurrent'
             current = self.fetch(path)
-            parse_current(current)
+            return parse_current(current)
 
         def parse_current( current):
 
-            self.current = self.create_event(current)
+            event_soup = Soup(str(current))
+            current_service  = event_soup.find('e2currentserviceinformation')
+            sref = current_service.find('e2servicereference').text
+            event_xml = [(sref, current)]
 
-        return get_current()
+            event = self.parse_events(event_xml)[0]
+            name = current_service.find('e2servicename').text
+            event['sref'] =sref
+            event['service_name'] = name
+
+            return event
+        event = get_current()
+
+        return event
 
     def create_event(self, event_xml):
 
         try:
             event_soup = Soup(str(event_xml))
             event_details = {
-                             'event_title': event_soup.find('e2eventtitle').text,
-                             'event_description': event_soup.find('e2eventdescription').text,
-                             'event_description_extended': event_soup.find('e2eventdescriptionextended').text,
+                             'event_title': escape(event_soup.find('e2eventtitle').text),
+                             'event_description': escape(event_soup.find('e2eventdescription').text),
+                             'event_description_extended': escape(event_soup.find('e2eventdescriptionextended').text),
                              'event_start': int(event_soup.find('e2eventstart').text),
                              'event_duration': int(event_soup.find('e2eventduration').text),
                              'event_id': int(event_soup.find('e2eventid').text)
@@ -379,11 +390,11 @@ class Receiver():
             raise
         return content
 
-#dev = 1
-#r = Receiver()
+dev = 1
+r = Receiver()
 
-#r.setup(host='192.168.1.252', port=80)
-#r.channels()
+r.setup(host='192.168.1.252', port=80)
+print r.current()
 #r.event_now()
 
 

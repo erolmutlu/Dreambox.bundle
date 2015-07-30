@@ -42,20 +42,32 @@ def Start():
 def MainMenu():
     Log('Entered MainMenu function')
 
-    #r.current()
     #Data.Save('sRef', r.current.service_reference)
     items = []
     # See if we have any subfolders on the hdd
     r.channels()
-    #Thread.Create(test, r=r )
+    event= r.current()
+    on_now = (str(event['service_name']) + ' ' +  str(event['sref']))
+    TITLE = '{} On Now - {}'.format(str(event['service_name']), str(event['event_title']))
+    Log(on_now)
     if Data.LoadObject('Started'):
         try:
             if(Prefs['folders']):
                 load_folders_from_receiver()
-            #items.append(Display_Event(sender='On Now - {}'.format(r.current),event=r,
-            #                                                                 channel=r.current.service_reference,
-            #                                                                 description=r.current.event_description,
-            #                                                                 duration=r.current.get_remaining()))
+            if Prefs['audio']:
+                items.append(DirectoryObject(key=Callback(Display_Audio_Events,
+                                                            sender='{} On Now - {}'.format(event['service_name'], event['event_title']),
+                                                            sRef=event['sref'],
+                                                            title=event['event_title'],
+                                                            description=event['event_description'],
+                                                            onnow=True), title=TITLE)
+                )
+            else:
+                items.append(Display_Event(sender='{}. On Now - {}'.format(service_name, event['event_title']),
+
+                                                                             channel=event['ch_id'],
+                                                                             description=event['event_description'],
+                                                                             duration=0))
             items.append(DirectoryObject(key=Callback(Display_Bouquets),
                                    title=Locale.LocalString('Live'),
                                    thumb = R(LIVE),
@@ -181,16 +193,16 @@ def Display_Bouquet_Channels(sref=None, name=None):
     return oc
 
 
-@route("/video/dreambox/Display_Audio_Events/{sender}")
+@route("/video/dreambox/Display_Audio_Events")
 def Display_Audio_Events(sender, sRef, title=None, description=None, onnow=False):
     import time
     from enigma2 import get_audio_tracks, zap
 
-    Log('Entered display Audio events: sender {} sref {} title {}'.format(sender, sRef, title))
+    Log('Entered display Audio events: sender {} sref {} title {}'.format(onnow, sRef, description))
 
     items = []
     zapped = True
-    if not onnow:
+    if not onnow and sRef:
         zapped = zap(Prefs['host'], Prefs['port_web'], sRef=sRef)
 
     if zapped:
@@ -199,7 +211,6 @@ def Display_Audio_Events(sender, sRef, title=None, description=None, onnow=False
             remaining = 0
             items.append(add_current_event(sRef=sRef, name=sender, description=description, title=title, remaining=0, audioid=audio_id, audio_description=audio_description))
 
-    items = check_empty_items(items)
     oc = ObjectContainer(objects=items, title2='Select Audio Channel', view_group='List', no_cache=True)
     return oc
 
@@ -240,7 +251,6 @@ def Display_Channel_Events(sref, title=None):
                                    title=title,
                                    duration = remaining,
                                    thumb=Callback(GetThumb, series=title)))
-    items = check_empty_items(items)
     oc = ObjectContainer(objects=items, title2=sender, view_group='List', no_cache=True)
     return oc
 
@@ -327,7 +337,6 @@ def Display_Event(sender='', event=r ,channel='', description='', filename=None,
         recorded=True
         if '+' in filename and include_oc == False:
             filename = filename.replace('+','zxz')
-        #channel=None
         folder=sender
         Log('Subfolders is {}'.format(channel))
         if subfolders:
@@ -391,7 +400,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None, 
     from enigma2 import format_string, zap
     if channel:
         channel = channel.strip('.m3u8')
-    if Prefs['zap'] and not recorded:
+    if Prefs['audio']: # and not recorded:
         Log('Changing Audio to {}'.format(audioid))
         zapaudio(channel, audioid)
     if recorded == 'False':
