@@ -182,6 +182,13 @@ class Receiver():
             callback()
             sender_function()
 
+    def stream_current(self):
+        """
+        Hopefully this will set the current stream to what is currently being viewed,
+        """
+        path = 'web/streamcurrent,m3u'
+        self.fetch(path)
+
     def events(self, update=False, where = None):
         """
         Get events. First, for all the events in the database, get the lowest(earliest time)

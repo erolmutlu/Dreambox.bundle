@@ -14,6 +14,7 @@ RECEIVER_STANDBY = 0
 RECEIVER_DEEP_STANDBY = 1
 RECEIVER_REBOOT = 2
 RECEIVER_RESTART_ENIGMA2 = 3
+PREFIX = '/video/dreambox'
 
 r = Receiver()
 
@@ -38,7 +39,7 @@ def Start():
     DirectoryObject.thumb = R(ICON)
 
 
-@handler('/video/dreambox', 'Dreambox', art=ART, thumb=ICON)
+@handler(PREFIX, 'Dreambox', art=ART, thumb=ICON)
 def MainMenu():
     Log('Entered MainMenu function')
 
@@ -47,7 +48,6 @@ def MainMenu():
     # See if we have any subfolders on the hdd
     r.channels()
     event= r.current()
-    on_now = (str(event['service_name']) + ' ' +  str(event['sref']))
     TITLE = '{} On Now - {}'.format(str(event['service_name']), str(event['event_title']))
     Log(on_now)
     if Data.LoadObject('Started'):
@@ -55,13 +55,7 @@ def MainMenu():
             if(Prefs['folders']):
                 load_folders_from_receiver()
             if Prefs['audio']:
-                items.append(DirectoryObject(key=Callback(Display_Audio_Events,
-                                                            sender='{} On Now - {}'.format(event['service_name'], event['event_title']),
-                                                            sRef=event['sref'],
-                                                            title=event['event_title'],
-                                                            description=event['event_description'],
-                                                            onnow=True), title=TITLE)
-                )
+                items.append(DirectoryObject(key=Callback(Display_Audio_Events, event), title=TITLE))
             else:
                 items.append(Display_Event(sender='{}. On Now - {}'.format(service_name, event['event_title']),
 
@@ -87,8 +81,7 @@ def MainMenu():
         except AttributeError as e:
             items.append(DirectoryObject(key=Callback(MainMenu),
                                    title=Locale.LocalString('ConnectError')))
-            #items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
-        items = check_empty_items(items)
+        items.append(DirectoryObject(key=Callback(add_tools), title='Tools'))
     else:
         Log('Cannot start correctly.')
         items.append(DirectoryObject(key=Callback(MainMenu),
@@ -103,7 +96,7 @@ def MainMenu():
     return oc
 
 
-@route('/video/dreambox/thumb')
+@route(PREFIX + '/thumb')
 def GetThumb(series):
     locale = Locale.DefaultLocale
     if locale == 'en-us':
@@ -119,18 +112,22 @@ def GetThumb(series):
 # Displays Bouquets when we have selected                        #
 # Live TV from the main menu                                     #
 ##################################################################
-@route("/video/dreambox/Display_Bouquets")
-
+@route(PREFIX + "/Display_Bouquets")
 def Display_Bouquets():
     Log('Entered Display Bouquets function')
 
-
-    r.event_now()
-    r.event_next()
     x = lambda bouquet: DirectoryObject(key = Callback(Display_Bouquet_Channels,
                                                          sref = bouquet['service_reference'],
                                                          name = bouquet['service_name']),
                                                          title = bouquet['service_name'])
+
+    r.event_now()
+    @parallelize
+    def parallel:
+        @task
+        def next():
+            r.event_next()
+
     items = [x(bouquet) for bouquet in r.bouquets()]
     oc = ObjectContainer(objects=items, view_group='List', no_cache=True, title2=Locale.LocalString('Live'))
     return oc
@@ -193,19 +190,16 @@ def Display_Bouquet_Channels(sref=None, name=None):
     return oc
 
 
-@route("/video/dreambox/Display_Audio_Events")
-def Display_Audio_Events(sender, sRef, title=None, description=None, onnow=False):
+@route(PREFIX + "/Display_Audio_Events", event=dict)
+def Display_Audio_Events(event, onnow=False):
     import time
     from enigma2 import get_audio_tracks, zap
 
-    Log('Entered display Audio events: sender {} sref {} title {}'.format(onnow, sRef, description))
+    Log('Entered display Audio events: {}'.format(str(event)))
 
     items = []
-    zapped = True
-    if not onnow and sRef:
-        zapped = zap(Prefs['host'], Prefs['port_web'], sRef=sRef)
 
-    if zapped:
+    if r.zap(event['sref']) and event['sref']:
         time.sleep(2)
         for audio_id, audio_description, active in get_audio_tracks(Prefs['host'],Prefs['port_web']):
             remaining = 0
@@ -403,6 +397,7 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None, 
     if Prefs['audio']: # and not recorded:
         Log('Changing Audio to {}'.format(audioid))
         zapaudio(channel, audioid)
+        r.streamcurrent()
     if recorded == 'False':
         stream = 'http://{}:{}/{}'.format(Prefs['host'], Prefs['port_video'], channel)
         Log('Stream to play {}'.format(stream))
