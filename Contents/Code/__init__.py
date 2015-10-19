@@ -202,7 +202,7 @@ def Display_Bouquet_Channels(sender='', index=None):
     return oc
 
 
-@route("/video/dreambox/dISPLAY_Audio_Events/{sender}")
+@route("/video/dreambox/Display_Audio_Events/{sender}")
 def Display_Audio_Events(sender, sRef, title=None, description=None, onnow=False):
     import time
     from enigma2 import get_audio_tracks, zap
