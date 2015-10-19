@@ -3,7 +3,13 @@
 	{
 		"id": "zap",
 		"type": "bool",
-		"label": "Zap to channel before stream",
+		"label": "Zap to channel before information",
+		"default": "false"
+	},
+	{
+		"id": "singletuner",
+		"type": "bool",
+		"label": "Single Tuner / Zap to channel before stream",
 		"default": "false"
 	},
 	{
@@ -18,19 +24,19 @@
 		"label": "Show full event list instead of now/next",
 		"default": "false"
 	},
-    {
-         "id": "folders",
-         "type": "bool",
-         "label": "View recorded folders",
-         "default": "false"
-    },
-    {
-         "id": "merge",
-         "type": "bool",
-         "label": "merge recorded folders",
-         "default": "false"
-    },
-    {
+	{
+		 "id": "folders",
+		 "type": "bool",
+		 "label": "View recorded folders",
+		 "default": "false"
+	},
+	{
+		 "id": "merge",
+		 "type": "bool",
+		 "label": "merge recorded folders",
+		 "default": "false"
+	},
+	{
 		"id": "duration",
 		"type": "text",
 		"label": "Duration of live stream (minutes)",
@@ -49,6 +55,24 @@
 		"default": "80"
 	},
 	{
+		"id": "authrequired",
+		"type": "bool",
+		"label": "Authentication required for Web Interface",
+		"default": "false"
+	},
+	{
+		"id": "username",
+		"type": "text",
+		"label": "User ID for Web Interface",
+		"default": "root"
+	},
+	{
+		"id": "password",
+		"type": "text",
+		"label": "Password for Web Interface",
+		"default": "dreambox"
+	},
+	{
 		"id": "port_video",
 		"type": "text",
 		"label": "Streaming Video Port",
@@ -65,23 +89,23 @@
 		"type": "text",
 		"label": "Path to movie folder",
 		"default": "\Harddisk\movie"
-    },
-        {
-                "id": "container",
-                "type": "text",
-                "label": "Use container",
-                "default": "mp4"
-        },
-        {
-                "id": "video_codec",
-                "type": "text",
-                "label": "Use video codec",
-                "default": "h264"
-        },
-        {
-                "id": "audio_codec",
-                "type": "text",
-                "label": "Use audio codec",
-                "default": "mp3"
-        }
+	},
+	{
+		"id": "container",
+		"type": "text",
+		"label": "Use container",
+		"default": "mp4"
+	},
+	{
+		"id": "video_codec",
+		"type": "text",
+		"label": "Use video codec",
+		"default": "h264"
+	},
+	{
+		"id": "audio_codec",
+		"type": "text",
+		"label": "Use audio codec",
+		"default": "mp3"
+	}
 ]

@@ -5,8 +5,6 @@ from itertools import chain
 import os
 
 
-
-
 def get_bouquets(host, web):
 
     url = 'http://{}:{}/web/getservices'.format(host, web)
@@ -372,6 +370,7 @@ def get_current_service_info(soup_list):
 
     except Exception as e:
         return 'Error', 'Messsage  : {} '.format(e.message)
+    Log(results)
     return results
 
 
@@ -436,6 +435,7 @@ def clean_filename(data):
     return data
 
 
+
 ###############################################################
 # Gets the stuff we need from the box and returns soup        #
 ###############################################################
@@ -444,6 +444,8 @@ def get_data(*args):
     from httplib2 import Http
     from urllib import urlencode
     req = Http(timeout=10)
+    if (Prefs['authrequired']):
+        req.add_credentials(Prefs['username'], Prefs['password'])
     results = []
     for item in args:
         u = item[0]

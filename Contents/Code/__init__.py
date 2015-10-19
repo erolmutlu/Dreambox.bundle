@@ -3,6 +3,7 @@ from socket import error
 from metadata import get_thumb
 import os
 from enigma2 import  get_number_of_tuners, get_movie_subfolders, get_current_service, get_bouquets
+from urllib import unquote
 
 ART = 'art-default.jpg'
 ICON = 'icon-default.png'
@@ -31,11 +32,18 @@ def Start():
     ObjectContainer.art = R(ART)
     ObjectContainer.title1 = Locale.LocalString('Title')
     DirectoryObject.thumb = R(ICON)
+    #Set auth for the webservice in the enigma2 code
+    if(Prefs['authrequired']):
+        Log('Set Authentication for Web Interface to user: {} pass: XXXXXX'.format(Prefs['username']))
+    else:
+        Log('Set Authentication for Web Interface to *NOT REQUIRED*')
+
+    Log('Getting Initial Channel...')
     #Save the inital channel to reset the box.
     try:
         sRef, channel, provider, title, description, remaining = get_current_service(Prefs['host'], Prefs['port_web'])[0]
         Data.Save('sRef', sRef)
-        Log('Loaded iniital channel from receiver')
+        Log('Loaded initial channel from receiver')
         Data.SaveObject('Started', True)
     except (HttpLib2Error, error) as e:
         Log('Error in Start.Httplib2 error. Unable to get current service - {}'.format(e.message))
@@ -163,6 +171,9 @@ def Display_FolderRecordings(dummy, folder=None):
 
 @route("/video/dreambox/Display_Bouquet_Channels/{sender}")
 def Display_Bouquet_Channels(sender='', index=None):
+    # Run it through urllib again because of a bug with iDevices double quoting.
+    sender = unquote(sender)
+    index = unquote(index)
     Log('Entered DisplayBouquetChannels function sender={} index={}'.format(sender, index))
     from enigma2 import get_channels_from_service
 
@@ -191,7 +202,7 @@ def Display_Bouquet_Channels(sender='', index=None):
     return oc
 
 
-@route("/video/dreambox/Display_Audio_Events/{sender}")
+@route("/video/dreambox/dISPLAY_Audio_Events/{sender}")
 def Display_Audio_Events(sender, sRef, title=None, description=None, onnow=False):
     import time
     from enigma2 import get_audio_tracks, zap
@@ -400,6 +411,8 @@ def PlayVideo(channel, filename=None, folder=None, recorded=None, audioid=None, 
     Log('Entering PlayVideo channel={} filename={} folder={} recorded={} audioid={}'.format(channel, filename, folder, recorded, audioid))
     import time
     from enigma2 import format_string, zap
+    if(Prefs['singletuner']):
+        zapped = zap(Prefs['host'], Prefs['port_web'], sRef=channel)
     if channel:
         channel = channel.strip('.m3u8')
     if Prefs['zap'] and not recorded:
